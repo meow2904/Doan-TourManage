@@ -1,0 +1,81 @@
+﻿@model TourManagement.Models.DBContext.Hotel
+
+@{
+    ViewBag.Title = "Add hotel | Let's Go";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add new hotel</h2>
+<hr />
+<form action="~/Admin/HotelsManagement/Create" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="col">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <div>
+                <input type="text" class="form-control" name="Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Content</label>
+            <div>
+                <textarea class="form-control" name="Content" id="ckeditor" rows="10"></textarea>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="ImgUrl">Image Thumbnail:</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" onchange="readURL(this)">
+                <label class="custom-file-label" for="validatedCustomFile">Choose an image</label>
+                <div><img id="FileImage" src="~/Content/images/meo.jpg" name="Image" alt="your image" class="img-thumbnail" width="100" /></div>
+                @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col">
+        <div class="form-group">
+            <label class="control-label">Phone</label>
+            <div>
+                <input type="number" name="Phone" id="Phone" class="form-control" min="1" />
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Address</label>
+            <div>
+                <input type="text" name="Address" id="Address" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Email</label>
+            <div>
+                <input type="text" name="Email" id="Address" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+  
+
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a class="btn btn-secondary" href="@Url.Action("Index","HotelsManagement")">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

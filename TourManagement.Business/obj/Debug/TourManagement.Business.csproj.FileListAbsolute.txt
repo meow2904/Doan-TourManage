@@ -1,0 +1,15 @@
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\TourManagement.Business.dll.config
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\TourManagement.Business.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\TourManagement.Business.pdb
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\EntityFramework.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\EntityFramework.SqlServer.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\TourManagement.Models.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\TourManagement.Models.pdb
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\TourManagement.Models.dll.config
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\EntityFramework.xml
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\EntityFramework.SqlServer.xml
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.csprojAssemblyReference.cache
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.csproj.CoreCompileInputs.cache
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.csproj.CopyComplete
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.pdb

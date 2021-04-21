@@ -1,0 +1,65 @@
+﻿@model TourManagement.Models.DBContext.Employee
+
+@{
+    ViewBag.Title = "Edit Employee " + Model.Name;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+<hr />
+
+<form action="@Url.Action("Edit", "EmployeesManagement")" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <div class="col">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <div>
+                <input type="text" class="form-control" name="Name" value="@Model.Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <div>
+                <select class="form-control" id="Gender" name="Gender">
+                    <option>Select Gender</option>
+                    <option value="True">Male</option>
+                    <option value="False">Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Phone</label>
+            <div>
+                <input type="number" name="Phone" id="Phone" class="form-control" min="0" value="@Model.Phone" />
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Address</label>
+            <div>
+                <input type="text" name="Address" id="Address" class="form-control" value="@Model.Address" />
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a class="btn btn-secondary" href="@Url.Action("Index","HotelsManagement")">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

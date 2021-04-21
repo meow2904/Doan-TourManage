@@ -1,0 +1,18 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.Tour>
+
+@{
+    ViewBag.Title = "List Tour";
+}
+<h1>Danh sách tour</h1>
+<hr />
+<div class="row">
+    @if (!Model.Any())
+     {
+        <div class="m-auto"><p>Don't have any tour in foreign country</p></div>
+     }
+
+    @foreach (var item in Model)
+     {
+        @Html.Partial("TourOverView", item);
+     }
+</div>

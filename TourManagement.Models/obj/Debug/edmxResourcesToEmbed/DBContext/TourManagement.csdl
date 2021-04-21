@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TourManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tours" Relationship="Self.FK_Tour_Category" FromRole="Category" ToRole="Tour" />
+  </EntityType>
+  <EntityType Name="Destination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Destination" FromRole="Destination" ToRole="TourDestination" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StatusWorking" Type="Int16" />
+    <NavigationProperty Name="Tours" Relationship="Self.FK_Tour_Employee" FromRole="Employee" ToRole="Tour" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
+    <NavigationProperty Name="Tours" Relationship="Self.FK_Tour_Hotel" FromRole="Hotel" ToRole="Tour" />
+  </EntityType>
+  <EntityType Name="OrderRoom">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="User" Relationship="Self.FK_OrderRoom_User" FromRole="OrderRoom" ToRole="User" />
+    <NavigationProperty Name="OrderRoomDetails" Relationship="Self.FK_OrderRoomDetail_OrderRoom" FromRole="OrderRoom" ToRole="OrderRoomDetail" />
+  </EntityType>
+  <EntityType Name="OrderRoomDetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <Property Name="TimeStart" Type="DateTime" Precision="0" />
+    <Property Name="TimeEnd" Type="DateTime" Precision="0" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="OrderRoom" Relationship="Self.FK_OrderRoomDetail_OrderRoom" FromRole="OrderRoomDetail" ToRole="OrderRoom" />
+    <NavigationProperty Name="Room" Relationship="Self.FK_OrderRoomDetail_Room" FromRole="OrderRoomDetail" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="OrderTour">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="OrderDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_OrderTour_Customer" FromRole="OrderTour" ToRole="User" />
+    <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTour" ToRole="OrderTourDetail" />
+  </EntityType>
+  <EntityType Name="OrderTourDetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="TourId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="TourId" Type="Int32" Nullable="false" />
+    <Property Name="QuantityChild" Type="Int32" />
+    <Property Name="QuantityAdult" Type="Int32" />
+    <NavigationProperty Name="OrderTour" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTourDetail" ToRole="OrderTour" />
+    <NavigationProperty Name="Tour" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="OrderTourDetail" ToRole="Tour" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HotelId" Type="Int32" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
+    <NavigationProperty Name="OrderRoomDetails" Relationship="Self.FK_OrderRoomDetail_Room" FromRole="Room" ToRole="OrderRoomDetail" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tour">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Time" Type="Int32" />
+    <Property Name="TimeStart" Type="DateTime" Precision="0" />
+    <Property Name="PositionStart" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Transport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityPeople" Type="Int32" />
+    <Property Name="PriceOfChild" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PriceOfAdult" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="HotelId" Type="Int32" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Tour_Category" FromRole="Tour" ToRole="Category" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Tour_Employee" FromRole="Tour" ToRole="Employee" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK_Tour_Hotel" FromRole="Tour" ToRole="Hotel" />
+    <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="Tour" ToRole="OrderTourDetail" />
+    <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Tour" FromRole="Tour" ToRole="TourDestination" />
+  </EntityType>
+  <EntityType Name="TourDestination">
+    <Key>
+      <PropertyRef Name="IdTour" />
+      <PropertyRef Name="IdDestination" />
+    </Key>
+    <Property Name="IdTour" Type="Int32" Nullable="false" />
+    <Property Name="IdDestination" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Destination" Relationship="Self.FK_TourDestination_Destination" FromRole="TourDestination" ToRole="Destination" />
+    <NavigationProperty Name="Tour" Relationship="Self.FK_TourDestination_Tour" FromRole="TourDestination" ToRole="Tour" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="Int32" />
+    <NavigationProperty Name="OrderRooms" Relationship="Self.FK_OrderRoom_User" FromRole="User" ToRole="OrderRoom" />
+    <NavigationProperty Name="OrderTours" Relationship="Self.FK_OrderTour_Customer" FromRole="User" ToRole="OrderTour" />
+  </EntityType>
+  <Association Name="FK_Tour_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDestination_Destination">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="TourDestination" Type="Self.TourDestination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TourDestination">
+        <PropertyRef Name="IdDestination" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tour_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tour_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderRoom_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="OrderRoom" Type="Self.OrderRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderRoom">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderRoomDetail_OrderRoom">
+    <End Role="OrderRoom" Type="Self.OrderRoom" Multiplicity="1" />
+    <End Role="OrderRoomDetail" Type="Self.OrderRoomDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderRoom">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderRoomDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderRoomDetail_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="OrderRoomDetail" Type="Self.OrderRoomDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderRoomDetail">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderTour_Customer">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="OrderTour" Type="Self.OrderTour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderTour">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderTourDetail_OrderTour">
+    <End Role="OrderTour" Type="Self.OrderTour" Multiplicity="1" />
+    <End Role="OrderTourDetail" Type="Self.OrderTourDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderTour">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderTourDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderTourDetail_Tour">
+    <End Role="Tour" Type="Self.Tour" Multiplicity="1" />
+    <End Role="OrderTourDetail" Type="Self.OrderTourDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderTourDetail">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourDestination_Tour">
+    <End Role="Tour" Type="Self.Tour" Multiplicity="1" />
+    <End Role="TourDestination" Type="Self.TourDestination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TourDestination">
+        <PropertyRef Name="IdTour" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TourManagementContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Destinations" EntityType="Self.Destination" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+    <EntitySet Name="OrderRooms" EntityType="Self.OrderRoom" />
+    <EntitySet Name="OrderRoomDetails" EntityType="Self.OrderRoomDetail" />
+    <EntitySet Name="OrderTours" EntityType="Self.OrderTour" />
+    <EntitySet Name="OrderTourDetails" EntityType="Self.OrderTourDetail" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tours" EntityType="Self.Tour" />
+    <EntitySet Name="TourDestinations" EntityType="Self.TourDestination" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Tour_Category" Association="Self.FK_Tour_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Tour" EntitySet="Tours" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDestination_Destination" Association="Self.FK_TourDestination_Destination">
+      <End Role="Destination" EntitySet="Destinations" />
+      <End Role="TourDestination" EntitySet="TourDestinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tour_Employee" Association="Self.FK_Tour_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Tour" EntitySet="Tours" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_Hotel" Association="Self.FK_Room_Hotel">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tour_Hotel" Association="Self.FK_Tour_Hotel">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="Tour" EntitySet="Tours" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderRoom_User" Association="Self.FK_OrderRoom_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrderRoom" EntitySet="OrderRooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderRoomDetail_OrderRoom" Association="Self.FK_OrderRoomDetail_OrderRoom">
+      <End Role="OrderRoom" EntitySet="OrderRooms" />
+      <End Role="OrderRoomDetail" EntitySet="OrderRoomDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderRoomDetail_Room" Association="Self.FK_OrderRoomDetail_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="OrderRoomDetail" EntitySet="OrderRoomDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderTour_Customer" Association="Self.FK_OrderTour_Customer">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrderTour" EntitySet="OrderTours" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderTourDetail_OrderTour" Association="Self.FK_OrderTourDetail_OrderTour">
+      <End Role="OrderTour" EntitySet="OrderTours" />
+      <End Role="OrderTourDetail" EntitySet="OrderTourDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderTourDetail_Tour" Association="Self.FK_OrderTourDetail_Tour">
+      <End Role="Tour" EntitySet="Tours" />
+      <End Role="OrderTourDetail" EntitySet="OrderTourDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourDestination_Tour" Association="Self.FK_TourDestination_Tour">
+      <End Role="Tour" EntitySet="Tours" />
+      <End Role="TourDestination" EntitySet="TourDestinations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

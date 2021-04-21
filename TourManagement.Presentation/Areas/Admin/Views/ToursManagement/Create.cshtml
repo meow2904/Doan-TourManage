@@ -1,0 +1,165 @@
+﻿@model TourManagement.Models.DBContext.Tour
+
+@{
+    ViewBag.Title = "Add tour | Let's Go";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add new tour</h2>
+<hr />
+
+<form action="~/Areas/Admin/Views/ToursManagement/Create" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="col">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <div>
+                <input type="text" class="form-control" name="Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Content</label>
+            <div>
+                <textarea class="form-control" name="Summary" id="ckeditor" rows="10"></textarea>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="ImgUrl">Image Thumbnail:</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" onchange="readURL(this)">
+                <label class="custom-file-label" for="validatedCustomFile">Choose an image</label>
+                <div><img id="FileImage" src="~/Content/images/meo.jpg" name="Image" alt="your image" class="img-thumbnail" width="200" /></div>
+                @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col">
+        <div class="form-group">
+            <label class="control-label">Time</label>
+            <div>
+                <input type="number" name="Time" id="Time" class="form-control" min="1" />
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Time Start</label>
+            <div>
+                <input type="date" name="TimeStart" id="TimeStart" class="form-control" />
+                @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Position Start</label>
+            <div>
+                @Html.EditorFor(model => model.PositionStart, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PositionStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Quantity Prople</label>
+            <div>
+                <input type="number" name="Quantity" id="Quantity" class="form-control" min="1" />
+                @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Option Hotel</label>
+            <div>
+                @Html.DropDownList("HotelID", null, "Select Hotel", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Loại tour</label>
+            <div>
+                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Tour guide</label>
+            <div>
+                @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <label class="control-label">Điểm đến</label>
+                <div>
+                    @Html.DropDownList("DestinationID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Destinations, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="row">
+            <div class="form-group col-6">
+                <label class="control-label">Price Of Adult</label>
+                <div>
+                    @Html.EditorFor(model => model.PriceOfAdult, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label class="control-label">Price Of Child</label>
+                <div>
+                    @Html.EditorFor(model => model.PriceOfChild, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a class="btn btn-secondary" href="/Admin/ToursManagement/Index">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $("#TimeStart").change(function () {
+                var Time = $("#Time").val()
+
+                var date = new Date($('#TimeStart').val());
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+
+                var TimeStart = [year, month, day].join('-')
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetEmployee")",
+                    dataType: "json",
+                    data: { datePick: TimeStart, time: Time },
+                    success: function (response) {
+                        //alert(JSON.stringify(data.Name))
+                        console.log(response)
+                    },
+                    error: function (errormes) {
+                        alert(errormes.responseText)
+                    }
+                })
+            })
+        })
+    </script>
+}

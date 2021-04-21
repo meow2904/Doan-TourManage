@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.Tour>
+
+@{
+    ViewBag.Title = "Tour management | Let's Go";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Tours Management</h2>
+    <hr />
+</div>
+<div class="py-2">
+    <a href="@Url.Action("Create", "ToursManagement")" class="btn btn-primary">ADD</a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            <p>Name</p>
+        </th>
+        <th>
+            <label>Time</label>
+        </th>
+        <th>
+            <label>From to</label>
+        </th>
+        <th>
+            <label></label>
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceOfAdult) đ
+            </td>
+            <td>
+                <img style="max-width:150px;" src="~/Content/images/@item.Image" alt="@item.Name" />
+            </td>
+            <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                <form action="@Url.Action("DeleteTour","ToursManagement", new { id=item.Id })" method="post">
+                    <a href="@Url.Action("Edit", "ToursManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>
+                    <button type="submit" onclick="return confirm('Are you sure to delete this tour?');" class="btn btn-outline-danger mx-1">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>

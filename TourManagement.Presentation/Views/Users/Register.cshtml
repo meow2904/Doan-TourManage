@@ -1,0 +1,71 @@
+﻿@model TourManagement.Models.DBContext.User
+
+@{
+    ViewBag.Title = "Register memeber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pt-5" style="height:500px;">
+    <h4 class="text-center py-3">Đăng kí tài khoản</h4>
+    <form action="Register" method="post" class="row form-horizontal" role="form" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row m-auto">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Họ Tên</label>
+                    <div>
+                        <input class="form-control" id="Name" name="Name" type="text" />
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Số điện thoại</label>
+                    <div>
+                        <input type="number" class="form-control" id="Phone" name="Phone" min="1" />
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Địa chỉ</label>
+                    <div>
+                        <input type="text" class="form-control" id="Address" name="Address" />
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <div>
+                        <input type="text" class="form-control" id="Email" name="Email" />
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Mật khẩu</label>
+                    <div>
+                        <input type="password" class="form-control" id="Password" name="Password" />
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Register" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

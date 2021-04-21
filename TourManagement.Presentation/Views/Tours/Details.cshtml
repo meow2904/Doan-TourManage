@@ -1,0 +1,62 @@
+﻿@model TourManagement.Models.DBContext.Tour
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="container tour-container pt-4">
+    <div>
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div>
+                <img class="img-fluid img-thumbnail" style="width: 100%;" src="~/Content/images/@Model.Image"
+                     alt="@Model.Name" />
+            </div>
+        </div>
+        <div class="col-md-4 border h-75 py-3">
+            <div class="tour-cart font-weight-normal">
+                <div class="text-center">
+                    <h5>@Model.Name</h5>
+                </div>
+                <hr />
+                <div>
+                    <div class="row">
+                        <span class="col-6">Thời gian: </span><span>@Model.Time ngày</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-6">Bắt đầu: </span><span>@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-6">Điểm xuất phát: </span><span>@Model.PositionStart</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-6">Giá từ: </span><span style="color:red;">@Math.Truncate(Model.PriceOfAdult.Value)</span> <span>đ / khách</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-6">Số lượng chỗ còn: </span><span>@ViewBag.Remaining</span>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <div class="input-group addtocart py-3 justify-content-center">
+                <a href="#" class="addtocart btn btn-outline-primary mr-3"><span class="fas fa-shopping-cart mr-1"></span>Book Now</a>
+            </div>
+        </div>
+
+        <div class="row mt-5 pt-4 border-top">
+            <h5>Tổng quan về tour</h5>
+            <div class="col-lg-12">
+                <h6>Thời gian: <span class="font-weight-light">@Model.Time ngày</span></h6>
+                <h6>Ngày khởi hành: <span class="font-weight-light">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span></h6>
+                <h6>Vận chuyển: <span class="font-weight-light">@Model.Transport</span></h6>
+                <h6>Xuất phát: <span class="font-weight-light">@Model.PositionStart</span></h6>
+                <h6>Điểm đến: <span>@ViewBag.Destination</span></h6>
+
+            </div>
+            <h5>Nội dung:</h5>
+            <div>
+                <p>@Model.Content</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.Employee>
+
+@{
+    ViewBag.Title = "Employee Mamagement";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h2>Employee Management</h2>
+    <hr />
+</div>
+<div class="py-2">
+    <a href="@Url.Action("Create", "EmployeesManagement")" class="btn btn-primary">ADD</a>
+</div>
+
+<table class="table table-bordered ">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Gender
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Status Working
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", "EmployeesManagement", new { id = item.Id })" class="nav-link">
+                @Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @if (item.Gender == true)
+                {
+                    <p>Nam</p>
+                }
+                else
+                {
+                    <p>Nữ</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusWorking)
+            </td>
+            <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                <form action="@Url.Action("Delete","EmployeesManagement", new { id=item.Id })" method="post">
+                    <a href="@Url.Action("Edit", "EmployeesManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>
+                    <button type="submit" onclick="return confirm('Are you sure to delete this hotel?');" class="btn btn-outline-danger mx-1">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
