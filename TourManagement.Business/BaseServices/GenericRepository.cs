@@ -21,8 +21,10 @@ namespace TourManagement.Business.BaseServices
         }
         public bool Add(TEntity entity)
         {
-            _dbSet.Add(entity);
-            return Context.SaveChanges() > 0;
+
+                _dbSet.Add(entity);
+                return Context.SaveChanges() > 0;
+
         }
 
         public void Delete(TEntity entity)

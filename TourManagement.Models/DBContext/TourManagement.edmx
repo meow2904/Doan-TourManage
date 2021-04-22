@@ -68,7 +68,7 @@
           </Key>
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
-          <Property Name="OrderDate" Type="nchar" MaxLength="10" />
+          <Property Name="OrderDate" Type="date" />
         </EntityType>
         <EntityType Name="OrderTourDetail">
           <Key>
@@ -424,7 +424,7 @@
           </Key>
           <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" />
-          <Property Name="OrderDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="User" Relationship="Self.FK_OrderTour_Customer" FromRole="OrderTour" ToRole="User" />
           <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTour" ToRole="OrderTourDetail" />
         </EntityType>

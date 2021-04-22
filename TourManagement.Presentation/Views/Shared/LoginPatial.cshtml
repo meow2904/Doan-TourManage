@@ -1,22 +1,24 @@
-﻿@if (Session["username"] != null)
+﻿@{
+    var user = (TourManagement.Models.DBContext.User)Session["username"];
+}
+@if (Session["username"] != null)
 {
-    
-    using(Html.BeginForm("logout", "Users", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+
+    using (Html.BeginForm("logout", "Users", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="dropdown">
             <a class="dropdown-toggle btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @Session["username"]
-                
+                @user.Name
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Tài khoản của tôi</a>
                 <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a>
             </div>
-        </div> 
-     }
+        </div>
+    }
 }
 else
 {
@@ -24,4 +26,4 @@ else
         <li class="nav-item">@Html.ActionLink("Đăng kí", "Register", "Users", null, new { id = "registerLink", @class = "nav-link" })</li>
         <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { id = "loginLink", @class = "nav-link" })</li>
     </ul>
-  }
+}

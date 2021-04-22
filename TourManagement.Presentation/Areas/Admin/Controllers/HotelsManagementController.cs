@@ -26,7 +26,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // GET: Admin/HotelsManagement
         public ActionResult Index()
         {
-            var hotels =_hotelRepository.GetAll();
+            var hotels = _hotelRepository.GetAll();
             return View(hotels);
         }
 
@@ -61,12 +61,12 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                     }
                 }
                 hotel.Image = fileName;
-                var resultCreate = _hotelRepository.Add(hotel);
-                if(resultCreate)
+                var resultAdd= _hotelRepository.Add(hotel);
+                if (resultAdd)
                 {
                     return RedirectToAction("Index");
                 }
-                
+
             }
 
             return View(hotel);

@@ -9,127 +9,70 @@ using System.Web.Mvc;
 using TourManagement.Models.DBContext;
 using TourManagement.Business.IServices;
 
-
 namespace TourManagement.Presentation.Controllers
 {
     public class OrderToursController : Controller
     {
         private TourManagementContext db = new TourManagementContext();
-        
+        private readonly ITourRepository _tourRepository;
+        private readonly IBookTourRepository _bookTourRepository;
 
-        // GET: OrderTours
-        public ActionResult Index()
+
+        public OrderToursController(ITourRepository tourRepository,
+            IBookTourRepository bookTourRepository)
         {
-            var orderTours = db.OrderTours.Include(o => o.User);
-            return View(orderTours.ToList());
+            _tourRepository = tourRepository;
+            _bookTourRepository = bookTourRepository;
         }
 
-        // GET: OrderTours/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult OrderTour(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderTour orderTour = db.OrderTours.Find(id);
-            if (orderTour == null)
-            {
-                return HttpNotFound();
-            }
-            return View(orderTour);
-        }
+            var tour = _tourRepository.GetById(id);
+            ViewBag.Tour = tour;
 
-        // GET: OrderTours/Create
-        public ActionResult Create()
-        {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name");
+            var remainingQuantity = _tourRepository.GetRemainingQuantity((int)id);
+            ViewBag.Remaining = remainingQuantity;
+
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
             return View();
         }
 
-        // POST: OrderTours/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderId,UserId,OrderDate")] OrderTour orderTour)
+        public ActionResult OrderTour(OrderTourDetail orderTourDetail)
         {
+            //get custommer from session
+            var cusInfor = (User)Session["username"];
             if (ModelState.IsValid)
             {
-                db.OrderTours.Add(orderTour);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var orderTour = new OrderTour();
+                orderTour.UserId = cusInfor.Id;
+
+                _bookTourRepository.BookTour(orderTour, orderTourDetail);
+                return RedirectToAction("CompleteOrder");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", orderTour.UserId);
-            return View(orderTour);
+            
+            return View(orderTourDetail);
         }
 
-        // GET: OrderTours/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult CompleteOrder()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderTour orderTour = db.OrderTours.Find(id);
-            if (orderTour == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", orderTour.UserId);
-            return View(orderTour);
-        }
+            ViewBag.CompleteMessage = "Cảm ơn bạn đã đặt tour, đơn hàng của bạn đang được xử lý";
 
-        // POST: OrderTours/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderId,UserId,OrderDate")] OrderTour orderTour)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(orderTour).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", orderTour.UserId);
-            return View(orderTour);
+            return View();
         }
-
-        // GET: OrderTours/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderTour orderTour = db.OrderTours.Find(id);
-            if (orderTour == null)
-            {
-                return HttpNotFound();
-            }
-            return View(orderTour);
-        }
-
-        // POST: OrderTours/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            OrderTour orderTour = db.OrderTours.Find(id);
-            db.OrderTours.Remove(orderTour);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

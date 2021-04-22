@@ -1,6 +1,8 @@
 using System;
+using TourManagement.Business.BaseServices;
 using TourManagement.Business.IServices;
 using TourManagement.Business.Services;
+using TourManagement.Models.DBContext;
 using Unity;
 
 namespace TourManagement.Presentation
@@ -48,6 +50,19 @@ namespace TourManagement.Presentation
             container.RegisterType<IEmployeeRepository, EmployeeRepository>();
             container.RegisterType<IDestinatioRepository, DestinationRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
+
+
+            container.RegisterType<IGenericRepository<Tour>, GenericRepository<Tour>>();
+
+            container.RegisterType<IGenericRepository<OrderTour>, GenericRepository<OrderTour>>();
+            container.RegisterType<IOrderTourRepository, OrderTourRepository>();
+
+            container.RegisterType<IGenericRepository<OrderTourDetail>, GenericRepository<OrderTourDetail>>();
+            container.RegisterType<IOrderTourDetailRepository, OrderTourDetailRepository>();
+
+            container.RegisterType<IBookTourRepository, BookTourRepository>();
+
+
         }
     }
 }

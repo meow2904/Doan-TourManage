@@ -1,0 +1,135 @@
+﻿@model TourManagement.Models.DBContext.OrderTourDetail
+
+@{
+    var tour = (TourManagement.Models.DBContext.Tour)ViewBag.Tour;
+    var custommer = (TourManagement.Models.DBContext.User)Session["username"];
+}
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <img class="img-fluid img-thumbnail" style="width: 100%;" src="~/Content/images/@tour.Image"
+                 alt="@tour.Name" />
+        </div>
+    </div>
+    <div class="col-md-6 border h-75 py-3">
+        <div class="tour-cart font-weight-normal">
+            <div class="text-center">
+                <h5>@tour.Name</h5>
+            </div>
+            <hr />
+            <div>
+                <div class="row">
+                    <span class="col-6">Thời gian: </span><span>@tour.Time ngày</span>
+                </div>
+                <div class="row">
+                    <span class="col-6">Bắt đầu: </span><span>@tour.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="row">
+                    <span class="col-6">Điểm xuất phát: </span><span>@tour.PositionStart</span>
+                </div>
+                <div class="row">
+                    <span class="col-6">Giá từ: </span>@Math.Truncate(tour.PriceOfAdult.Value) đ/khách</span>
+                </div>
+                <div class="row">
+                    <span class="col-6">Số lượng chỗ còn: </span><span>@ViewBag.Remaining</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<span class="text-danger">
+    Các khoản phí phát sinh (nếu có) như: phụ thu dành cho khách nước ngoài, việt kiều; phụ thu phòng đơn; phụ thu chênh lệch giá tour… Nhân viên sẽ gọi điện thoại
+    tư vấn cho quý khách ngay sau khi có phiếu xác nhận booking. (Trong giờ hành chính)
+    Trường hợp quý khách không đồng ý các khoản phát sinh, phiếu xác nhận booking của quý khách sẽ không có hiệu lực.
+</span>
+
+<div class="py-4">
+    <div class="text-center">
+        <h4>Bảng giá chi tiết</h4>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Loại giá</th>
+                <th scope="col">Giá người lớn</th>
+                <th scope="col">Giá trẻ em</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Giá</th>
+                <td>@tour.PriceOfAdult.Value đ</td>
+                <td>@tour.PriceOfChild.Value đ</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+@using (Html.BeginForm("OrderTour", "OrderTours", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-center">Thông tin đơn đặt tour</h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="form-group col-4">
+                <label class="control-label">Tên khách hàng</label>
+                <div>
+                    <input type="text" value="@custommer.Name" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Số diện thoại</label>
+                <div>
+                    <input type="text" value="@custommer.Phone" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Địa chỉ</label>
+                <div>
+                    <input type="text" value="@custommer.Address" disabled="disabled" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="form-group col-4">
+                <label>Mã tour</label>
+                <div>
+                    <input type="number" value="@tour.Id" id="TourId" name="TourId" readonly/>
+                    @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-4">
+                <label>Người lớn</label>
+                <div>
+                    <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1" />
+                    @Html.ValidationMessageFor(model => model.QuantityAdult, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-4">
+                <label>Trẻ em</label>
+                <div>
+                    <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0" />
+                    @Html.ValidationMessageFor(model => model.QuantityChild, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <div>
+                <input type="submit" value="Hoàn thành" class="btn btn-outline-success" />
+            </div>
+        </div>
+    </div>
+}

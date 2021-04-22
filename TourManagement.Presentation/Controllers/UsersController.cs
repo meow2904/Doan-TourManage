@@ -109,14 +109,14 @@ namespace TourManagement.Presentation.Controllers
 
             if (result != null && result.Role == 2)
             {
-                Session["username"] = result.Name.ToString();
+                Session["username"] = result;
                 return RedirectToAction("Index", "Home");
 
                 
             }
             else if (result != null && result.Role == 1)
             {
-                Session["username"] = result.Name.ToString();
+                Session["username"] = result;
                 return RedirectToAction("Index", "ToursManagement", new { area = "Admin" });
             }
             else
