@@ -2,15 +2,17 @@
 @{
     ViewBag.Title = "Search Tour";
 }
-<h1>Danh sách tour</h1>
-<hr />
-<div class="row" style="height: 450px;">
+
+<div class="row">
     @if (!Model.Any())
     {
-        <div class="m-auto"><p>Không có tour với nội dung <span class="font-weight-bold">@ViewBag.MessageSearch</span> nào được tìm thấy</p></div>
+        <div class="m-auto pt-5" style="height:550px;"><p>Không có tour với nội dung <span class="font-weight-bold">@ViewBag.MessageSearch</span> nào được tìm thấy</p></div>
     }
-    @foreach (var item in Model)
+    else
     {
-        @Html.Partial("TourOverView", item);
+        foreach (var item in Model)
+        {
+            @Html.Partial("TourOverView", item);
+        }
     }
 </div>

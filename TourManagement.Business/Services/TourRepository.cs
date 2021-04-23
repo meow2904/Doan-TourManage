@@ -18,16 +18,27 @@ namespace TourManagement.Business.Services
 
         public int GetRemainingQuantity(int tourId)
         {
-            var quantity1 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityAdult);
-            var quantity2 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityChild);
-            var remainQuantity = Context.Tours.Where(x => x.Id == tourId).Sum(x => x.QuantityPeople) - (quantity1 + quantity2);
+            var tourOrderDetail = Context.OrderTourDetails.FirstOrDefault(x => x.TourId==tourId);
+            var tour = Context.Tours.FirstOrDefault(x => x.Id==tourId);
 
-            return (int)remainQuantity;
+            int remainQuantity=tour.QuantityPeople.Value;
+            if(tourOrderDetail ==null)
+            {
+                return remainQuantity;
+            }
+            else
+            {
+                var quantity1 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityAdult);
+                var quantity2 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityChild);
+                remainQuantity = (int)(Context.Tours.Where(x => x.Id == tourId).Sum(x => x.QuantityPeople) - (quantity1 + quantity2));
+                return remainQuantity;
+            }        
         }
 
         public IEnumerable<Tour> Search(string tour)
         {
-            return Context.Tours.Where(x => x.Name.Contains(tour)).ToList();
+            return Context.Tours.Where(x => x.Name.Contains(tour.ToLower()) ||
+            x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower()))).ToList();
         }
     }
 }

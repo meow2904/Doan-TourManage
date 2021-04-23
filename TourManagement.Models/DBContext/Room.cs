@@ -14,20 +14,15 @@ namespace TourManagement.Models.DBContext
     
     public partial class Room
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Room()
-        {
-            this.OrderRoomDetails = new HashSet<OrderRoomDetail>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<decimal> Price { get; set; }
-        public string Content { get; set; }
+        public string Acreage { get; set; }
+        public Nullable<int> NumberBed { get; set; }
+        public string Image { get; set; }
+        public string Note { get; set; }
         public Nullable<int> HotelId { get; set; }
     
         public virtual Hotel Hotel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderRoomDetail> OrderRoomDetails { get; set; }
     }
 }

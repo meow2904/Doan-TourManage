@@ -10,7 +10,6 @@ namespace TourManagement.Business.BaseServices
     {
         IEnumerable<TEntity> GetAll();
         TEntity GetById(int Id);
-
         bool Add(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

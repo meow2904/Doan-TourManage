@@ -44,9 +44,9 @@
                 <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
             }
             @*<form class="form-inline my-2 my-lg-0 col-4" action="SearchTour">
-                <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Search tour" aria-label="Search">
-                <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
-            </form>*@
+                    <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Search tour" aria-label="Search">
+                    <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
+                </form>*@
 
             @Html.Partial("LoginPatial")
         </div>
@@ -63,6 +63,16 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    <script>
+        $(document).ready(() => {
+            if ($('#remaining').text() == 0) {
+            $('#btnBook').addClass('disabled')
+        }
+        else {
+            $('#btnBook').removeClass('disabled')
+        }
+    })
+    </script>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

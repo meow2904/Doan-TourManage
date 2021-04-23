@@ -29,8 +29,6 @@ namespace TourManagement.Models.DBContext
         public virtual DbSet<Destination> Destinations { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Hotel> Hotels { get; set; }
-        public virtual DbSet<OrderRoom> OrderRooms { get; set; }
-        public virtual DbSet<OrderRoomDetail> OrderRoomDetails { get; set; }
         public virtual DbSet<OrderTour> OrderTours { get; set; }
         public virtual DbSet<OrderTourDetail> OrderTourDetails { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }

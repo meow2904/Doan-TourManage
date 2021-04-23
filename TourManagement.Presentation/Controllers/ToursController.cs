@@ -21,14 +21,6 @@ namespace TourManagement.Presentation.Controllers
             _tourRepository = tourRepository;
             _destinatioRepository = destinatioRepository;
         }
-        // GET: Tours
-        public ActionResult Index()
-        {
-            var tours = _tourRepository.GetAll();
-            return View(tours);
-        }
-
-        // GET: Tours/Details/5
         
         public ActionResult Details(int? id)
         {

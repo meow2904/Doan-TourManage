@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("HotelOverView", item);
+    }
+</div>

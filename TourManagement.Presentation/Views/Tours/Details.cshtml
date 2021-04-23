@@ -1,6 +1,7 @@
 ﻿@model TourManagement.Models.DBContext.Tour
 @{
     ViewBag.Title = Model.Name;
+    var remaining = @ViewBag.Remaining;
 }
 <div class="container tour-container pt-4">
     <div>
@@ -21,42 +22,71 @@
                 <hr />
                 <div>
                     <div class="row">
-                        <span class="col-6">Thời gian: </span><span>@Model.Time ngày</span>
+                        <p class="col-6">Thời gian: </p><span>@Model.Time ngày</span>
                     </div>
                     <div class="row">
-                        <span class="col-6">Bắt đầu: </span><span>@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                        <p class="col-6">Bắt đầu: </p><span>@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
                     </div>
                     <div class="row">
-                        <span class="col-6">Điểm xuất phát: </span><span>@Model.PositionStart</span>
+                        <p class="col-6">Điểm xuất phát: </p><span>@Model.PositionStart</span>
                     </div>
                     <div class="row">
-                        <span class="col-6">Giá từ: </span><span style="color:red;">@Math.Truncate(Model.PriceOfAdult.Value)</span> <span>đ / khách</span>
+                        <p class="col-6">Giá từ:</p><p style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###")</p><p>đ/khách</p>
                     </div>
                     <div class="row">
-                        <span class="col-6">Số lượng chỗ còn: </span><span>@ViewBag.Remaining</span>
+                        <p class="col-6">Số lượng chỗ còn: </p><span id="remaining">@remaining</span>
                     </div>
                     <hr />
                 </div>
             </div>
             <div class="input-group addtocart py-3 justify-content-center">
-                <a href="@Url.Action("OrderTour","OrderTours", new { id= Model.Id})" class="addtocart btn btn-outline-primary mr-3"><span class="fas fa-shopping-cart mr-1"></span>Book Now</a>
+                <a href="@Url.Action("OrderTour","OrderTours", new { id= Model.Id})" id="btnBook" class="btn btn-outline-primary mr-3"><span class="fas fa-shopping-cart mr-1"></span>Book Now</a>
             </div>
+           
         </div>
 
         <div class="row mt-5 pt-4 border-top">
-            <h5>Tổng quan về tour</h5>
-            <div class="col-lg-12">
-                <h6>Thời gian: <span class="font-weight-light">@Model.Time ngày</span></h6>
-                <h6>Ngày khởi hành: <span class="font-weight-light">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span></h6>
-                <h6>Vận chuyển: <span class="font-weight-light">@Model.Transport</span></h6>
-                <h6>Xuất phát: <span class="font-weight-light">@Model.PositionStart</span></h6>
-                <h6>Điểm đến: <span>@ViewBag.Destination</span></h6>
-
+            <h5><img src="~/Content/images/info.svg" height="20" width="20"> Tổng quan về tour</h5>
+            <div class="col-lg-12 py-4">
+                <div class="row">
+                    <h6 class="col-3">Địa diểm đến:</h6> <span class="font-weight-light col-9">@ViewBag.Destination</span>
+                    <h6 class="col-3">Thời gian: </h6><span class="font-weight-light col-9">@Model.Time ngày</span>
+                    <h6 class="col-3">Ngày khởi hành: </h6><span class="font-weight-light col-9">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                    <h6 class="col-3">Hướng dẫn viên: </h6><span class="font-weight-light col-9">@Model.Employee.Name</span>
+                    <h6 class="col-3">Nơi nghỉ đêm: </h6><span class="font-weight-light col-9">@Model.StopPosition</span>
+                    <h6 class="col-3">Vận chuyển: </h6><span class="font-weight-light col-9">@Model.Transport</span>
+                    <h6 class="col-3">Xuất phát: </h6><span class="font-weight-light col-9">@Model.PositionStart</span>
+                </div>
             </div>
-            <h5>Nội dung:</h5>
-            <div>
-                <p>@Model.Content</p>
+            <div class="py-4">
+                <h5><img src="~/Content/images/content.svg" height="20" width="20"> Giới thiệu chung</h5>
+                <div>
+                    <p>@Model.Content</p>
+                </div>
             </div>
+            <div class="row py-4">
+                <div class="col-6">
+                    <h5>Bao gồm</h5>
+                    <ul>
+                        <li>Vận chuyển: du lịch đời mới, đưa đón theo chương trình. Lái xe thân thiện và cẩn thận suốt hành trình.</li>
+                        <li>Hướng dẫn viên kinh nghiệm suốt tuyến.</li>
+                        <li>Vé thắng cảnh theo chương trình.</li>
+                        <li>Nước uống trên xe: 1 chai 0,5 lit/ người/ ngày</li>
+                        <li>Thuế VAT theo quy định của nhà nước</li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <h5>Không bao gồm</h5>
+                    <ul>
+                        <li>Đồ uống trong bữa ăn và chi phí cá nhân</li>
+                        <li>Ăn sáng</li>
+                        <li>Tiền tip hướng dẫn viên và lái xe</li>
+                        <li>Các chi phí khác không đề cập trong mục bao gồm</li>
+                    </ul>
+                </div>
+            </div>
+            <span class="w-100 text-center">KÍNH CHÚC QUÝ KHÁCH CHUYẾN ĐI THÚ VỊ VÀ BỔ ÍCH !</span>
         </div>
     </div>
 </div>
+

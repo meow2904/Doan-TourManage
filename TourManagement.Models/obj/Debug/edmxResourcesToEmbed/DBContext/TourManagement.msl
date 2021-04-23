@@ -43,26 +43,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderRooms">
-      <EntityTypeMapping TypeName="TourManagementModel.OrderRoom">
-        <MappingFragment StoreEntitySet="OrderRoom">
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrderRoomDetails">
-      <EntityTypeMapping TypeName="TourManagementModel.OrderRoomDetail">
-        <MappingFragment StoreEntitySet="OrderRoomDetail">
-          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
-          <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
-          <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderTours">
       <EntityTypeMapping TypeName="TourManagementModel.OrderTour">
         <MappingFragment StoreEntitySet="OrderTour">
@@ -88,7 +68,10 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Acreage" ColumnName="Acreage" />
+          <ScalarProperty Name="NumberBed" ColumnName="NumberBed" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="HotelId" ColumnName="HotelId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -119,7 +102,7 @@
           <ScalarProperty Name="PriceOfChild" ColumnName="PriceOfChild" />
           <ScalarProperty Name="PriceOfAdult" ColumnName="PriceOfAdult" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="StopPosition" ColumnName="StopPosition" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
         </MappingFragment>
       </EntityTypeMapping>

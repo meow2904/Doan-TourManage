@@ -4,8 +4,10 @@
         <div class="h-50"><img src="../../Content/images/@Model.Image" class="card-img-top img-thumbnail h-100" alt="@Model.Name"></div>
         <div class="card-body d-flex flex-column justify-content-between h-auto">
             <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name</a>
-            <p>Giá từ: <span class="font-weight-bold">@Model.PriceOfAdult  đ/khách</span></p>
-                @*<a href="/Tours/Details?id=@Model.Id" class="btn btn-primary w-50">View More</a>*@
+            <div class="row">
+                <p class="col-7 "><img src="~/Content/images/calendar.svg" height="15" width="15"/> @Model.TimeStart.Value.ToString("dd/MM/yyyy")</p>
+                <p class="col-5 px-0"><span style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###") đ</span></p>
+            </div>
         </div>
     </div>
 </div>

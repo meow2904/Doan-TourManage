@@ -33,12 +33,11 @@ namespace TourManagement.Models.DBContext
         public Nullable<decimal> PriceOfChild { get; set; }
         public Nullable<decimal> PriceOfAdult { get; set; }
         public Nullable<int> EmployeeId { get; set; }
-        public Nullable<int> HotelId { get; set; }
+        public string StopPosition { get; set; }
         public Nullable<int> CategoryId { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Employee Employee { get; set; }
-        public virtual Hotel Hotel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTourDetail> OrderTourDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

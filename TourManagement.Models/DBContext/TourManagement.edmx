@@ -43,25 +43,6 @@
           <Property Name="Image" Type="nvarchar" MaxLength="50" />
           <Property Name="Content" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="OrderRoom">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="OrderDate" Type="date" />
-        </EntityType>
-        <EntityType Name="OrderRoomDetail">
-          <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="RoomId" />
-          </Key>
-          <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="RoomId" Type="int" Nullable="false" />
-          <Property Name="TimeStart" Type="date" />
-          <Property Name="TimeEnd" Type="date" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
-        </EntityType>
         <EntityType Name="OrderTour">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -87,7 +68,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Acreage" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberBed" Type="int" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar(max)" />
           <Property Name="HotelId" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -116,7 +100,7 @@
           <Property Name="PriceOfChild" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PriceOfAdult" Type="decimal" Precision="18" Scale="2" />
           <Property Name="EmployeeId" Type="int" />
-          <Property Name="HotelId" Type="int" />
+          <Property Name="StopPosition" Type="nvarchar" MaxLength="256" />
           <Property Name="CategoryId" Type="int" />
         </EntityType>
         <EntityType Name="TourDestination">
@@ -140,42 +124,6 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Role" Type="int" />
         </EntityType>
-        <Association Name="FK_OrderRoom_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="OrderRoom" Type="Self.OrderRoom" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderRoom">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderRoomDetail_OrderRoom">
-          <End Role="OrderRoom" Type="Self.OrderRoom" Multiplicity="1" />
-          <End Role="OrderRoomDetail" Type="Self.OrderRoomDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderRoom">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="OrderRoomDetail">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderRoomDetail_Room">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="OrderRoomDetail" Type="Self.OrderRoomDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderRoomDetail">
-              <PropertyRef Name="RoomId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderTour_Customer">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="OrderTour" Type="Self.OrderTour" Multiplicity="*" />
@@ -248,18 +196,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tour_Hotel">
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
-          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hotel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tour">
-              <PropertyRef Name="HotelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TourDestination_Destination">
           <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
           <End Role="TourDestination" Type="Self.TourDestination" Multiplicity="*" />
@@ -289,8 +225,6 @@
           <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderRoom" EntityType="Self.OrderRoom" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderRoomDetail" EntityType="Self.OrderRoomDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTour" EntityType="Self.OrderTour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTourDetail" EntityType="Self.OrderTourDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
@@ -298,18 +232,6 @@
           <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TourDestination" EntityType="Self.TourDestination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_OrderRoom_User" Association="Self.FK_OrderRoom_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="OrderRoom" EntitySet="OrderRoom" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderRoomDetail_OrderRoom" Association="Self.FK_OrderRoomDetail_OrderRoom">
-            <End Role="OrderRoom" EntitySet="OrderRoom" />
-            <End Role="OrderRoomDetail" EntitySet="OrderRoomDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderRoomDetail_Room" Association="Self.FK_OrderRoomDetail_Room">
-            <End Role="Room" EntitySet="Room" />
-            <End Role="OrderRoomDetail" EntitySet="OrderRoomDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderTour_Customer" Association="Self.FK_OrderTour_Customer">
             <End Role="User" EntitySet="User" />
             <End Role="OrderTour" EntitySet="OrderTour" />
@@ -332,10 +254,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Tour_Employee" Association="Self.FK_Tour_Employee">
             <End Role="Employee" EntitySet="Employee" />
-            <End Role="Tour" EntitySet="Tour" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tour_Hotel" Association="Self.FK_Tour_Hotel">
-            <End Role="Hotel" EntitySet="Hotel" />
             <End Role="Tour" EntitySet="Tour" />
           </AssociationSet>
           <AssociationSet Name="FK_TourDestination_Destination" Association="Self.FK_TourDestination_Destination">
@@ -393,30 +311,6 @@
           <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
-          <NavigationProperty Name="Tours" Relationship="Self.FK_Tour_Hotel" FromRole="Hotel" ToRole="Tour" />
-        </EntityType>
-        <EntityType Name="OrderRoom">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="User" Relationship="Self.FK_OrderRoom_User" FromRole="OrderRoom" ToRole="User" />
-          <NavigationProperty Name="OrderRoomDetails" Relationship="Self.FK_OrderRoomDetail_OrderRoom" FromRole="OrderRoom" ToRole="OrderRoomDetail" />
-        </EntityType>
-        <EntityType Name="OrderRoomDetail">
-          <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="RoomId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="RoomId" Type="Int32" Nullable="false" />
-          <Property Name="TimeStart" Type="DateTime" Precision="0" />
-          <Property Name="TimeEnd" Type="DateTime" Precision="0" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="OrderRoom" Relationship="Self.FK_OrderRoomDetail_OrderRoom" FromRole="OrderRoomDetail" ToRole="OrderRoom" />
-          <NavigationProperty Name="Room" Relationship="Self.FK_OrderRoomDetail_Room" FromRole="OrderRoomDetail" ToRole="Room" />
         </EntityType>
         <EntityType Name="OrderTour">
           <Key>
@@ -447,10 +341,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Acreage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberBed" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HotelId" Type="Int32" />
           <NavigationProperty Name="Hotel" Relationship="Self.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
-          <NavigationProperty Name="OrderRoomDetails" Relationship="Self.FK_OrderRoomDetail_Room" FromRole="Room" ToRole="OrderRoomDetail" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -478,11 +374,10 @@
           <Property Name="PriceOfChild" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PriceOfAdult" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="EmployeeId" Type="Int32" />
-          <Property Name="HotelId" Type="Int32" />
+          <Property Name="StopPosition" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CategoryId" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Tour_Category" FromRole="Tour" ToRole="Category" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Tour_Employee" FromRole="Tour" ToRole="Employee" />
-          <NavigationProperty Name="Hotel" Relationship="Self.FK_Tour_Hotel" FromRole="Tour" ToRole="Hotel" />
           <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="Tour" ToRole="OrderTourDetail" />
           <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Tour" FromRole="Tour" ToRole="TourDestination" />
         </EntityType>
@@ -508,7 +403,6 @@
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Role" Type="Int32" />
-          <NavigationProperty Name="OrderRooms" Relationship="Self.FK_OrderRoom_User" FromRole="User" ToRole="OrderRoom" />
           <NavigationProperty Name="OrderTours" Relationship="Self.FK_OrderTour_Customer" FromRole="User" ToRole="OrderTour" />
         </EntityType>
         <Association Name="FK_Tour_Category">
@@ -556,54 +450,6 @@
             </Principal>
             <Dependent Role="Room">
               <PropertyRef Name="HotelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tour_Hotel">
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
-          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hotel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tour">
-              <PropertyRef Name="HotelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderRoom_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="OrderRoom" Type="Self.OrderRoom" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderRoom">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderRoomDetail_OrderRoom">
-          <End Role="OrderRoom" Type="Self.OrderRoom" Multiplicity="1" />
-          <End Role="OrderRoomDetail" Type="Self.OrderRoomDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderRoom">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="OrderRoomDetail">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderRoomDetail_Room">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="OrderRoomDetail" Type="Self.OrderRoomDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderRoomDetail">
-              <PropertyRef Name="RoomId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -660,8 +506,6 @@
           <EntitySet Name="Destinations" EntityType="Self.Destination" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Hotels" EntityType="Self.Hotel" />
-          <EntitySet Name="OrderRooms" EntityType="Self.OrderRoom" />
-          <EntitySet Name="OrderRoomDetails" EntityType="Self.OrderRoomDetail" />
           <EntitySet Name="OrderTours" EntityType="Self.OrderTour" />
           <EntitySet Name="OrderTourDetails" EntityType="Self.OrderTourDetail" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
@@ -684,22 +528,6 @@
           <AssociationSet Name="FK_Room_Hotel" Association="Self.FK_Room_Hotel">
             <End Role="Hotel" EntitySet="Hotels" />
             <End Role="Room" EntitySet="Rooms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tour_Hotel" Association="Self.FK_Tour_Hotel">
-            <End Role="Hotel" EntitySet="Hotels" />
-            <End Role="Tour" EntitySet="Tours" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderRoom_User" Association="Self.FK_OrderRoom_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="OrderRoom" EntitySet="OrderRooms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderRoomDetail_OrderRoom" Association="Self.FK_OrderRoomDetail_OrderRoom">
-            <End Role="OrderRoom" EntitySet="OrderRooms" />
-            <End Role="OrderRoomDetail" EntitySet="OrderRoomDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderRoomDetail_Room" Association="Self.FK_OrderRoomDetail_Room">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="OrderRoomDetail" EntitySet="OrderRoomDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderTour_Customer" Association="Self.FK_OrderTour_Customer">
             <End Role="User" EntitySet="Users" />
@@ -766,26 +594,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderRooms">
-            <EntityTypeMapping TypeName="TourManagementModel.OrderRoom">
-              <MappingFragment StoreEntitySet="OrderRoom">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderRoomDetails">
-            <EntityTypeMapping TypeName="TourManagementModel.OrderRoomDetail">
-              <MappingFragment StoreEntitySet="OrderRoomDetail">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
-                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
-                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderTours">
             <EntityTypeMapping TypeName="TourManagementModel.OrderTour">
               <MappingFragment StoreEntitySet="OrderTour">
@@ -811,7 +619,10 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Acreage" ColumnName="Acreage" />
+                <ScalarProperty Name="NumberBed" ColumnName="NumberBed" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="HotelId" ColumnName="HotelId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -842,7 +653,7 @@
                 <ScalarProperty Name="PriceOfChild" ColumnName="PriceOfChild" />
                 <ScalarProperty Name="PriceOfAdult" ColumnName="PriceOfAdult" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="StopPosition" ColumnName="StopPosition" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>

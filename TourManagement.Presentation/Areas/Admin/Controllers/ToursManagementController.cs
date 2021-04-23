@@ -53,7 +53,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "Name", tour.HotelId);
             return View(tour);
         }
 
@@ -71,7 +70,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "Name", tour.HotelId);
             return View(tour);
         }
 
@@ -90,7 +88,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "Name", tour.HotelId);
             return View(tour);
         }
 

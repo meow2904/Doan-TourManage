@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.OrderTour>
+@{
+    ViewBag.Title = "GetOrderTour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row pt-5">
+    @if (!Model.Any())
+    {
+        <div class="m-auto">
+            <p>bạn chưa có đơn đặt tour nào</p>
+            <a href="@Html.ActionLink("Index","Home")">Tìm tour tại đây</a>
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Mã đơn</th>
+                    <th scope="col">Ngày đặt</th>
+                    <th scope="col">Xem chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@item.OrderId</th>
+                        <td>@item.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td><a href="#">Chi tiết</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
+

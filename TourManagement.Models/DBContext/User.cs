@@ -17,7 +17,6 @@ namespace TourManagement.Models.DBContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.OrderRooms = new HashSet<OrderRoom>();
             this.OrderTours = new HashSet<OrderTour>();
         }
     
@@ -29,8 +28,6 @@ namespace TourManagement.Models.DBContext
         public string Password { get; set; }
         public Nullable<int> Role { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderRoom> OrderRooms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTour> OrderTours { get; set; }
     }

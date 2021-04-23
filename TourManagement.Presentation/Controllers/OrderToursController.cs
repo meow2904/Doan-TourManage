@@ -13,16 +13,25 @@ namespace TourManagement.Presentation.Controllers
 {
     public class OrderToursController : Controller
     {
-        private TourManagementContext db = new TourManagementContext();
         private readonly ITourRepository _tourRepository;
         private readonly IBookTourRepository _bookTourRepository;
+        private readonly IOrderTourRepository _orderTourRepository;
 
 
         public OrderToursController(ITourRepository tourRepository,
-            IBookTourRepository bookTourRepository)
+            IBookTourRepository bookTourRepository,
+            IOrderTourRepository orderTourRepository)
         {
             _tourRepository = tourRepository;
             _bookTourRepository = bookTourRepository;
+            _orderTourRepository = orderTourRepository;
+        }
+
+        public ActionResult GetOrderTour()
+        {
+            var custommer = (User)Session["username"];
+            var orderTour = _orderTourRepository.GetOrderTourByCustommer(custommer.Id);
+            return View(orderTour);
         }
 
         public ActionResult OrderTour(int id)

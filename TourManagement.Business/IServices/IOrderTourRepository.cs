@@ -10,5 +10,6 @@ namespace TourManagement.Business.IServices
 {
     public interface IOrderTourRepository: IGenericRepository<OrderTour>
     {
+        IEnumerable<OrderTour> GetOrderTourByCustommer(int cusId);
     }
 }

@@ -19,20 +19,6 @@ namespace TourManagement.Presentation.Controllers
         {
             _userRepository = userRepository;
         }
-        // GET: Users/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
         // GET: Users/Create
         public ActionResult Register()

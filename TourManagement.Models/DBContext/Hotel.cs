@@ -18,7 +18,6 @@ namespace TourManagement.Models.DBContext
         public Hotel()
         {
             this.Rooms = new HashSet<Room>();
-            this.Tours = new HashSet<Tour>();
         }
     
         public int Id { get; set; }
@@ -31,7 +30,5 @@ namespace TourManagement.Models.DBContext
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tour> Tours { get; set; }
     }
 }
