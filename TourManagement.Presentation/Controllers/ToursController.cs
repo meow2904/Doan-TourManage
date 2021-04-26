@@ -24,16 +24,12 @@ namespace TourManagement.Presentation.Controllers
         
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             var tour = _tourRepository.GetById((int)id);
             if (tour == null)
             {
                 return HttpNotFound();
             }
-
             //get destiantions in tour
             var destinations = _destinatioRepository.GetDestinationByidTour((int)id);
             string dess = "";

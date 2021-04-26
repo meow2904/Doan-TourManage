@@ -20,6 +20,7 @@ namespace TourManagement.Presentation.Controllers
         public ActionResult Index()
         {
             var tours = _tourRepository.GetAll();
+
             return View(tours);
         }
 

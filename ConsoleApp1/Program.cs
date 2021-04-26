@@ -29,8 +29,12 @@ namespace ConsoleApp1
             //{
             //    Console.WriteLine(item.Name);
             //}
-            var rs = userRepository.GetUserLogin("Admin@gmail.com","aaaa" );
-            Console.WriteLine("a "+ rs.Name + " a");
+            var rs = tourRepository.GetById(1);
+            foreach(var item in rs.Images)
+            {
+                Console.WriteLine(item);
+            }
+            //Console.WriteLine("a "+ rs.Name + " a");
             Console.ReadLine();
         }
     }

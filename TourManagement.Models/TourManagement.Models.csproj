@@ -65,6 +65,9 @@
     <Compile Include="DBContext\Hotel.cs">
       <DependentUpon>TourManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContext\Image.cs">
+      <DependentUpon>TourManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContext\OrderTour.cs">
       <DependentUpon>TourManagement.tt</DependentUpon>
     </Compile>
@@ -89,13 +92,13 @@
       <DependentUpon>TourManagement.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContext\TourManagement.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>TourManagement.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="DBContext\TourManagement.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>TourManagement.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBContext\User.cs">
@@ -125,8 +128,8 @@
     </Content>
     <Content Include="DBContext\TourManagement.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TourManagement.edmx</DependentUpon>
       <LastGenOutput>TourManagement.cs</LastGenOutput>
+      <DependentUpon>TourManagement.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

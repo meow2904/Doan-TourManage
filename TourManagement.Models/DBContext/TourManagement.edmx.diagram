@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="597264c1b5c144f087c574cec8c57dbf" Name="Diagram1">
+      <Diagram DiagramId="391a02b4bab14e42a4b55bc5ee17cf6b" Name="Diagram1">
         <EntityTypeShape EntityType="TourManagementModel.Category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.Destination" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.Destination" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.Hotel" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.OrderTour" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.OrderTourDetail" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.Room" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.Hotel" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.Image" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.OrderTour" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.OrderTourDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.Room" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.Tour" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.TourDestination" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.User" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.TourDestination" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.User" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="TourManagementModel.FK_Tour_Category" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_TourDestination_Destination" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_Tour_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_Room_Hotel" ManuallyRouted="false" />
+        <AssociationConnector Association="TourManagementModel.FK_Image_Tour" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_OrderTour_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_OrderTourDetail_OrderTour" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_OrderTourDetail_Tour" ManuallyRouted="false" />

@@ -168,6 +168,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\hotelcss\hotel.css" />
     <Content Include="Content\images\baidinh1.jpg" />
+    <Content Include="Content\images\baidinh2.jpg" />
+    <Content Include="Content\images\baidinh3.jpg" />
     <Content Include="Content\images\calendar.svg" />
     <Content Include="Content\images\content.svg" />
     <Content Include="Content\images\dalat.png" />
@@ -186,6 +188,7 @@
     <Content Include="Content\images\hotels\sala1.jpg" />
     <Content Include="Content\images\hotels\vungtau1.jpg" />
     <Content Include="Content\images\info.svg" />
+    <Content Include="Content\images\laocai1.jpg" />
     <Content Include="Content\images\logo1.PNG" />
     <Content Include="Content\images\meo.jpg" />
     <Content Include="Content\images\nhat1.jpg" />
@@ -194,16 +197,27 @@
     <Content Include="Content\images\nhatrang.png" />
     <Content Include="Content\images\phansipang1.jpg" />
     <Content Include="Content\images\phanthiet1.jpg" />
+    <Content Include="Content\images\phanthiet2.jpg" />
+    <Content Include="Content\images\phanthiet3.jpg" />
+    <Content Include="Content\images\phanthiet4.jpg" />
     <Content Include="Content\images\phuquoc1.jpg" />
-    <Content Include="Content\images\sapa.png" />
+    <Content Include="Content\images\phuquoc2.jpg" />
+    <Content Include="Content\images\phuquoc3.jpg" />
+    <Content Include="Content\images\sapa1.jpg" />
+    <Content Include="Content\images\sapa2.jpg" />
+    <Content Include="Content\images\sapa3.jpg" />
     <Content Include="Content\images\searchbtn.svg" />
     <Content Include="Content\images\slide1.jpg" />
     <Content Include="Content\images\slide2.jpg" />
     <Content Include="Content\images\slide3.jpg" />
-    <Content Include="Content\images\tamchuc.jpg" />
+    <Content Include="Content\images\tamchuc1.jpg" />
+    <Content Include="Content\images\tamchuc2.jpg" />
+    <Content Include="Content\images\tamchuc3.jpg" />
     <Content Include="Content\images\thungchimninhbinh.jpg" />
+    <Content Include="Content\images\trangan1.jpg" />
     <Content Include="Content\images\user.svg" />
     <Content Include="Content\images\vuonvua.jpg" />
+    <Content Include="Content\images\yentu1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -329,6 +343,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

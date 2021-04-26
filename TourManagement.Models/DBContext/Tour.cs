@@ -17,6 +17,7 @@ namespace TourManagement.Models.DBContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tour()
         {
+            this.Images = new HashSet<Image>();
             this.OrderTourDetails = new HashSet<OrderTourDetail>();
             this.TourDestinations = new HashSet<TourDestination>();
         }
@@ -28,9 +29,9 @@ namespace TourManagement.Models.DBContext
         public string PositionStart { get; set; }
         public string Transport { get; set; }
         public string Content { get; set; }
-        public string Image { get; set; }
         public Nullable<int> QuantityPeople { get; set; }
         public Nullable<decimal> PriceOfChild { get; set; }
+        public Nullable<decimal> SurchargeOfRoom { get; set; }
         public Nullable<decimal> PriceOfAdult { get; set; }
         public Nullable<int> EmployeeId { get; set; }
         public string StopPosition { get; set; }
@@ -38,6 +39,8 @@ namespace TourManagement.Models.DBContext
     
         public virtual Category Category { get; set; }
         public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTourDetail> OrderTourDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

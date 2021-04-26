@@ -38,6 +38,14 @@
     <Property Name="Image" Type="nvarchar" MaxLength="50" />
     <Property Name="Content" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameImage" Type="nvarchar" MaxLength="50" />
+    <Property Name="TourId" Type="int" />
+  </EntityType>
   <EntityType Name="OrderTour">
     <Key>
       <PropertyRef Name="OrderId" />
@@ -90,9 +98,9 @@
     <Property Name="PositionStart" Type="nvarchar" MaxLength="100" />
     <Property Name="Transport" Type="nvarchar" MaxLength="50" />
     <Property Name="Content" Type="nvarchar(max)" />
-    <Property Name="Image" Type="nvarchar" MaxLength="50" />
     <Property Name="QuantityPeople" Type="int" />
     <Property Name="PriceOfChild" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SurchargeOfRoom" Type="decimal" Precision="18" Scale="2" />
     <Property Name="PriceOfAdult" Type="decimal" Precision="18" Scale="2" />
     <Property Name="EmployeeId" Type="int" />
     <Property Name="StopPosition" Type="nvarchar" MaxLength="256" />
@@ -119,6 +127,18 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Role" Type="int" />
   </EntityType>
+  <Association Name="FK_Image_Tour">
+    <End Role="Tour" Type="Self.Tour" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tour">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OrderTour_Customer">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="OrderTour" Type="Self.OrderTour" Multiplicity="*" />
@@ -220,6 +240,7 @@
     <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderTour" EntityType="Self.OrderTour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderTourDetail" EntityType="Self.OrderTourDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
@@ -227,6 +248,10 @@
     <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TourDestination" EntityType="Self.TourDestination" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Image_Tour" Association="Self.FK_Image_Tour">
+      <End Role="Tour" EntitySet="Tour" />
+      <End Role="Image" EntitySet="Image" />
+    </AssociationSet>
     <AssociationSet Name="FK_OrderTour_Customer" Association="Self.FK_OrderTour_Customer">
       <End Role="User" EntitySet="User" />
       <End Role="OrderTour" EntitySet="OrderTour" />
