@@ -46,7 +46,11 @@ namespace TourManagement.Presentation.Controllers
             {
                 return RedirectToAction("Login", "Users");
             }
-            return View();
+            else
+            {
+                return View();
+            }    
+            
         }
 
 

@@ -173,6 +173,10 @@
     <Content Include="Content\images\calendar.svg" />
     <Content Include="Content\images\content.svg" />
     <Content Include="Content\images\dalat.png" />
+    <Content Include="Content\images\Destinations\dd1.jpg" />
+    <Content Include="Content\images\Destinations\dd2.jpg" />
+    <Content Include="Content\images\Destinations\dd3.jpg" />
+    <Content Include="Content\images\Destinations\dd4.jpg" />
     <Content Include="Content\images\halong1.jpg" />
     <Content Include="Content\images\hanquoc1.jpg" />
     <Content Include="Content\images\hanquoc2.jpg" />
@@ -372,13 +376,11 @@
     <Content Include="Views\Tours\GetByCategory.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Shared\LoginPatial.cshtml" />
     <Content Include="Views\Home\SearchTour.cshtml" />
     <Content Include="Views\OrderTours\OrderTour.cshtml" />
     <Content Include="Views\OrderTours\CompleteOrder.cshtml" />
-    <Content Include="Views\Tours\TourContain.cshtml" />
     <Content Include="Views\OrderTours\GetOrderTour.cshtml" />
     <Content Include="Views\Hotels\Details.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />

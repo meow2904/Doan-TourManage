@@ -37,11 +37,13 @@ namespace TourManagement.Presentation.Controllers
             {
                 dess += item.Name + " - ";
             }
+            ViewBag.Destination = dess.Substring(0, dess.Length - 3);
 
             //get remain quantity in tour
             var remainingQuantity = _tourRepository.GetRemainingQuantity((int)id);
             ViewBag.Remaining = remainingQuantity;
-            ViewBag.Destination = dess.Substring(0, dess.Length - 3);
+
+            
             return View(tour);
         }
 

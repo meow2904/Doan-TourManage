@@ -37,11 +37,14 @@ namespace TourManagement.Presentation.Controllers
             if (ModelState.IsValid)
             {
                 user.Role = 2;
-                _userRepository.Add(user);
-                return RedirectToAction("Index");
+                var result = _userRepository.Add(user);
+                if(result)
+                {
+                    return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/'</script>");
+                }
             }
 
-            return View(user);
+            return Redirect("/");
         }
 
         // GET: Users/Edit/5
@@ -51,7 +54,7 @@ namespace TourManagement.Presentation.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            var user = _userRepository.GetById((int)id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -64,13 +67,13 @@ namespace TourManagement.Presentation.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Email,Address,Password,Role")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                user.Role = 2;
+                _userRepository.Update(user);
+                return RedirectToAction("Index", "Home");
             }
             return View(user);
         }

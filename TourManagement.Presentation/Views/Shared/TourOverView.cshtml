@@ -5,7 +5,7 @@
         <div class="card-body d-flex flex-column justify-content-between h-auto">
             <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name</a>
             <div class="row">
-                <p class="col-7 "><img src="~/Content/images/calendar.svg" height="15" width="15"/> @Model.TimeStart.Value.ToString("dd/MM/yyyy")</p>
+                <p class="col-7 "><img src="~/Content/images/calendar.svg" height="15" width="15" /> @Model.TimeStart.Value.ToString("dd/MM/yyyy")</p>
                 <p class="col-5 px-0"><span style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###") đ</span></p>
             </div>
         </div>

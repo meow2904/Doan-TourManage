@@ -24,6 +24,16 @@
     box-shadow: none;
 }
 
-menu-login {
-    
+.destination {
+    position: relative;
+    height: 350px;
+}
+
+.destination-name {
+    position: absolute;
+    top: 320px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: aliceblue;
+    font-weight: 500;
 }

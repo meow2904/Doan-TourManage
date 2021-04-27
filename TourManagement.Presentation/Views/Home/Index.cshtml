@@ -1,7 +1,7 @@
 ﻿@using TourManagement.Models.DBContext
 @model IEnumerable<Tour>
 @{
-    ViewBag.Title = "Trang chu - Let's Go";
+    ViewBag.Title = "Tìm tour du lịch - Let's Go";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container body-content py-3">
@@ -38,4 +38,44 @@
     {
         @Html.Partial("TourOverView", item);
     }
+</div>
+<div class="py-4">
+    <div class="text-center py-3">
+        <h3>Điểm đến yêu thích</h3>
+    </div>
+    <div class="row">
+
+        <div class="col-3 text-center">
+            <div class="destination">
+                <a href="@Url.Action("SearchTour", "Home", new { search = "Hạ Long" })"><img src="~/Content/images/Destinations/dd1.jpg" class="h-100 img-fluid" alt="dd1.jpg" /></a>
+                <div class="destination-name">
+                    <p>VỊNH HẠ LONG</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="destination">
+                <a href="@Url.Action("SearchTour", "Home", new { search = "SaPa" })"><img src="~/Content/images/Destinations/dd2.jpg" class="h-100 img-fluid" alt="dd2.jpg" /></a>
+                <div class="destination-name">
+                    <p>SAPA</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="destination">
+                <a href="@Url.Action("SearchTour", "Home", new { search = "Đà Nẵng" })"><img src="~/Content/images/Destinations/dd3.jpg" class="h-100 img-fluid" alt="dd3.jpg" /></a>
+                <div class="destination-name">
+                    <p>ĐÀ NẴNG</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="destination">
+                <a href="@Url.Action("SearchTour", "Home", new { search = "Phú Quốc" })"><img src="~/Content/images/Destinations/dd4.jpg" class="h-100 img-fluid" alt="dd4.jpg" /></a>
+                <div class="destination-name">
+                    <p>PHÚ QUỐC</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -4,7 +4,7 @@
 @if (Session["username"] != null)
 {
 
-    using (Html.BeginForm("logout", "Users", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("Logout", "Users", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
@@ -14,7 +14,8 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="@Url.Action("GetOrderTour", "OrderTours")">Tài khoản của tôi</a>
+                <a class="dropdown-item" href="@Url.Action("Edit", "Users", new { id = user.Id})">Cập nhật tài khoản</a>
+                <a class="dropdown-item" href="@Url.Action("GetOrderTour", "OrderTours")">Lịch sử đơn đặt</a>
                 <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a>
             </div>
         </div>
