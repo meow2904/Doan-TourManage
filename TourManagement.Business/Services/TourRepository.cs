@@ -42,9 +42,10 @@ namespace TourManagement.Business.Services
                 OrderBy(x => x.PriceOfAdult).Skip(size * (page - 1)).Take(size).ToList();
         }
 
-        public IEnumerable<Tour> GetToursByPriceWithPaging(decimal startPrice, decimal endPrice, int page, int size)
+        public IEnumerable<Tour> GetToursByPriceWithPaging(string category, decimal startPrice, decimal endPrice, int page, int size)
         {
-            return Context.Tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).
+            var tours = Context.Tours.Where(x => x.Category.Name == category).ToList();
+            return tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).
                 OrderBy(x => x.PriceOfAdult).Skip(size * (page - 1)).Take(size).ToList();
         }
 
@@ -54,9 +55,10 @@ namespace TourManagement.Business.Services
             x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower()))).ToList();
         }
 
-        public IEnumerable<Tour> GetByPrice(decimal startPrice, decimal endPrice)
+        public IEnumerable<Tour> GetByPrice(string category, decimal startPrice, decimal endPrice)
         {
-            return Context.Tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).ToList();
+            var tours = Context.Tours.Where(x => x.Category.Name == category).ToList();
+            return tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).ToList();
         }
     }
 }

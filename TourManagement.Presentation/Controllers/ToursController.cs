@@ -60,25 +60,26 @@ namespace TourManagement.Presentation.Controllers
             var totalPage = (int)Math.Ceiling(totalTourByCategory / (double)size);
             ViewBag.TotalPage = totalPage;
             ViewBag.CurrentPage = page;
+            ViewBag.CurrentCategory = category;
 
             var tours = _tourRepository.GetToursByCategoryWithPaging(category, page, size);
-
-
             return View(tours);
         }
 
-        public ActionResult GetByPrice(decimal startPrice, decimal endPrice, int page)
+        public ActionResult GetByPrice(string category, decimal startPrice, decimal endPrice, int page)
         {
-            if(page < 0)
+            if (page < 0)
             {
                 page = 1;
             }
-            int totalTour = _tourRepository.GetByPrice(startPrice, endPrice).Count();
+            int totalTour = _tourRepository.GetByPrice(category, startPrice, endPrice).Count();
             var totalPage = (int)Math.Ceiling(totalTour / (double)size);
             ViewBag.TotalPage = totalPage;
 
             ViewBag.CurrentPage = page;
-            var tours = _tourRepository.GetToursByPriceWithPaging(startPrice, endPrice, page, size);
+            ViewBag.CurrentCategory = category;
+
+            var tours = _tourRepository.GetToursByPriceWithPaging(category, startPrice, endPrice, page, size);
             return View(tours);
         }
 

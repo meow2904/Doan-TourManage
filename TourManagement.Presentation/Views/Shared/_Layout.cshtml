@@ -8,7 +8,6 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
     <link rel="stylesheet" type="text/css" href="~/Scripts/Site.js" />
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 
@@ -46,19 +45,16 @@
                 <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Search tour" aria-label="Search">
                 <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
             }
-            @*<form class="form-inline my-2 my-lg-0 col-4" action="SearchTour">
-                    <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Search tour" aria-label="Search">
-                    <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
-                </form>*@
-
             @Html.Partial("LoginPatial")
         </div>
     </nav>
     <div class="clearfix">
 
     </div>
-    <div class="container body-content ptc-60">
-        @RenderBody()
+    <div class="container ptc-60">
+        <div>
+            @RenderBody()
+        </div>
         <hr />
         <div class="card-footer text-muted text-center">
             <p>Copyright &copy; 2021 - MeowMeow</p>
@@ -66,7 +62,6 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-   
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
