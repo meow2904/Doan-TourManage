@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourManagement.Business.BaseServices;
 using TourManagement.Business.IServices;
+using TourManagement.Models;
 using TourManagement.Models.DBContext;
 
 namespace TourManagement.Business.Services
@@ -18,11 +19,11 @@ namespace TourManagement.Business.Services
 
         public int GetRemainingQuantity(int tourId)
         {
-            var tourOrderDetail = Context.OrderTourDetails.FirstOrDefault(x => x.TourId==tourId);
-            var tour = Context.Tours.FirstOrDefault(x => x.Id==tourId);
+            var tourOrderDetail = Context.OrderTourDetails.FirstOrDefault(x => x.TourId == tourId);
+            var tour = Context.Tours.FirstOrDefault(x => x.Id == tourId);
 
-            int remainQuantity=tour.QuantityPeople.Value;
-            if(tourOrderDetail ==null)
+            int remainQuantity = tour.QuantityPeople.Value;
+            if (tourOrderDetail == null)
             {
                 return remainQuantity;
             }
@@ -32,13 +33,30 @@ namespace TourManagement.Business.Services
                 var quantity2 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityChild);
                 remainQuantity = (int)(Context.Tours.Where(x => x.Id == tourId).Sum(x => x.QuantityPeople) - (quantity1 + quantity2));
                 return remainQuantity;
-            }        
+            }
+        }
+
+        public IEnumerable<Tour> GetToursByCategoryWithPaging(string category, int page, int size)
+        {
+            return Context.Tours.Where(x => x.Category.Name == category).
+                OrderBy(x => x.PriceOfAdult).Skip(size * (page - 1)).Take(size).ToList();
+        }
+
+        public IEnumerable<Tour> GetToursByPriceWithPaging(decimal startPrice, decimal endPrice, int page, int size)
+        {
+            return Context.Tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).
+                OrderBy(x => x.PriceOfAdult).Skip(size * (page - 1)).Take(size).ToList();
         }
 
         public IEnumerable<Tour> Search(string tour)
         {
             return Context.Tours.Where(x => x.Name.Contains(tour.ToLower()) ||
             x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower()))).ToList();
+        }
+
+        public IEnumerable<Tour> GetByPrice(decimal startPrice, decimal endPrice)
+        {
+            return Context.Tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).ToList();
         }
     }
 }

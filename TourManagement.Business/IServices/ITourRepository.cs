@@ -8,11 +8,15 @@ using TourManagement.Models.DBContext;
 
 namespace TourManagement.Business.IServices
 {
-    public interface ITourRepository: IGenericRepository<Tour>
+    public interface ITourRepository : IGenericRepository<Tour>
     {
         IEnumerable<Tour> GetByCategory(string category);
         int GetRemainingQuantity(int tourId);
         IEnumerable<Tour> Search(string tour);
+        IEnumerable<Tour> GetToursByCategoryWithPaging(string category, int page, int size);
+
+        IEnumerable<Tour> GetByPrice(decimal startPrice, decimal endPrice);
+        IEnumerable<Tour> GetToursByPriceWithPaging(decimal startPrice, decimal endPrice, int page, int size);
 
     }
 }

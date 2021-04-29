@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TourManagement.Business.IServices;
+using TourManagement.Models;
 using TourManagement.Models.DBContext;
 
 namespace TourManagement.Presentation.Controllers
@@ -16,12 +17,13 @@ namespace TourManagement.Presentation.Controllers
         private TourManagementContext db = new TourManagementContext();
         private readonly ITourRepository _tourRepository;
         private readonly IDestinatioRepository _destinatioRepository;
+        private int size = 8;
         public ToursController(ITourRepository tourRepository, IDestinatioRepository destinatioRepository)
         {
             _tourRepository = tourRepository;
             _destinatioRepository = destinatioRepository;
         }
-        
+
         public ActionResult Details(int? id)
         {
 
@@ -43,24 +45,42 @@ namespace TourManagement.Presentation.Controllers
             var remainingQuantity = _tourRepository.GetRemainingQuantity((int)id);
             ViewBag.Remaining = remainingQuantity;
 
-            
+
             return View(tour);
         }
 
-        public ActionResult GetByCategory(string category)
+        public ActionResult GetByCategory(string category, int page)
         {
-            if (category == null)
+            int totalTourByCategory = _tourRepository.GetByCategory(category).Count();
+            if (page <= 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                page = 1;
             }
-            var tours = _tourRepository.GetByCategory(category);
-            if (tours == null)
-            {
-                ViewBag.Message = "Don't have tour in foeign country";
-            }
+
+            var totalPage = (int)Math.Ceiling(totalTourByCategory / (double)size);
+            ViewBag.TotalPage = totalPage;
+            ViewBag.CurrentPage = page;
+
+            var tours = _tourRepository.GetToursByCategoryWithPaging(category, page, size);
+
+
             return View(tours);
         }
-        
+
+        public ActionResult GetByPrice(decimal startPrice, decimal endPrice, int page)
+        {
+            if(page < 0)
+            {
+                page = 1;
+            }
+            int totalTour = _tourRepository.GetByPrice(startPrice, endPrice).Count();
+            var totalPage = (int)Math.Ceiling(totalTour / (double)size);
+            ViewBag.TotalPage = totalPage;
+
+            ViewBag.CurrentPage = page;
+            var tours = _tourRepository.GetToursByPriceWithPaging(startPrice, endPrice, page, size);
+            return View(tours);
+        }
 
         protected override void Dispose(bool disposing)
         {

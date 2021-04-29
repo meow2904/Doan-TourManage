@@ -7,6 +7,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Site.js" />
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 
@@ -26,10 +28,9 @@
             <ul class="navbar-nav col">
                 <li class="nav-item dropdown" id="group-tour">
                     <a class="nav-link" href="@Url.Action("Index", "Home", new { area = "" })">TOUR</a>
-
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="@Url.Action("GetByCategory", "Tours", new { category = "Trong nước" })">Trong nước</a>
-                        <a class="dropdown-item" href="@Url.Action("GetByCategory", "Tours", new { category = "Nước Ngoài" })">Nước ngoài</a>
+                        <a class="dropdown-item" href="@Url.Action("GetByCategory", "Tours", new { category = "Trong nước", page = 1 })">Trong nước</a>
+                        <a class="dropdown-item" href="@Url.Action("GetByCategory", "Tours", new { category = "Nước Ngoài", page = 1 })">Nước ngoài</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -65,16 +66,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    <script>
-    $(document).ready(() => {
-            if ($('#remaining').text() == 0) {
-        $('#btnBook').addClass('disabled')
-    }
-        else {
-        $('#btnBook').removeClass('disabled')
-    }
-    })
-    </script>
+   
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

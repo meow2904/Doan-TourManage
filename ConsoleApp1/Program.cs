@@ -8,14 +8,17 @@ using TourManagement.Business.Services;
 
 namespace ConsoleApp1
 {
-    class Program
+    class @Program
     {
         private static IDestinatioRepository destinatioRepository= new DestinationRepository();
         private static ITourRepository tourRepository= new TourRepository();
         private static IUserRepository userRepository= new UserRepository();
-
+        static int n1 = 1;
+        int n2;
         static void Main(string[] args)
         {
+
+
             //var rs = tour.GetAll().Where(td => td.Id == 1002);
 
             //var destinations = destinatioRepository.GetAll().Where(d => rs.Any(x => x. == d.Id));
@@ -29,13 +32,25 @@ namespace ConsoleApp1
             //{
             //    Console.WriteLine(item.Name);
             //}
-            var rs = tourRepository.GetById(1);
-            foreach(var item in rs.Images)
-            {
-                Console.WriteLine(item);
-            }
+            //var rs = tourRepository.GetById(1);
+            //foreach(var item in rs.Images)
+            //{
+            //    Console.WriteLine(item);
+            //}
             //Console.WriteLine("a "+ rs.Name + " a");
             Console.ReadLine();
         }
+
+        private static void swap( int x, int y)
+        {
+            int tem =x;
+            x = y;
+            y = tem;
+        }
+    }
+
+    class @Var
+    {
+
     }
 }

@@ -170,6 +170,8 @@
     <Content Include="Content\images\baidinh1.jpg" />
     <Content Include="Content\images\baidinh2.jpg" />
     <Content Include="Content\images\baidinh3.jpg" />
+    <Content Include="Content\images\baidinh4.jpg" />
+    <Content Include="Content\images\bancat1.jpg" />
     <Content Include="Content\images\calendar.svg" />
     <Content Include="Content\images\content.svg" />
     <Content Include="Content\images\dalat.png" />
@@ -178,6 +180,7 @@
     <Content Include="Content\images\Destinations\dd3.jpg" />
     <Content Include="Content\images\Destinations\dd4.jpg" />
     <Content Include="Content\images\halong1.jpg" />
+    <Content Include="Content\images\halong2.jpg" />
     <Content Include="Content\images\hanquoc1.jpg" />
     <Content Include="Content\images\hanquoc2.jpg" />
     <Content Include="Content\images\hanquoc3.jpg" />
@@ -210,6 +213,8 @@
     <Content Include="Content\images\sapa1.jpg" />
     <Content Include="Content\images\sapa2.jpg" />
     <Content Include="Content\images\sapa3.jpg" />
+    <Content Include="Content\images\sapa4.jpg" />
+    <Content Include="Content\images\sapa5.jpg" />
     <Content Include="Content\images\searchbtn.svg" />
     <Content Include="Content\images\slide1.jpg" />
     <Content Include="Content\images\slide2.jpg" />
@@ -385,6 +390,7 @@
     <Content Include="Views\Hotels\Details.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />
     <Content Include="Views\Shared\HotelOverView.cshtml" />
+    <Content Include="Views\Tours\GetByPrice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
