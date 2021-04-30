@@ -1,13 +1,19 @@
 ﻿@model TourManagement.Models.DBContext.Hotel
 
-<div class="col-md-3 py-3">
-    <div class="card" style="height: 300px;">
-        <div class="h-50"><img src="~/Content/images/hotels/@Model.Image" class="card-img-top img-thumbnail h-100" alt="@Model.Name"></div>
-        <div class="card-body d-flex flex-column justify-content-between h-auto text-center">
-            <a class="" style="color: black;" href="#">@Model.Name</a>
-            <div class="m-auto">
-                <p><a href="#" class="btn btn-outline-primary" >Xem chi tiết</a></p>
+<div class="col-4 py-3">
+    <div class="hotels animate__animated animate__zoomIn">
+        <a class="h-100" href="@Url.Action("Details", "Hotels", new { id =Model.Id})">
+            <img src="~/Content/images/hotels/@Model.Image" class="h-100 w-100 " alt="@Model.Name">
+   
+            <div class="hotels-name">
+                <div>
+                    @for(int i=0; i<5; i++)
+                    {
+                        <img src="~/Content/images/star.svg" height="10" width="10"/>
+                    }
+                </div>
+                <p>@Model.Name</p>
             </div>
-        </div>
+        </a> 
     </div>
 </div>

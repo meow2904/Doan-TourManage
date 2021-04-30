@@ -18,6 +18,7 @@ namespace TourManagement.Models.DBContext
         public int TourId { get; set; }
         public Nullable<int> QuantityChild { get; set; }
         public Nullable<int> QuantityAdult { get; set; }
+        public Nullable<int> NumberRoom { get; set; }
     
         public virtual OrderTour OrderTour { get; set; }
         public virtual Tour Tour { get; set; }

@@ -64,6 +64,7 @@
     <EntitySetMapping Name="OrderTourDetails">
       <EntityTypeMapping TypeName="TourManagementModel.OrderTourDetail">
         <MappingFragment StoreEntitySet="OrderTourDetail">
+          <ScalarProperty Name="NumberRoom" ColumnName="NumberRoom" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="TourId" ColumnName="TourId" />
           <ScalarProperty Name="QuantityChild" ColumnName="QuantityChild" />

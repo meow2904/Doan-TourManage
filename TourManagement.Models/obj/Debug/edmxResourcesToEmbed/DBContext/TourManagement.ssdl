@@ -63,6 +63,7 @@
     <Property Name="TourId" Type="int" Nullable="false" />
     <Property Name="QuantityChild" Type="int" />
     <Property Name="QuantityAdult" Type="int" />
+    <Property Name="NumberRoom" Type="int" />
   </EntityType>
   <EntityType Name="Room">
     <Key>

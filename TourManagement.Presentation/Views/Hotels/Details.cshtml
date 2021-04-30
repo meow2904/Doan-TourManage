@@ -5,63 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container tour-container pt-4">
+    <div>
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="carousel-inner" style="height: 400px;">
+                <img src="~/Content/images/hotels/@Model.Image" class="d-block w-100 img-thumbnail img-fluid" alt="...">
+            </div>
+        </div>
 
-<div>
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <div class="col-md-4 border h-75 py-3">
+            <div class="tour-cart font-weight-normal">
+                <div class="text-center">
+                    <h5>@Model.Name</h5>
+                </div>
+                <hr />
+                <div>
+                    <div class="row">
+                        <p class="col-4">Đia chỉ: </p><span>@Model.Address</span>
+                    </div>
+                    <div class="row">
+                        <p class="col-4">Điện thoại: </p><span>@Model.Phone</span>
+                    </div>
+                    <div class="row">
+                        <p class="col-4">Email:</p><span>@Model.Email</span>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            <div class="input-group addtocart py-3 justify-content-center">
+                <a href="@Url.Action("OrderTour","OrderTours", new { id= Model.Id})" id="btnBook" class="btn btn-outline-primary mr-3">Liên hệ</a>
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <div class="row mt-5 pt-4 border-top">
+            <div class="py-4 border-top">
+                <h5><img src="~/Content/images/content.svg" height="20" width="20"> Giới thiệu chung</h5>
+                <div>
+                    <p>@Model.Content</p>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-    </dl>
+            <div class="row py-4 border-top">
+                
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

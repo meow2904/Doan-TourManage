@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TourManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TourManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -68,6 +68,7 @@
           <Property Name="TourId" Type="int" Nullable="false" />
           <Property Name="QuantityChild" Type="int" />
           <Property Name="QuantityAdult" Type="int" />
+          <Property Name="NumberRoom" Type="int" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -290,8 +291,7 @@
             <End Role="TourDestination" EntitySet="TourDestination" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TourManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -367,6 +367,7 @@
           <Property Name="QuantityAdult" Type="Int32" />
           <NavigationProperty Name="OrderTour" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTourDetail" ToRole="OrderTour" />
           <NavigationProperty Name="Tour" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="OrderTourDetail" ToRole="Tour" />
+          <Property Name="NumberRoom" Type="Int32" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -667,6 +668,7 @@
           <EntitySetMapping Name="OrderTourDetails">
             <EntityTypeMapping TypeName="TourManagementModel.OrderTourDetail">
               <MappingFragment StoreEntitySet="OrderTourDetail">
+                <ScalarProperty Name="NumberRoom" ColumnName="NumberRoom" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="TourId" ColumnName="TourId" />
                 <ScalarProperty Name="QuantityChild" ColumnName="QuantityChild" />

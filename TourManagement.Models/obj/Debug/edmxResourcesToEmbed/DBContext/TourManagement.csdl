@@ -72,6 +72,7 @@
     <Property Name="QuantityAdult" Type="Int32" />
     <NavigationProperty Name="OrderTour" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTourDetail" ToRole="OrderTour" />
     <NavigationProperty Name="Tour" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="OrderTourDetail" ToRole="Tour" />
+    <Property Name="NumberRoom" Type="Int32" />
   </EntityType>
   <EntityType Name="Room">
     <Key>

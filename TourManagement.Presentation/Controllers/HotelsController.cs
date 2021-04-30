@@ -33,11 +33,7 @@ namespace TourManagement.Presentation.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = db.Hotels.Find(id);
-            if (hotel == null)
-            {
-                return HttpNotFound();
-            }
+            var hotel = _hotelRepository.GetById((int)id);
             return View(hotel);
         }
 

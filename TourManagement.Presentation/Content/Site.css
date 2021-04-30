@@ -16,8 +16,8 @@
     display: block;
 }
 
-#group-price:hover .dropdown-menu{
-    display:block;
+#group-price:hover .dropdown-menu {
+    display: block;
 }
 
 .ptc-60 {
@@ -25,7 +25,7 @@
 }
 
 .btn-none:focus {
-    outline:none !important;
+    outline: none !important;
     box-shadow: none;
 }
 
@@ -42,3 +42,38 @@
     color: aliceblue;
     font-weight: 500;
 }
+
+/*css hotel over view*/
+.hotels {
+    position: relative;
+    height: 240px;
+}
+
+    .hotels::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 75%;
+        background: -moz-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.65) 100%);
+        background: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.65) 100%);
+        background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.65) 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+.hotels-name {
+    position: absolute;
+    top: 210px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+    z-index:99;
+}
+
+    .hotels-name > p {
+        color: aliceblue;
+    }

@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
-    <link rel="stylesheet" type="text/css" href="~/Scripts/Site.js" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 </head>
 
 <body>
@@ -16,33 +18,31 @@
 
         <div class="col-2 text-right">
             <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
-                <img class="border rounded-circle" src="~/Content/images/logo1.PNG" style="width: 50px; height:50px">
+                <img class="border rounded-circle" src="~/Content/images/tours/logo1.jpg" style="width: 50px; height:50px">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
         </div>
 
         <div class="collapse navbar-collapse row" id="navbarSupportedContent">
             <ul class="navbar-nav col">
                 <li class="nav-item dropdown" id="group-tour">
-                    <a class="nav-link" href="@Url.Action("Index", "Home", new { area = "" })">TOUR</a>
+                    <a class="nav-link font-weight-bold" href="@Url.Action("Index", "Home", new { area = "" })">TOUR</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="@Url.Action("GetByCategory", "Tours", new { category = "Trong nước", page = 1 })">Trong nước</a>
                         <a class="dropdown-item" href="@Url.Action("GetByCategory", "Tours", new { category = "Nước Ngoài", page = 1 })">Nước ngoài</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item font-weight-bold">
                     @Html.ActionLink("KHÁCH SẠN", "Index", "Hotels", new { area = "" }, new { @class = "nav-link" })
                 </li>
-                <li class="nav-item">
+                <li class="nav-item font-weight-bolder">
                     @Html.ActionLink("GIỚI THIỆU", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
                 </li>
             </ul>
 
             @using (Html.BeginForm("SearchTour", "Home", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0 col-4" }))
             {
-                <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Search tour" aria-label="Search">
+                <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Tìm kiếm tour, điểm đến " aria-label="Search">
                 <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
             }
             @Html.Partial("LoginPatial")
@@ -63,6 +63,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Site.js"></script>
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

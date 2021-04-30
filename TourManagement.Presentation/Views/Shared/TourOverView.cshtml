@@ -1,7 +1,7 @@
 ﻿@model TourManagement.Models.DBContext.Tour
-<div class="col-md-3 py-3">
+<div class="col-3 py-3">
     <div class="card h-100">
-        <div class="h-50"><img src="../../Content/images/@Model.Images.FirstOrDefault().NameImage" class="card-img-top img-thumbnail h-100" alt="@Model.Name"></div>
+        <div class="h-50"><img src="../../Content/images/tours/@Model.Images.FirstOrDefault().NameImage" class="card-img-top h-100" alt="@Model.Name"></div>
         <div class="card-body d-flex flex-column justify-content-between h-auto">
             <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name</a>
             <div class="row">

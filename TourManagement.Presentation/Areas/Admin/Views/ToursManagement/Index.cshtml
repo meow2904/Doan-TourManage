@@ -44,9 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PriceOfAdult) đ
             </td>
-            <td>
-                <img style="max-width:150px;" src="~/Content/images/@item.Image" alt="@item.Name" />
-            </td>
+          
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">
                 <form action="@Url.Action("DeleteTour","ToursManagement", new { id=item.Id })" method="post">
                     <a href="@Url.Action("Edit", "ToursManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>

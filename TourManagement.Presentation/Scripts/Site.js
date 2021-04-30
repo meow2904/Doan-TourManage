@@ -1,10 +1,9 @@
-﻿<script>
-    $(document).ready(() => {
-            if ($('#remaining').text() == 0) {
+﻿
+$(document).ready(() => {
+    if ($('#remaining').text() == 0) {
         $('#btnBook').addClass('disabled')
     }
-        else {
+    else {
         $('#btnBook').removeClass('disabled')
     }
-    })
-    </script>
+})
