@@ -12,7 +12,7 @@ namespace ConsoleApp1
     {
         private static IDestinatioRepository destinatioRepository= new DestinationRepository();
         private static ITourRepository tourRepository= new TourRepository();
-        private static IUserRepository userRepository= new UserRepository();
+        private static IHotelRepository hotelRepository= new HotelRepository();
         static int n1 = 1;
         int n2;
         static void Main(string[] args)
@@ -38,6 +38,14 @@ namespace ConsoleApp1
             //    Console.WriteLine(item);
             //}
             //Console.WriteLine("a "+ rs.Name + " a");
+            var hotel = hotelRepository.GetById(1);
+            var rooms = hotel.Rooms;
+
+
+            foreach(var item in rooms)
+            {
+                Console.WriteLine(item.Name);
+            }
             Console.ReadLine();
         }
 

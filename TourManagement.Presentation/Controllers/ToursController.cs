@@ -14,7 +14,7 @@ namespace TourManagement.Presentation.Controllers
 {
     public class ToursController : Controller
     {
-        private TourManagementContext db = new TourManagementContext();
+        //private TourManagementContext db = new TourManagementContext();
         private readonly ITourRepository _tourRepository;
         private readonly IDestinatioRepository _destinatioRepository;
         private int size = 8;
@@ -83,13 +83,13 @@ namespace TourManagement.Presentation.Controllers
             return View(tours);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

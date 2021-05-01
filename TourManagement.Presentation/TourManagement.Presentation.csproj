@@ -188,6 +188,13 @@
     <Content Include="Content\images\hotels\phuquoc4.jpg" />
     <Content Include="Content\images\hotels\phuquoc5.jpg" />
     <Content Include="Content\images\hotels\phuquoc7.jpg" />
+    <Content Include="Content\images\hotels\room\room1.jpg" />
+    <Content Include="Content\images\hotels\room\room2.jpg" />
+    <Content Include="Content\images\hotels\room\room3.jpg" />
+    <Content Include="Content\images\hotels\room\room4.jpg" />
+    <Content Include="Content\images\hotels\room\room5.jpg" />
+    <Content Include="Content\images\hotels\room\room6.jpg" />
+    <Content Include="Content\images\hotels\room\room7.jpg" />
     <Content Include="Content\images\hotels\sapa1.jpg" />
     <Content Include="Content\images\hotels\vungtau1.jpg" />
     <Content Include="Content\images\hotels\vungtau2.jpg" />

@@ -14,15 +14,24 @@ namespace TourManagement.Presentation.Controllers
 {
     public class HotelsController : Controller
     {
-        private TourManagementContext db = new TourManagementContext();
         private readonly IHotelRepository _hotelRepository;
+        private int size = 9;
         public HotelsController(IHotelRepository hotelRepository)
         {
             _hotelRepository = hotelRepository;
         }
-        public ActionResult Index()
+        public ActionResult Index(int page)
         {
-            var hotels = _hotelRepository.GetAll();
+            var totalHotels = _hotelRepository.GetAll().Count();
+            if(page <= 0)
+            {
+                page = 1;
+            }
+            var totalPage = (int)Math.Ceiling(totalHotels / (double)size);
+            ViewBag.TotalPage = totalPage;
+            ViewBag.CurrentPage = page;
+
+            var hotels = _hotelRepository.GetHotelWithPaging(page, size);
             return View(hotels);
         }
 
@@ -37,13 +46,5 @@ namespace TourManagement.Presentation.Controllers
             return View(hotel);
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

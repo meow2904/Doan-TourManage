@@ -10,5 +10,6 @@ namespace TourManagement.Business.IServices
 {
     public interface IHotelRepository : IGenericRepository<Hotel>
     {
+        IEnumerable<Hotel> GetHotelWithPaging(int page, int size);
     }
 }

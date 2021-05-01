@@ -1,7 +1,14 @@
 ﻿@model IEnumerable<TourManagement.Models.DBContext.Hotel>
 @{
     ViewBag.Title = "Danh sách khách sạn";
-    
+
+    int totalPage = @ViewBag.TotalPage;
+    int pageRange = 3;
+    int currentPage = @ViewBag.CurrentPage;
+    var category = @ViewBag.CurrentCategory;
+
+    var prevDisabled = (currentPage - 1 <= 0 ? "disabled" : "");
+    var nextDisabled = (currentPage >= totalPage ? "disabled" : "");
 }
 
 <div class="row">
@@ -9,4 +16,19 @@
     {
         @Html.Partial("HotelOverView", item);
     }
+    <nav aria-label="Page navigation example" class="row w-100">
+        <ul class="pagination col-12 justify-content-center">
+            <li class="page-item"><a class="btn page-link @prevDisabled" href="@Url.Action("Index", "Hotels", new {page=(currentPage - 1 <= 0 ? 1 : currentPage - 1) })">Previous</a></li>
+            @for (int i = 1; i <= totalPage; i++)
+            {
+                if (i >= currentPage - pageRange && i <= currentPage + pageRange)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Hotels", new {page = i })">@i</a>
+                    </li>
+                }
+            }
+            <li class="page-item"><a class="btn page-link @nextDisabled" href="@Url.Action("Index", "Hotels", new {page=(currentPage + 1 > totalPage ? totalPage :   currentPage + 1)})">Next</a></li>
+        </ul>
+    </nav>
 </div>
