@@ -28,7 +28,9 @@
                     </li>
                 }
             }
-            <li class="page-item"><a class="btn page-link @nextDisabled" href="@Url.Action("Index", "Hotels", new {page=(currentPage + 1 > totalPage ? totalPage :   currentPage + 1)})">Next</a></li>
+            <li class="page-item">
+                <a class="btn page-link @nextDisabled" href="@Url.Action("Index", "Hotels", new {page=(currentPage + 1 > totalPage ? totalPage : currentPage + 1)})">Next</a>
+            </li>
         </ul>
     </nav>
 </div>

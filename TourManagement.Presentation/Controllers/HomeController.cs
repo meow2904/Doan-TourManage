@@ -10,7 +10,7 @@ namespace TourManagement.Presentation.Controllers
     public class HomeController : Controller
     {
         private readonly ITourRepository _tourRepository;
-        //private readonly IDestinatioRepository _destinatioRepository;
+        private int size = 8;
 
 
         public HomeController(ITourRepository tourRepository)
@@ -19,7 +19,8 @@ namespace TourManagement.Presentation.Controllers
         }
         public ActionResult Index()
         {
-            var tours = _tourRepository.GetAll();
+            var date = DateTime.Now.Date;
+            var tours = _tourRepository.GetToursByDateWithPaging(date, 1, size);
 
             return View(tours);
         }

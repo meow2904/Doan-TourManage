@@ -14,6 +14,7 @@ namespace TourManagement.Business.IServices
         int GetRemainingQuantity(int tourId);
         IEnumerable<Tour> Search(string tour);
         IEnumerable<Tour> GetToursByCategoryWithPaging(string category, int page, int size);
+        IEnumerable<Tour> GetToursByDateWithPaging(DateTime date, int page, int size);
 
         IEnumerable<Tour> GetByPrice(string category, decimal startPrice, decimal endPrice);
         IEnumerable<Tour> GetToursByPriceWithPaging(string category, decimal startPrice, decimal endPrice, int page, int size);

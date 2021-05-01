@@ -46,5 +46,18 @@ namespace TourManagement.Presentation.Controllers
             return View(hotel);
         }
 
+        public ActionResult ConfirmContact()
+        {
+            var custommer = (User)Session["username"];
+            if(custommer == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
     }
 }

@@ -172,6 +172,7 @@
     <Content Include="Content\images\destiantions\dd2.jpg" />
     <Content Include="Content\images\destiantions\dd3.jpg" />
     <Content Include="Content\images\destiantions\dd4.jpg" />
+    <Content Include="Content\images\email.svg" />
     <Content Include="Content\images\hotels\danang1.jpg" />
     <Content Include="Content\images\hotels\danang2.jpg" />
     <Content Include="Content\images\hotels\danang3.jpg" />
@@ -180,6 +181,7 @@
     <Content Include="Content\images\hotels\hotram1.jpg" />
     <Content Include="Content\images\hotels\hotram2.jpg" />
     <Content Include="Content\images\hotels\langco.jpg" />
+    <Content Include="Content\images\hotels\logohotels.jpg" />
     <Content Include="Content\images\hotels\muine1t.jpg" />
     <Content Include="Content\images\hotels\phanthiet1.jpg" />
     <Content Include="Content\images\hotels\phuquoc1.jpg" />
@@ -201,6 +203,7 @@
     <Content Include="Content\images\hotels\vungtau3.jpg" />
     <Content Include="Content\images\hotels\vungtau4.jpg" />
     <Content Include="Content\images\info.svg" />
+    <Content Include="Content\images\phone-call.svg" />
     <Content Include="Content\images\searchbtn.svg" />
     <Content Include="Content\images\star.svg" />
     <Content Include="Content\images\tours\baidinh1.jpg" />
@@ -410,6 +413,7 @@
     <Content Include="Views\Hotels\Index.cshtml" />
     <Content Include="Views\Shared\HotelOverView.cshtml" />
     <Content Include="Views\Tours\GetByPrice.cshtml" />
+    <Content Include="Views\Hotels\ConfirmContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

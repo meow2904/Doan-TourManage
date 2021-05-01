@@ -100,7 +100,7 @@ namespace TourManagement.Presentation.Controllers
             {
                 Session["username"] = result;
                 return RedirectToAction("Index", "Home");
-
+               
                 
             }
             else if (result != null && result.Role == 1)

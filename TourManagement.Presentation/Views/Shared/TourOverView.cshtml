@@ -1,12 +1,23 @@
 ﻿@model TourManagement.Models.DBContext.Tour
-<div class="col-3 py-3">
-    <div class="card h-100">
-        <div class="h-50"><img src="../../Content/images/tours/@Model.Images.FirstOrDefault().NameImage" class="card-img-top h-100" alt="@Model.Name"></div>
-        <div class="card-body d-flex flex-column justify-content-between h-auto">
-            <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name</a>
-            <div class="row">
-                <p class="col-7 "><img src="~/Content/images/calendar.svg" height="15" width="15" /> @Model.TimeStart.Value.ToString("dd/MM/yyyy")</p>
-                <p class="col-5 px-0"><span style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###") đ</span></p>
+<div class="col-3 py-3 px-1">
+    <div class="card tours">
+        <div class="tour-image">
+            <img src="../../Content/images/tours/@Model.Images.FirstOrDefault().NameImage" class="w-100 h-100" alt="@Model.Name">
+        </div>
+        <div class="tour-detail">
+            <div class="h-75 p-2 bg-light m-auto">
+                @if (Model.Name.Length > 35)
+                {
+                    <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name.Substring(0, 32)...</a>
+                }
+                else
+                {
+                    <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name</a>
+                }
+            </div>
+            <div class="row text-center">
+                <span class="col-7"><img src="~/Content/images/calendar.svg" height="15" width="15" /> @Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                <span class="col-5 px-0"><span style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###") đ</span></span>
             </div>
         </div>
     </div>

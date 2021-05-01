@@ -23,8 +23,13 @@
 }
 else
 {
+
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">@Html.ActionLink("Đăng kí", "Register", "Users", null, new { id = "registerLink", @class = "nav-link" })</li>
-        <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { id = "loginLink", @class = "nav-link" })</li>
+        <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { @class = "nav-link" })</li>
     </ul>
 }
+
+<script>
+    var getUrl = window.location.href;
+</script>

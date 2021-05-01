@@ -104,7 +104,6 @@
     <Compile Include="DBContext\User.cs">
       <DependentUpon>TourManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="PageList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

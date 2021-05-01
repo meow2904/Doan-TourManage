@@ -46,7 +46,7 @@
 /*css hotel over view*/
 .hotels {
     position: relative;
-    height: 240px;
+    height: 250px;
 }
 
     .hotels::before {
@@ -77,3 +77,16 @@
     .hotels-name > p {
         color: aliceblue;
     }
+
+/*css tour over view*/
+.tours {
+    height: 280px;
+}
+
+.tour-image {
+    height: 65%;
+}
+.tour-detail {
+    height: 35%;
+}
+

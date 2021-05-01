@@ -13,8 +13,6 @@ namespace ConsoleApp1
         private static IDestinatioRepository destinatioRepository= new DestinationRepository();
         private static ITourRepository tourRepository= new TourRepository();
         private static IHotelRepository hotelRepository= new HotelRepository();
-        static int n1 = 1;
-        int n2;
         static void Main(string[] args)
         {
 

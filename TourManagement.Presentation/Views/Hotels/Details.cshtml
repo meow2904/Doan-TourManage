@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="input-group py-3 justify-content-center">
-                <a href="@Url.Action("","OrderTours", new { id= Model.Id})" class="btn btn-outline-primary mr-3">Liên hệ</a>
+                <a href="@Url.Action("ConfirmContact", "Hotels")" class="btn btn-outline-primary mr-3">Liên hệ</a>
             </div>
         </div>
 
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-3 text-center">
                             <p>Giá: @Math.Truncate(item.Price.Value).ToString("###,###,###") đ</p>
-                            <a class="nav-link btn btn-outline-secondary" href="#" >Liên hệ</a>
+                            <a class="nav-link btn btn-outline-secondary" href="@Url.Action("ConfirmContact", "Hotels")" >Liên hệ</a>
                         </div>
                     </div>
                 }

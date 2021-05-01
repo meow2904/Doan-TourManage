@@ -3,8 +3,7 @@
 <div class="col-4 py-3">
     <div class="hotels animate__animated animate__zoomIn">
         <a class="h-100" href="@Url.Action("Details", "Hotels", new { id =Model.Id})">
-            <img src="~/Content/images/hotels/@Model.Image" class="h-100 w-100 " alt="@Model.Name">
-   
+            <img src="~/Content/images/hotels/@Model.Image" class="h-100 w-100" alt="@Model.Name">
             <div class="hotels-name">
                 <div>
                     @for(int i=0; i<5; i++)

@@ -60,5 +60,11 @@ namespace TourManagement.Business.Services
             var tours = Context.Tours.Where(x => x.Category.Name == category).ToList();
             return tours.Where(x => x.PriceOfAdult >= startPrice && x.PriceOfAdult <= endPrice).ToList();
         }
+
+        public IEnumerable<Tour> GetToursByDateWithPaging(DateTime date, int page, int size)
+        {
+            return Context.Tours.Where(x => x.TimeStart.Value > date).
+                OrderBy(x => x.Name).Skip(size * (page - 1)).Take(size).ToList();
+        }
     }
 }

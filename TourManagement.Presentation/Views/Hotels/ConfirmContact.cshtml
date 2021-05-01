@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var custommer = (TourManagement.Models.DBContext.User)Session["username"];
+}
+
+<div class="w-100 bg-light h-100 m-auto pt-4">
+    <div class="row" style="height:530px;">
+        <div class="col-md-6 text-center">
+            <div>
+                <h3>LIÊN HỆ ĐẶT PHÒNG</h3>
+            </div>
+            <div>
+                <address>
+                    <a href="mailto:meowmeow@gmail.com"><img src="~/Content/images/email.svg" height="25" width="25"> meowmeow@travel.com</a>
+                    <p><img src="~/Content/images/phone-call.svg" height="25" width="25"> 0929041999</p>
+                </address>
+            </div>
+            <div class="w-100">
+                <img src="~/Content/images/hotels/logohotels.jpg" class="w-75"/>
+            </div>
+        </div>
+        <div class="col-md-6" id="cusinfor">
+            <div class="form-group">
+                <p>Họ tên</p>
+                <input type="text" value="@custommer.Name" class="w-75" readonly>
+            </div>
+            <div class="form-group">
+                <p>Email</p>
+                <input type="text" value="@custommer.Email" class="w-75" readonly>
+            </div>
+            <div class="form-group">
+                <p>Số điện thoại</p>
+                <input type="text" value="@custommer.Phone" class="w-75" readonly>
+            </div>
+            <div class="form-group">
+                <p>Địa chỉ</p>
+                <input type="text" value="@custommer.Address" class="w-75" readonly>
+            </div>
+            <div class="form-group">
+                <p>Yêu cầu</p>
+                <textarea rows="3" class="w-75"></textarea>
+            </div>
+            <div>
+                <p class="btn btn-outline-primary" id="btnSend">Gửi</p>
+            </div>
+        </div>
+    </div>
+
+</div>
