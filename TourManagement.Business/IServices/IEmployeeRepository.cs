@@ -12,5 +12,7 @@ namespace TourManagement.Business.IServices
     {
         IEnumerable<Employee> GetEmployeeFree(DateTime datePick, int time);
         IEnumerable<Employee> GetEmployeesWithPaging(int page, int size);
+        IEnumerable<Employee> SearchEmployees(string employeeSearch);
+        IEnumerable<Employee> SearchEmployeesWithPaging(string employeeSearch, int page, int size);
     }
 }

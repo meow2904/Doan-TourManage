@@ -19,20 +19,51 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         {
             _employeeRepository = employeeRepository;
         }
-                
+
         // GET: Admin/EmployeesManagement
-        public ActionResult Index()
+        public ActionResult Index(int page)
         {
-            if(Session["username"] == null)
+            if (Session["username"] == null)
             {
-                return RedirectToAction("Login", "Users", new { area=""});
+                return RedirectToAction("Login", "Users", new { area = "" });
             }
             else
             {
-                var employees = _employeeRepository.GetAll();
+                var totalEmployees = _employeeRepository.GetAll().Count();
+                if (page <= 0)
+                {
+                    page = 1;
+                }
+                var totalPage = (int)Math.Ceiling(totalEmployees / (double)8);
+                ViewBag.TotalPage = totalPage;
+                ViewBag.CurrentPage = page;
+
+                var employees = _employeeRepository.GetEmployeesWithPaging(page, 6);
                 return View(employees);
             }
-            
+
+        }
+
+        public ActionResult Search(string employeeSearch, int page)
+        {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Users", new { area = "" });
+            }
+            else
+            {
+                var totalEmployees = _employeeRepository.SearchEmployees(employeeSearch).Count();
+                if (page <= 0)
+                {
+                    page = 1;
+                }
+                var totalPage = (int)Math.Ceiling(totalEmployees / (double)8);
+                ViewBag.TotalPage = totalPage;
+                ViewBag.CurrentPage = page;
+
+                var employees = _employeeRepository.SearchEmployeesWithPaging(employeeSearch, page, 6);
+                return PartialView(employees);
+            }
         }
 
         // GET: Admin/EmployeesManagement/Details/5
@@ -53,7 +84,14 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // GET: Admin/EmployeesManagement/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Users", new { area = "" });
+            }
+            else
+            {
+                return View();
+            } 
         }
 
         // POST: Admin/EmployeesManagement/Create
@@ -61,16 +99,27 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Gender,BirthDate,Address,Phone,StatusWorking")] Employee employee)
+        public ActionResult Create(Employee employee)
         {
-            if (ModelState.IsValid)
+            if (Session["username"] == null)
             {
-                db.Employees.Add(employee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Users", new { area = "" });
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    employee.StatusWorking = 1;
+                    var result = _employeeRepository.Add(employee);
+                    if (result)
+                    {
+                        return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/'</script>");
+                    }
+                    return RedirectToAction("/");
+                }
 
-            return View(employee);
+                return View(employee);
+            }
         }
 
         // GET: Admin/EmployeesManagement/Edit/5
@@ -99,7 +148,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             {
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { page= 1});
             }
             return View(employee);
         }
@@ -130,13 +179,5 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

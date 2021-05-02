@@ -12,39 +12,16 @@ namespace ConsoleApp1
     {
         private static IDestinatioRepository destinatioRepository= new DestinationRepository();
         private static ITourRepository tourRepository= new TourRepository();
-        private static IHotelRepository hotelRepository= new HotelRepository();
+        private static IEmployeeRepository hotelRepository= new EmployeeRepository();
         static void Main(string[] args)
         {
 
+            var e = hotelRepository.GetById(1010);
 
-            //var rs = tour.GetAll().Where(td => td.Id == 1002);
+            Console.WriteLine(e.BirthDate);
+            //Console.WriteLine(e.Name);
 
-            //var destinations = destinatioRepository.GetAll().Where(d => rs.Any(x => x. == d.Id));
-
-            //foreach (var item in destinatioRepository.GetDestinationByidTour(1002))
-            //{
-            //    Console.WriteLine(item.Name +" " );
-
-            //}
-            //foreach (var item in rs)
-            //{
-            //    Console.WriteLine(item.Name);
-            //}
-            //var rs = tourRepository.GetById(1);
-            //foreach(var item in rs.Images)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine("a "+ rs.Name + " a");
-            var hotel = hotelRepository.GetById(1);
-            var rooms = hotel.Rooms;
-
-
-            foreach(var item in rooms)
-            {
-                Console.WriteLine(item.Name);
-            }
-            Console.ReadLine();
+            
         }
 
         private static void swap( int x, int y)

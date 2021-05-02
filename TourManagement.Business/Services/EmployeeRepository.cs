@@ -28,5 +28,15 @@ namespace TourManagement.Business.Services
         {
             return Context.Employees.OrderBy(x => x.Name).Skip(size * (page - 1)).Take(size).ToList();
         }
+
+        public IEnumerable<Employee> SearchEmployees(string employeeSearch)
+        {
+            return Context.Employees.Where(x => x.Name.Contains(employeeSearch.ToLower())).ToList();
+        }
+
+        public IEnumerable<Employee> SearchEmployeesWithPaging(string employeeSearch, int page, int size)
+        {
+            return Context.Employees.Where(x => x.Name.Contains(employeeSearch.ToLower())).OrderBy(x => x.Name).Skip(size * (page - 1)).Take(size).ToList();
+        }
     }
 }
