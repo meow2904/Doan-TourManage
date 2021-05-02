@@ -11,5 +11,6 @@ namespace TourManagement.Business.IServices
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
         IEnumerable<Employee> GetEmployeeFree(DateTime datePick, int time);
+        IEnumerable<Employee> GetEmployeesWithPaging(int page, int size);
     }
 }

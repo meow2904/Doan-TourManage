@@ -15,5 +15,11 @@ namespace TourManagement.Business.Services
         {
             return Context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
         }
+
+        public IEnumerable<User> GetUsersWithPaging(int page, int size)
+        {
+            return Context.Users.OrderBy(x => x.Name).Skip(size * (page - 1)).Take(size).ToList();
+        }
+
     }
 }

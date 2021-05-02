@@ -100,13 +100,13 @@ namespace TourManagement.Presentation.Controllers
             {
                 Session["username"] = result;
                 return RedirectToAction("Index", "Home");
-               
-                
+
+
             }
             else if (result != null && result.Role == 1)
             {
                 Session["username"] = result;
-                return RedirectToAction("Index", "ToursManagement", new { area = "Admin" });
+                return RedirectToAction("Index", "ToursManagement", new { area = "Admin"});
             }
             else
             {

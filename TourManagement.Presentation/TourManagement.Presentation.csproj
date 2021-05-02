@@ -173,6 +173,7 @@
     <Content Include="Content\images\destiantions\dd3.jpg" />
     <Content Include="Content\images\destiantions\dd4.jpg" />
     <Content Include="Content\images\email.svg" />
+    <Content Include="Content\images\hotel.svg" />
     <Content Include="Content\images\hotels\danang1.jpg" />
     <Content Include="Content\images\hotels\danang2.jpg" />
     <Content Include="Content\images\hotels\danang3.jpg" />
@@ -203,6 +204,7 @@
     <Content Include="Content\images\hotels\vungtau3.jpg" />
     <Content Include="Content\images\hotels\vungtau4.jpg" />
     <Content Include="Content\images\info.svg" />
+    <Content Include="Content\images\management.svg" />
     <Content Include="Content\images\phone-call.svg" />
     <Content Include="Content\images\searchbtn.svg" />
     <Content Include="Content\images\star.svg" />
@@ -248,6 +250,8 @@
     <Content Include="Content\images\tours\trangan1.jpg" />
     <Content Include="Content\images\tours\vuonvua.jpg" />
     <Content Include="Content\images\tours\yentu1.jpg" />
+    <Content Include="Content\images\travel-bag.svg" />
+    <Content Include="Content\images\travel.svg" />
     <Content Include="Content\images\user.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />

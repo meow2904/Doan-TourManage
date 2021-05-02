@@ -11,5 +11,6 @@ namespace TourManagement.Business.IServices
     public interface IUserRepository: IGenericRepository<User>
     {
         User GetUserLogin(string email, string password);
+        IEnumerable<User> GetUsersWithPaging(int page, int size);
     }
 }

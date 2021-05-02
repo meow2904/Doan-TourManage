@@ -23,5 +23,10 @@ namespace TourManagement.Business.Services
             var employees = Context.Employees.Where(e => !emps.Contains(e.Id)).ToList();
             return employees;
         }
+
+        public IEnumerable<Employee> GetEmployeesWithPaging(int page, int size)
+        {
+            return Context.Employees.OrderBy(x => x.Name).Skip(size * (page - 1)).Take(size).ToList();
+        }
     }
 }

@@ -8,8 +8,17 @@
     <h2>Employee Management</h2>
     <hr />
 </div>
-<div class="py-2">
-    <a href="@Url.Action("Create", "EmployeesManagement")" class="btn btn-primary">ADD</a>
+<div class="py-2 row">
+    <div class="col-7">
+        <a href="@Url.Action("Create", "EmployeesManagement")" class="btn btn-primary">ADD</a>
+    </div>
+    <div class="col-5">
+        @using (Html.BeginForm("Search", "", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0" }))
+        {
+            <input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Tìm kiếm nhân viên " aria-label="Search">
+            <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>
+        }
+    </div>
 </div>
 
 <table class="table table-bordered ">
@@ -35,8 +44,7 @@
     {
         <tr>
             <td>
-                <a href="@Url.Action("Details", "EmployeesManagement", new { id = item.Id })" class="nav-link">
-                @Html.DisplayFor(modelItem => item.Name)</a>
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @if (item.Gender == true)

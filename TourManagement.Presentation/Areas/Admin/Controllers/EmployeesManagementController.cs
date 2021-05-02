@@ -23,8 +23,16 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // GET: Admin/EmployeesManagement
         public ActionResult Index()
         {
-            var employees= _employeeRepository.GetAll();
-            return View(employees);
+            if(Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Users", new { area=""});
+            }
+            else
+            {
+                var employees = _employeeRepository.GetAll();
+                return View(employees);
+            }
+            
         }
 
         // GET: Admin/EmployeesManagement/Details/5
