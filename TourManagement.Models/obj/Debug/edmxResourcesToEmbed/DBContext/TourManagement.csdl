@@ -49,7 +49,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NameImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TourId" Type="Int32" />
-    <NavigationProperty Name="Tour" Relationship="Self.FK_Image_Tour" FromRole="Image" ToRole="Tour" />
   </EntityType>
   <EntityType Name="OrderTour">
     <Key>
@@ -118,9 +117,9 @@
     <Property Name="CategoryId" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Tour_Category" FromRole="Tour" ToRole="Category" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Tour_Employee" FromRole="Tour" ToRole="Employee" />
-    <NavigationProperty Name="Images" Relationship="Self.FK_Image_Tour" FromRole="Tour" ToRole="Image" />
     <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="Tour" ToRole="OrderTourDetail" />
     <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Tour" FromRole="Tour" ToRole="TourDestination" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TourDestination">
     <Key>
@@ -191,18 +190,6 @@
       </Principal>
       <Dependent Role="Room">
         <PropertyRef Name="HotelId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Image_Tour">
-    <End Role="Tour" Type="Self.Tour" Multiplicity="0..1" />
-    <End Role="Image" Type="Self.Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tour">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Image">
-        <PropertyRef Name="TourId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -282,10 +269,6 @@
     <AssociationSet Name="FK_Room_Hotel" Association="Self.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotels" />
       <End Role="Room" EntitySet="Rooms" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Image_Tour" Association="Self.FK_Image_Tour">
-      <End Role="Tour" EntitySet="Tours" />
-      <End Role="Image" EntitySet="Images" />
     </AssociationSet>
     <AssociationSet Name="FK_OrderTour_Customer" Association="Self.FK_OrderTour_Customer">
       <End Role="User" EntitySet="Users" />

@@ -33,7 +33,7 @@
         <div class="form-group">
             <label class="control-label" for="ImgUrl">Image Thumbnail:</label>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" onchange="readURL(this)">
+                <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" multiple onchange="readURL(this)">
                 <label class="custom-file-label" for="validatedCustomFile">Choose an image</label>
                 <div>
                     <img id="FileImage" src="~/Content/images/meo.jpg" name="Image" alt="your image" class="img-thumbnail" width="200" />

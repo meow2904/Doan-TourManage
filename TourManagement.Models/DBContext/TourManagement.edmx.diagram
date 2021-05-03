@@ -21,7 +21,6 @@
         <AssociationConnector Association="TourManagementModel.FK_TourDestination_Destination" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_Tour_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_Room_Hotel" ManuallyRouted="false" />
-        <AssociationConnector Association="TourManagementModel.FK_Image_Tour" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_OrderTour_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_OrderTourDetail_OrderTour" ManuallyRouted="false" />
         <AssociationConnector Association="TourManagementModel.FK_OrderTourDetail_Tour" ManuallyRouted="false" />

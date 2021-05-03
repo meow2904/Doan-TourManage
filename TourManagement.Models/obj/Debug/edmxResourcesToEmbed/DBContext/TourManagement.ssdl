@@ -106,6 +106,7 @@
     <Property Name="EmployeeId" Type="int" />
     <Property Name="StopPosition" Type="nvarchar" MaxLength="256" />
     <Property Name="CategoryId" Type="int" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TourDestination">
     <Key>
@@ -128,18 +129,6 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Role" Type="int" />
   </EntityType>
-  <Association Name="FK_Image_Tour">
-    <End Role="Tour" Type="Self.Tour" Multiplicity="0..1" />
-    <End Role="Image" Type="Self.Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tour">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Image">
-        <PropertyRef Name="TourId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OrderTour_Customer">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="OrderTour" Type="Self.OrderTour" Multiplicity="*" />
@@ -249,10 +238,6 @@
     <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TourDestination" EntityType="Self.TourDestination" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Image_Tour" Association="Self.FK_Image_Tour">
-      <End Role="Tour" EntitySet="Tour" />
-      <End Role="Image" EntitySet="Image" />
-    </AssociationSet>
     <AssociationSet Name="FK_OrderTour_Customer" Association="Self.FK_OrderTour_Customer">
       <End Role="User" EntitySet="User" />
       <End Role="OrderTour" EntitySet="OrderTour" />

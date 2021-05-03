@@ -1,8 +1,12 @@
 ﻿@model TourManagement.Models.DBContext.Tour
+@{
+    string[] listImages = Model.Image.Split('-');
+}
+
 <div class="col-3 py-3 px-1">
     <div class="card tours">
         <div class="tour-image">
-            <img src="../../Content/images/tours/@Model.Images.FirstOrDefault().NameImage" class="w-100 h-100" alt="@Model.Name">
+            <img src="~/Content/images/tours/@listImages[0]" class="w-100 h-100" alt="@Model.Name">
         </div>
         <div class="tour-detail">
             <div class="h-75 p-2 bg-light m-auto">

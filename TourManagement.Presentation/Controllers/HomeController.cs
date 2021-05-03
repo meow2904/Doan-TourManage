@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,7 +13,6 @@ namespace TourManagement.Presentation.Controllers
         private readonly ITourRepository _tourRepository;
         private int size = 8;
 
-
         public HomeController(ITourRepository tourRepository)
         {
             _tourRepository = tourRepository;
@@ -21,7 +21,8 @@ namespace TourManagement.Presentation.Controllers
         {
             var date = DateTime.Now.Date;
             var tours = _tourRepository.GetToursByDateWithPaging(date, 1, size);
-
+            
+            
             return View(tours);
         }
 

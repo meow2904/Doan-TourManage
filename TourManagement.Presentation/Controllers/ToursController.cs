@@ -41,6 +41,9 @@ namespace TourManagement.Presentation.Controllers
             }
             ViewBag.Destination = dess.Substring(0, dess.Length - 3);
 
+            string[] listImages = tour.Image.Split('-');
+            ViewBag.ListImages = listImages;
+                
             //get remain quantity in tour
             var remainingQuantity = _tourRepository.GetRemainingQuantity((int)id);
             ViewBag.Remaining = remainingQuantity;

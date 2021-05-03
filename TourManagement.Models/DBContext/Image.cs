@@ -17,7 +17,5 @@ namespace TourManagement.Models.DBContext
         public int Id { get; set; }
         public string NameImage { get; set; }
         public Nullable<int> TourId { get; set; }
-    
-        public virtual Tour Tour { get; set; }
     }
 }

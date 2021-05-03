@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,24 +17,12 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            var e = hotelRepository.GetById(1010);
+            var e = tourRepository.GetById(1);
 
-            Console.WriteLine(e.BirthDate);
-            //Console.WriteLine(e.Name);
+            Console.WriteLine();
 
-            
+            Console.ReadKey();
+
         }
-
-        private static void swap( int x, int y)
-        {
-            int tem =x;
-            x = y;
-            y = tem;
-        }
-    }
-
-    class @Var
-    {
-
     }
 }

@@ -1,8 +1,9 @@
 ﻿@model TourManagement.Models.DBContext.Tour
 @{
     ViewBag.Title = Model.Name;
+
     var remaining = @ViewBag.Remaining;
-    
+    string[] listImages = @ViewBag.ListImages;
 }
 <div class="container tour-container pt-4">
     <div>
@@ -15,10 +16,10 @@
                     <div class="carousel-item active">
                         <img src="~/Content/images/tours/image-active.jpg" class="d-block w-100 img-thumbnail img-fluid" alt="...">
                     </div>
-                    @foreach (var item in Model.Images)
+                    @foreach (var item in listImages)
                     {
                         <div class="carousel-item">
-                            <img src="~/Content/images/tours/@item.NameImage"  class="d-block w-100 img-thumbnail img-fluid" alt="...">
+                            <img src="~/Content/images/tours/@item"  class="d-block w-100 img-thumbnail img-fluid" alt="...">
                         </div>
                     }
                 </div>
