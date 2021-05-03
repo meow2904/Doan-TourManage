@@ -13,11 +13,13 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 {
     public class EmployeesManagementController : Controller
     {
-        private TourManagementContext db = new TourManagementContext();
         private readonly IEmployeeRepository _employeeRepository;
-        public EmployeesManagementController(IEmployeeRepository employeeRepository)
+        private readonly ITourRepository _tourRepository;
+        public EmployeesManagementController(IEmployeeRepository employeeRepository,
+            ITourRepository tourRepository)
         {
             _employeeRepository = employeeRepository;
+            _tourRepository = tourRepository;
         }
 
         // GET: Admin/EmployeesManagement
@@ -69,16 +71,21 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // GET: Admin/EmployeesManagement/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+
+            if (Session["username"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Users", new { area = "" });
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            else
             {
-                return HttpNotFound();
+                var employee = _employeeRepository.GetById((int)id);
+                if (employee == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(employee);
             }
-            return View(employee);
+
         }
 
         // GET: Admin/EmployeesManagement/Create
@@ -91,7 +98,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             else
             {
                 return View();
-            } 
+            }
         }
 
         // POST: Admin/EmployeesManagement/Create
@@ -115,7 +122,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                     {
                         return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/'</script>");
                     }
-                    return RedirectToAction("/");
+                    return RedirectToAction("Index", "EmployeesManagement", new { area = "Admin" });
                 }
 
                 return View(employee);
@@ -125,16 +132,23 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // GET: Admin/EmployeesManagement/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["username"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Users", new { area = "" });
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Employee employee = _employeeRepository.GetById((int)id);
+                if (employee == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(employee);
             }
-            return View(employee);
         }
 
         // POST: Admin/EmployeesManagement/Edit/5
@@ -144,39 +158,29 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Gender,BirthDate,Address,Phone,StatusWorking")] Employee employee)
         {
-            if (ModelState.IsValid)
+            if (Session["username"] == null)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index", new { page= 1});
+                return RedirectToAction("Login", "Users", new { area = "" });
             }
-            return View(employee);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    _employeeRepository.Update(employee);
+                    return RedirectToAction("Index", new { page = 1 });
+                }
+                return View(employee);
+            }
         }
 
-        // GET: Admin/EmployeesManagement/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
-        }
 
         // POST: Admin/EmployeesManagement/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var employee = _employeeRepository.GetById(id);
+            _employeeRepository.Delete(employee);
+            return RedirectToAction("Index", new { page = 1 });
         }
 
     }

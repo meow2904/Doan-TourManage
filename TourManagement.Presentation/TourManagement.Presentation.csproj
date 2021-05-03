@@ -283,8 +283,6 @@
     <Content Include="Areas\Admin\Views\HotelsManagement\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\HotelsManagement\Index.cshtml" />
     <Content Include="Areas\Admin\Views\EmployeesManagement\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\EmployeesManagement\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\EmployeesManagement\Details.cshtml" />
     <Content Include="Areas\Admin\Views\EmployeesManagement\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\EmployeesManagement\Index.cshtml" />
     <Content Include="Content\bootstrap-grid.css.map" />

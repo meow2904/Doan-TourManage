@@ -42,7 +42,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Time,TimeStart,PositionStart,Transport,Content,Image,QuantityPeople,PriceOfChild,PriceOfAdult,EmployeeId,HotelId,CategoryId")] Tour tour)
+        public ActionResult Create(Tour tour)
         {
             if (ModelState.IsValid)
             {
@@ -52,8 +52,25 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
-            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
+            
             return View(tour);
+        }
+
+        [HttpGet]
+        public ActionResult GetEmployee(DateTime datePick, int time)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var employees = _employeeRepository.GetEmployeeFree(datePick, time);
+            //var json = new JavaScriptSerializer().Serialize(employees.ToList());
+
+            //ViewBag.Employees = new SelectList(employees.OrderBy(x => x.Name), "EmployeeID", "Name");
+
+            string empNull = "";
+            foreach (var item in employees)
+            {
+                empNull += item.Id + "," + item.Name + "-";
+            }
+            return Content(empNull);
         }
 
         // GET: Admin/ToursManagement/Edit/5

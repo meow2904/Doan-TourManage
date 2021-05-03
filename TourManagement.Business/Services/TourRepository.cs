@@ -66,5 +66,10 @@ namespace TourManagement.Business.Services
             return Context.Tours.Where(x => x.TimeStart.Value > date).
                 OrderBy(x => x.Name).Skip(size * (page - 1)).Take(size).ToList();
         }
+
+        public int CountTourByEmpId(int empId)
+        {
+            return Context.Tours.Where(x => x.EmployeeId == empId).Count();
+        }
     }
 }

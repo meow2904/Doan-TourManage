@@ -10,9 +10,8 @@
 
 <form action="@Url.Action("Create", "EmployeesManagement")" method="post" class=" row form-horizontal" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+
     <div class="row w-100">
         <div class="col-7">
             <div class="form-group">
@@ -27,8 +26,9 @@
             <div class="form-group">
                 <label>Gender</label>
                 <div>
-                    <select class="form-control" id="Gender">
-                        <option value="True" selected>Nam</option>
+                    <select class="form-control" id="Gender" name="Gender">
+                        <option >Select gender</option>
+                        <option value="True">Nam</option>
                         <option value="False">Nữ</option>
                     </select>
                 </div>
@@ -65,7 +65,7 @@
             <div class="form-group">
                 <div>
                     <input type="submit" value="Save" class="btn btn-success" />
-                    <a class="btn btn-secondary" href="@Url.Action("Index","HotelsManagement")">Cancel</a>
+                    <a class="btn btn-secondary" href="@Url.Action("Index","EmployeesManagement")">Cancel</a>
                 </div>
             </div>
         </div>

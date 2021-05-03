@@ -13,7 +13,6 @@ namespace TourManagement.Presentation.Controllers
 {
     public class UsersController : Controller
     {
-        private TourManagementContext db = new TourManagementContext();
         private readonly IUserRepository _userRepository;
         public UsersController(IUserRepository userRepository)
         {
@@ -114,15 +113,6 @@ namespace TourManagement.Presentation.Controllers
             }
 
             return View();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

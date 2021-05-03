@@ -8,7 +8,7 @@
 <h2>Add new tour</h2>
 <hr />
 
-<form action="~/Areas/Admin/Views/ToursManagement/Create" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+<form action="@Url.Action("Creeate","ToursManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -17,7 +17,7 @@
         <div class="form-group">
             <label class="control-label">Name</label>
             <div>
-                <input type="text" class="form-control" name="Name" />
+                <input type="text" class="form-control" name="Name" id="Name" />
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="form-group">
             <label class="control-label">Content</label>
             <div>
-                <textarea class="form-control" name="Summary" id="ckeditor" rows="10"></textarea>
+                <textarea class="form-control" name="Content" id="Content" rows="10"></textarea>
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,59 +35,56 @@
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" onchange="readURL(this)">
                 <label class="custom-file-label" for="validatedCustomFile">Choose an image</label>
-                <div><img id="FileImage" src="~/Content/images/meo.jpg" name="Image" alt="your image" class="img-thumbnail" width="200" /></div>
-                @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+                <div>
+                    <img id="FileImage" src="~/Content/images/meo.jpg" name="Image" alt="your image" class="img-thumbnail" width="200" />
+                </div>
             </div>
         </div>
 
     </div>
 
     <div class="col">
-        <div class="form-group">
-            <label class="control-label">Time</label>
-            <div>
-                <input type="number" name="Time" id="Time" class="form-control" min="1" />
-                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="form-group col-6">
+                <label class="control-label">Time</label>
+                <div>
+                    <input type="number" name="Time" id="Time" class="form-control" min="1" />
+                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label">Time Start</label>
-            <div>
-                <input type="date" name="TimeStart" id="TimeStart" class="form-control" />
-                @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+            <div class="form-group col-6">
+                <label class="control-label">Time Start</label>
+                <div>
+                    <input type="date" name="TimeStart" id="TimeStart" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label">Position Start</label>
             <div>
-                @Html.EditorFor(model => model.PositionStart, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" name="PositionStart" id="PositionStart" class="form-control" />
                 @Html.ValidationMessageFor(model => model.PositionStart, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label">Quantity Prople</label>
-            <div>
-                <input type="number" name="Quantity" id="Quantity" class="form-control" min="1" />
-                @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="form-group col-6">
+                <label class="control-label">Quantity Prople</label>
+                <div>
+                    <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" />
+                    @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="control-label">Option Hotel</label>
-            <div>
-                @Html.DropDownList("HotelID", null, "Select Hotel", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label">Loại tour</label>
-            <div>
-                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            <div class="form-group col-6">
+                <label class="control-label">Category</label>
+                <div>
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
@@ -99,27 +96,45 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                <label class="control-label">Điểm đến</label>
-                <div>
-                    @Html.DropDownList("DestinationID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Destinations, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
         <div class="row">
             <div class="form-group col-6">
+                <label class="control-label">Stop position</label>
+                <div>
+                    <input type="text" id="StopPosition" name="StopPosition" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.StopPosition, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-6">
+                <label class="control-label">Transport</label>
+                <div>
+                    <input type="text" id="Transport" name="Transport" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.Transport, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-4">
                 <label class="control-label">Price Of Adult</label>
                 <div>
-                    @Html.EditorFor(model => model.PriceOfAdult, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0"/>
                     @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-4">
                 <label class="control-label">Price Of Child</label>
                 <div>
-                    @Html.EditorFor(model => model.PriceOfChild, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" />
                     @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Surcharge Of Room</label>
+                <div>
+                    <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" />
+                    @Html.ValidationMessageFor(model => model.SurchargeOfRoom, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -129,6 +144,10 @@
                 <input type="submit" value="Add" class="btn btn-success" />
                 <a class="btn btn-secondary" href="/Admin/ToursManagement/Index">Cancel</a>
             </div>
+        </div>
+
+        <div class="form-group">
+            
         </div>
     </div>
 </form>
@@ -146,17 +165,24 @@
                 var year = date.getFullYear();
 
                 var TimeStart = [year, month, day].join('-')
+
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "@Url.Action("GetEmployee")",
-                    dataType: "json",
                     data: { datePick: TimeStart, time: Time },
+                    contentType: 'application/json;charset=utf-8',
                     success: function (response) {
-                        //alert(JSON.stringify(data.Name))
-                        console.log(response)
+                        let rs = response.split("-")
+                        let dropdown = $("#EmployeeID")
+                        dropdown.empty()
+
+                        for (let item of rs) {
+                            dropdown.append($('<option></option>').val(item.split(',')[0]).html(item.split(',')[1]))
+                        }
                     },
+
                     error: function (errormes) {
-                        alert(errormes.responseText)
+                        
                     }
                 })
             })
