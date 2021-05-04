@@ -71,5 +71,11 @@ namespace TourManagement.Business.Services
         {
             return Context.Tours.Where(x => x.EmployeeId == empId).Count();
         }
+
+        public IEnumerable<Category> GetCategory()
+        {
+            return Context.Categories.ToList();
+        }
+
     }
 }

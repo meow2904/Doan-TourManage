@@ -21,8 +21,6 @@ namespace TourManagement.Presentation.Controllers
         {
             var date = DateTime.Now.Date;
             var tours = _tourRepository.GetToursByDateWithPaging(date, 1, size);
-            
-            
             return View(tours);
         }
 

@@ -5,19 +5,20 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Add new tour</h2>
 <hr />
 
-<form action="@Url.Action("Creeate","ToursManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+<form action="@Url.Action("Create","ToursManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="col">
+    <div class="col-6">
         <div class="form-group">
             <label class="control-label">Name</label>
             <div>
-                <input type="text" class="form-control" name="Name" id="Name" />
+                <input type="text" class="form-control" name="Name" id="Name" required/>
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,30 +26,35 @@
         <div class="form-group">
             <label class="control-label">Content</label>
             <div>
-                <textarea class="form-control" name="Content" id="Content" rows="10"></textarea>
+                <textarea class="form-control" name="Content" id="Content" rows="5" required></textarea>
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="ImgUrl">Image Thumbnail:</label>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" multiple onchange="readURL(this)">
-                <label class="custom-file-label" for="validatedCustomFile">Choose an image</label>
-                <div>
-                    <img id="FileImage" src="~/Content/images/meo.jpg" name="Image" alt="your image" class="img-thumbnail" width="200" />
-                </div>
+            <div>
+                <input type="text" id="Image" name="Image" class="col-5" />
+                <input type="file" id="filesInput" name="filesInput" multiple required onchange="Getname()">
             </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Select more destinations</label>
+            <div>
+                @Html.DropDownList("DestinationIds", new SelectList(ViewBag.DestiantionId, "Value", "Text"), new { @class = "form-control",
+               @id = "DestinationIds", multiple = "multiple", required= "required" , size =5})
+            </div>
+            <p id="outputDes"></p>
         </div>
 
     </div>
 
-    <div class="col">
+    <div class="col-6">
         <div class="row">
             <div class="form-group col-6">
                 <label class="control-label">Time</label>
                 <div>
-                    <input type="number" name="Time" id="Time" class="form-control" min="1" />
+                    <input type="number" name="Time" id="Time" class="form-control" min="1" required/>
                     @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -56,7 +62,7 @@
             <div class="form-group col-6">
                 <label class="control-label">Time Start</label>
                 <div>
-                    <input type="date" name="TimeStart" id="TimeStart" class="form-control" />
+                    <input type="date" name="TimeStart" id="TimeStart" class="form-control" required/>
                     @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,7 +80,7 @@
             <div class="form-group col-6">
                 <label class="control-label">Quantity Prople</label>
                 <div>
-                    <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" />
+                    <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" required/>
                     @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -118,14 +124,14 @@
             <div class="form-group col-4">
                 <label class="control-label">Price Of Adult</label>
                 <div>
-                    <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0"/>
+                    <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" required/>
                     @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group col-4">
                 <label class="control-label">Price Of Child</label>
                 <div>
-                    <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" />
+                    <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" required/>
                     @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -133,7 +139,7 @@
             <div class="form-group col-4">
                 <label class="control-label">Surcharge Of Room</label>
                 <div>
-                    <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" />
+                    <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" required/>
                     @Html.ValidationMessageFor(model => model.SurchargeOfRoom, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -147,10 +153,12 @@
         </div>
 
         <div class="form-group">
-            
+
         </div>
     </div>
 </form>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -182,10 +190,10 @@
                     },
 
                     error: function (errormes) {
-                        
                     }
                 })
             })
         })
+
     </script>
 }

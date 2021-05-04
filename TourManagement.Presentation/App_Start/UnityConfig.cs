@@ -61,6 +61,7 @@ namespace TourManagement.Presentation
             container.RegisterType<IOrderTourDetailRepository, OrderTourDetailRepository>();
 
             container.RegisterType<IBookTourRepository, BookTourRepository>();
+            container.RegisterType<ITourDestinationRepository, TourDestinationRepository>();
 
 
         }

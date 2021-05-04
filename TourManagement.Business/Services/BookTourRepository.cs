@@ -22,11 +22,9 @@ namespace TourManagement.Business.Services
         {
             orderTour.OrderDate = DateTime.Now.Date;
 
-
             //update quantity of tour
             var tour = _tourRepository.GetById(orderTourDetail.TourId);
             tour.QuantityPeople -= (orderTourDetail.QuantityAdult + orderTourDetail.QuantityChild);
-
             _tourRepository.Update(tour);
 
             orderTourDetail.OrderTour = orderTour;

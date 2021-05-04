@@ -19,5 +19,8 @@ namespace TourManagement.Business.IServices
         IEnumerable<Tour> GetToursByPriceWithPaging(string category, decimal startPrice, decimal endPrice, int page, int size);
         int CountTourByEmpId(int empId);
 
+        IEnumerable<Category> GetCategory();
+
+
     }
 }

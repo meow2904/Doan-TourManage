@@ -1,4 +1,4 @@
-﻿
+﻿//check tour is valid
 $(document).ready(() => {
     if ($('#remaining').text() == 0) {
         $('#btnBook').addClass('disabled')
@@ -8,6 +8,7 @@ $(document).ready(() => {
     }
 })
 
+
 $(document).ready(() => {
     $("#btnSend").on("click", () => {
         $("#cusinfor").empty()
@@ -15,7 +16,7 @@ $(document).ready(() => {
     })
 })
 
-
+//caculate price order
 function cal_price() {
     var quan_child = parseInt(document.getElementById('QuantityChild').value);
     var price_child = parseInt(document.getElementById('price_child').innerHTML.replace(/\,/g,""));
@@ -39,3 +40,17 @@ function cal_price() {
     document.getElementById('sum_price').innerHTML = sum_price;
 
 }
+
+//display name image
+function Getname() {
+    var input = document.getElementById('filesInput');
+    console.log(typeof (input));
+    var output = document.getElementById('Image');
+    var image = "";
+    for (var i = 0; i < input.files.length; i++) {
+        image = image + input.files.item(i).name + '-';
+    }
+    output.value = image.substring(0, (image.length - 1));
+}
+
+

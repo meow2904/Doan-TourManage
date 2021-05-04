@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,10 +17,17 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         private TourManagementContext db = new TourManagementContext();
         private readonly ITourRepository _tourRepository;
         private readonly IEmployeeRepository _employeeRepository;
-        public ToursManagementController(ITourRepository tourRepository, IEmployeeRepository employeeRepository)
+        private readonly IDestinatioRepository _destinatioRepository;
+        private readonly ITourDestinationRepository _tourDestinationRepository;
+        public ToursManagementController(ITourRepository tourRepository,
+            IEmployeeRepository employeeRepository,
+            IDestinatioRepository destinatioRepository,
+            ITourDestinationRepository tourDestinationRepository)
         {
             _tourRepository = tourRepository;
             _employeeRepository = employeeRepository;
+            _destinatioRepository = destinatioRepository;
+            _tourDestinationRepository = tourDestinationRepository;
         }
         // GET: Admin/ToursManagement
         public ActionResult Index()
@@ -31,9 +39,9 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // GET: Admin/ToursManagement/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name");
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(_tourRepository.GetCategory(), "Id", "Name");
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.EmployeeId = new SelectList(_employeeRepository.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -42,12 +50,39 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Tour tour)
+        public ActionResult Create(Tour tour, List<string> DestinationIds, List<HttpPostedFileBase> filesInput)
         {
             if (ModelState.IsValid)
             {
-                db.Tours.Add(tour);
-                db.SaveChanges();
+
+                if (filesInput != null)
+                {
+                    try
+                    {
+                        foreach(var item in filesInput)
+                        {
+                            string fileName = "";
+                            fileName = Path.GetFileName(item.FileName);
+                            string path = Path.Combine(Server.MapPath("~/Content/images/tours"), fileName);
+                            item.SaveAs(path);
+                        }
+                        
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                _tourRepository.Add(tour);
+                foreach (var item in DestinationIds)
+                {
+                    
+                    var tourdestination = new TourDestination();
+                    tourdestination.IdTour = tour.Id;
+                    tourdestination.IdDestination = Int32.Parse(item);
+
+                    _tourDestinationRepository.Add(tourdestination);
+                }
                 return RedirectToAction("Index");
             }
 
