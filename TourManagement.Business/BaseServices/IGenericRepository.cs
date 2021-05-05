@@ -14,9 +14,5 @@ namespace TourManagement.Business.BaseServices
         void Update(TEntity entity);
         void Delete(TEntity entity);
         void DeleteByID(int id);
-        //IEnumerable<TEntity> GetWithPaging(int page, int size);
-        //IEnumerable<TEntity> GetWithPaging(Expression<Func<TEntity, bool>> filter = null,
-        //    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-        //    string includeProperties = "", int page = 1, int pageSize = 10);
     }
 }

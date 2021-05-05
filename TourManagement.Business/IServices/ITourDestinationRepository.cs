@@ -10,5 +10,6 @@ namespace TourManagement.Business.IServices
 {
     public interface ITourDestinationRepository: IGenericRepository<TourDestination>
     {
+        IEnumerable<TourDestination> GetListTourDesination(int tourId);
     }
 }

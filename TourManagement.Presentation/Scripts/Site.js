@@ -54,3 +54,44 @@ function Getname() {
 }
 
 
+function TakeEmployees(url) {
+    $(function () {
+        $("#TimeStart").change(function () {
+            var Time = $("#Time").val()
+
+            var date = new Date($('#TimeStart').val());
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            var TimeStart = [year, month, day].join('-')
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: { datePick: TimeStart, time: Time },
+                contentType: 'application/json;charset=utf-8',
+                success: function (response) {
+                    let rs = response.split("-")
+                    let dropdown = $("#EmployeeID")
+                    dropdown.empty()
+
+                    for (let item of rs) {
+                        dropdown.append($('<option></option>').val(item.split(',')[0]).html(item.split(',')[1]))
+                    }
+                },
+
+                error: function (errormes) {
+                }
+            })
+        })
+    })
+}
+
+
+//read html
+function strip(html) {
+    var tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+}

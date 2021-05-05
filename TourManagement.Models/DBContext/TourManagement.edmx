@@ -43,14 +43,6 @@
           <Property Name="Image" Type="nvarchar" MaxLength="50" />
           <Property Name="Content" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Image">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NameImage" Type="nvarchar" MaxLength="50" />
-          <Property Name="TourId" Type="int" />
-        </EntityType>
         <EntityType Name="OrderTour">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -111,7 +103,7 @@
           <Property Name="EmployeeId" Type="int" />
           <Property Name="StopPosition" Type="nvarchar" MaxLength="256" />
           <Property Name="CategoryId" Type="int" />
-          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TourDestination">
           <Key>
@@ -235,7 +227,6 @@
           <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTour" EntityType="Self.OrderTour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTourDetail" EntityType="Self.OrderTourDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
@@ -322,14 +313,6 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
         </EntityType>
-        <EntityType Name="Image">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TourId" Type="Int32" />
-        </EntityType>
         <EntityType Name="OrderTour">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -399,7 +382,7 @@
           <NavigationProperty Name="Employee" Relationship="Self.FK_Tour_Employee" FromRole="Tour" ToRole="Employee" />
           <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="Tour" ToRole="OrderTourDetail" />
           <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Tour" FromRole="Tour" ToRole="TourDestination" />
-          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TourDestination">
           <Key>
@@ -526,7 +509,6 @@
           <EntitySet Name="Destinations" EntityType="Self.Destination" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Hotels" EntityType="Self.Hotel" />
-          <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="OrderTours" EntityType="Self.OrderTour" />
           <EntitySet Name="OrderTourDetails" EntityType="Self.OrderTourDetail" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
@@ -612,15 +594,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="TourManagementModel.Image">
-              <MappingFragment StoreEntitySet="Image">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NameImage" ColumnName="NameImage" />
-                <ScalarProperty Name="TourId" ColumnName="TourId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

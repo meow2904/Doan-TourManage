@@ -38,14 +38,6 @@
     <Property Name="Image" Type="nvarchar" MaxLength="50" />
     <Property Name="Content" Type="nvarchar(max)" />
   </EntityType>
-  <EntityType Name="Image">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NameImage" Type="nvarchar" MaxLength="50" />
-    <Property Name="TourId" Type="int" />
-  </EntityType>
   <EntityType Name="OrderTour">
     <Key>
       <PropertyRef Name="OrderId" />
@@ -106,7 +98,7 @@
     <Property Name="EmployeeId" Type="int" />
     <Property Name="StopPosition" Type="nvarchar" MaxLength="256" />
     <Property Name="CategoryId" Type="int" />
-    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TourDestination">
     <Key>
@@ -230,7 +222,6 @@
     <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderTour" EntityType="Self.OrderTour" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderTourDetail" EntityType="Self.OrderTourDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />

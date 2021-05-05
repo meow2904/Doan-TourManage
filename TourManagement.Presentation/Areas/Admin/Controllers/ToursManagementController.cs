@@ -29,6 +29,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             _destinatioRepository = destinatioRepository;
             _tourDestinationRepository = tourDestinationRepository;
         }
+
         // GET: Admin/ToursManagement
         public ActionResult Index()
         {
@@ -45,11 +46,11 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View();
         }
 
+
         // POST: Admin/ToursManagement/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(Tour tour, List<string> DestinationIds, List<HttpPostedFileBase> filesInput)
         {
             if (ModelState.IsValid)
@@ -87,18 +88,19 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
-            
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.EmployeeId = new SelectList(_employeeRepository.GetAll(), "Id", "Name");
             return View(tour);
         }
+
 
         [HttpGet]
         public ActionResult GetEmployee(DateTime datePick, int time)
         {
             db.Configuration.ProxyCreationEnabled = false;
             var employees = _employeeRepository.GetEmployeeFree(datePick, time);
-            //var json = new JavaScriptSerializer().Serialize(employees.ToList());
 
-            //ViewBag.Employees = new SelectList(employees.OrderBy(x => x.Name), "EmployeeID", "Name");
+            ViewBag.Employees = new SelectList(employees.OrderBy(x => x.Name), "EmployeeID", "Name");
 
             string empNull = "";
             foreach (var item in employees)
@@ -108,38 +110,73 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return Content(empNull);
         }
 
+
         // GET: Admin/ToursManagement/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tour tour = db.Tours.Find(id);
+            var tour = _tourRepository.GetById((int)id);
+
             if (tour == null)
             {
                 return HttpNotFound();
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+
             return View(tour);
         }
 
+        
         // POST: Admin/ToursManagement/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Time,TimeStart,PositionStart,Transport,Content,Image,QuantityPeople,PriceOfChild,PriceOfAdult,EmployeeId,HotelId,CategoryId")] Tour tour)
+        [ValidateInput(false)]
+        public ActionResult Edit(Tour tour, List<string> DestinationIds, List<HttpPostedFileBase> filesInput)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tour).State = EntityState.Modified;
-                db.SaveChanges();
+                if (filesInput != null)
+                {
+                    try
+                    {
+                        foreach (var item in filesInput)
+                        {
+                            string fileName = "";
+                            fileName = Path.GetFileName(item.FileName);
+                            string path = Path.Combine(Server.MapPath("~/Content/images/tours"), fileName);
+                            item.SaveAs(path);
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+
+                _tourRepository.Update(tour);
+                //delete old tourdes 
+                var tds = _tourDestinationRepository.GetListTourDesination(tour.Id);
+                foreach(var item in tds)
+                {
+                    _tourDestinationRepository.Delete(item);
+                }
+
+                foreach (var item in DestinationIds)
+                {
+                    var tourdestination = new TourDestination();
+                    tourdestination.IdTour = tour.Id;
+                    tourdestination.IdDestination = Int32.Parse(item);
+
+                    _tourDestinationRepository.Add(tourdestination);
+                }
                 return RedirectToAction("Index");
             }
+
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
-            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.EmployeeId = new SelectList(_employeeRepository.GetAll(), "Id", "Name");
             return View(tour);
         }
 

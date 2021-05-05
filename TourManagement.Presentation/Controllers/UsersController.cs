@@ -37,7 +37,7 @@ namespace TourManagement.Presentation.Controllers
             {
                 user.Role = 2;
                 var result = _userRepository.Add(user);
-                if(result)
+                if (result)
                 {
                     return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/'</script>");
                 }
@@ -61,9 +61,7 @@ namespace TourManagement.Presentation.Controllers
             return View(user);
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User user)
@@ -79,8 +77,19 @@ namespace TourManagement.Presentation.Controllers
 
         public ActionResult Logout()
         {
-            Session.Clear();
-            return Redirect("/");
+            var user = (User)Session["username"];
+            var result = _userRepository.GetById(user.Id);
+            if (result.Role != 1)
+            {
+                Session.Clear();
+                return Redirect("/");
+            }
+            else
+            {
+                Session.Clear();
+                return RedirectToAction("Index","Home", new { area= ""});
+            }
+            
         }
 
         public ActionResult Login()
@@ -105,7 +114,7 @@ namespace TourManagement.Presentation.Controllers
             else if (result != null && result.Role == 1)
             {
                 Session["username"] = result;
-                return RedirectToAction("Index", "ToursManagement", new { area = "Admin"});
+                return RedirectToAction("Index", "ToursManagement", new { area = "Admin" });
             }
             else
             {

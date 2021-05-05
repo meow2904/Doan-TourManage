@@ -3,27 +3,40 @@
 }
 @if (Session["username"] != null)
 {
-
-    using (Html.BeginForm("Logout", "Users", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="dropdown">
-            <a class="dropdown-toggle btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @user.Name
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="@Url.Action("Edit", "Users", new { id = user.Id})">Cập nhật tài khoản</a>
-                <a class="dropdown-item" href="@Url.Action("GetOrderTour", "OrderTours")">Lịch sử đơn đặt</a>
-                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a>
+<form action="@Url.Action("Logout", "Users", new { area = "" })" id="logoutForm" class="navbar-right" method="post">
+    @Html.AntiForgeryToken()
+    <ul class="navbar-nav-cus nav-right">
+        <li class="nav-item-cus avt-wrapper">
+            <div class="avt dropdown">
+                <a class="dropdown-toggle btn" data-toggle="user-menu" >
+                    <i class="fas fa-user-tie"></i>
+                    @user.Name
+                </a>
+                <ul id="user-menu" class="dropdown-menu-cus">
+                    <li class="dropdown-menu-item">
+                        <a href="@Url.Action("Edit", "Users", new { area = "", id = user.Id })" class="dropdown-menu-link">
+                            <div>
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="dropdown-menu-item">
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-menu-link">
+                            <div>
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </div>
-    }
+        </li>
+    </ul>
+</form>
 }
 else
 {
-
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">@Html.ActionLink("Đăng kí", "Register", "Users", null, new { id = "registerLink", @class = "nav-link" })</li>
         <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { @class = "nav-link" })</li>

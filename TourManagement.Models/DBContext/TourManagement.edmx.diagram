@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="TourManagementModel.Destination" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.Hotel" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.Image" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.OrderTour" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.OrderTourDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.Room" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />

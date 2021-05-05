@@ -18,38 +18,58 @@
         <div class="form-group">
             <label class="control-label">Name</label>
             <div>
-                <input type="text" class="form-control" name="Name" id="Name" required/>
+                <input type="text" class="form-control" name="Name" id="Name" required />
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label">Content</label>
+            <label class="control-label">Position Start</label>
             <div>
-                <textarea class="form-control" name="Content" id="Content" rows="5" required></textarea>
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div>
-                <input type="text" id="Image" name="Image" class="col-5" />
-                <input type="file" id="filesInput" name="filesInput" multiple required onchange="Getname()">
+                <input type="text" name="PositionStart" id="PositionStart" class="form-control" required/>
+                @Html.ValidationMessageFor(model => model.PositionStart, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label">Select more destinations</label>
             <div>
-                @Html.DropDownList("DestinationIds", new SelectList(ViewBag.DestiantionId, "Value", "Text"), new { @class = "form-control",
-               @id = "DestinationIds", multiple = "multiple", required= "required" , size =5})
+                @Html.DropDownList("DestinationIds", new SelectList(ViewBag.DestiantionId, "Value", "Text"), new
+                {
+                    @class = "form-control",
+                    @id = "DestinationIds",
+                    multiple = "multiple",
+                    required = "required",
+                    size = 5
+                })
             </div>
-            <p id="outputDes"></p>
         </div>
-
     </div>
 
     <div class="col-6">
+        <div class="form-group">
+            <label class="control-label">Select images</label>
+            <div>
+                <input type="text" id="Image" name="Image" class="col-5" />
+                <input type="file" id="filesInput" name="filesInput" multiple required onchange="Getname()">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label class="control-label">Quantity Prople</label>
+                <div>
+                    <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" required />
+                    @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label class="control-label">Category</label>
+                <div>
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="form-group col-6">
                 <label class="control-label">Time</label>
@@ -67,33 +87,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label">Position Start</label>
-            <div>
-                <input type="text" name="PositionStart" id="PositionStart" class="form-control" />
-                @Html.ValidationMessageFor(model => model.PositionStart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-6">
-                <label class="control-label">Quantity Prople</label>
-                <div>
-                    <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" required/>
-                    @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-6">
-                <label class="control-label">Category</label>
-                <div>
-                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
         <div class="form-group">
             <label class="control-label">Tour guide</label>
             <div>
@@ -101,12 +94,11 @@
                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="row">
             <div class="form-group col-6">
                 <label class="control-label">Stop position</label>
                 <div>
-                    <input type="text" id="StopPosition" name="StopPosition" class="form-control" />
+                    <input type="text" id="StopPosition" name="StopPosition" class="form-control" required/>
                     @Html.ValidationMessageFor(model => model.StopPosition, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -114,7 +106,7 @@
             <div class="form-group col-6">
                 <label class="control-label">Transport</label>
                 <div>
-                    <input type="text" id="Transport" name="Transport" class="form-control" />
+                    <input type="text" id="Transport" name="Transport" class="form-control" required />
                     @Html.ValidationMessageFor(model => model.Transport, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -124,14 +116,14 @@
             <div class="form-group col-4">
                 <label class="control-label">Price Of Adult</label>
                 <div>
-                    <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" required/>
+                    <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" required />
                     @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group col-4">
                 <label class="control-label">Price Of Child</label>
                 <div>
-                    <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" required/>
+                    <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" required />
                     @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -139,61 +131,40 @@
             <div class="form-group col-4">
                 <label class="control-label">Surcharge Of Room</label>
                 <div>
-                    <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" required/>
+                    <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" required />
                     @Html.ValidationMessageFor(model => model.SurchargeOfRoom, "", new { @class = "text-danger" })
                 </div>
             </div>
 
         </div>
+
+
+
+    </div>
+    <div class="w-100">
         <div class="form-group">
+            <label class="control-label">Content</label>
             <div>
-                <input type="submit" value="Add" class="btn btn-success" />
-                <a class="btn btn-secondary" href="/Admin/ToursManagement/Index">Cancel</a>
+                <textarea class="form-control" name="Content" id="editor" ></textarea>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-
+    </div>
+    <div class="form-group">
+        <div>
+            <input type="submit" value="Add" class="btn btn-success" />
+            <a class="btn btn-secondary" href="/Admin/ToursManagement/Index">Cancel</a>
         </div>
     </div>
 </form>
 
 
+@section scripts {
+    <script src="~/Scripts/ckeditor5-build-classic/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor5-build-classic/ClassicEditor.js"></script>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(function () {
-            $("#TimeStart").change(function () {
-                var Time = $("#Time").val()
-
-                var date = new Date($('#TimeStart').val());
-                var day = date.getDate();
-                var month = date.getMonth() + 1;
-                var year = date.getFullYear();
-
-                var TimeStart = [year, month, day].join('-')
-
-                $.ajax({
-                    type: "GET",
-                    url: "@Url.Action("GetEmployee")",
-                    data: { datePick: TimeStart, time: Time },
-                    contentType: 'application/json;charset=utf-8',
-                    success: function (response) {
-                        let rs = response.split("-")
-                        let dropdown = $("#EmployeeID")
-                        dropdown.empty()
-
-                        for (let item of rs) {
-                            dropdown.append($('<option></option>').val(item.split(',')[0]).html(item.split(',')[1]))
-                        }
-                    },
-
-                    error: function (errormes) {
-                    }
-                })
-            })
-        })
-
+        var url = "@Url.Action("GetEmployee")"
+            TakeEmployees(url);
     </script>
 }

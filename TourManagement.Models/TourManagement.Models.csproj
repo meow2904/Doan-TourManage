@@ -65,9 +65,6 @@
     <Compile Include="DBContext\Hotel.cs">
       <DependentUpon>TourManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContext\Image.cs">
-      <DependentUpon>TourManagement.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBContext\OrderTour.cs">
       <DependentUpon>TourManagement.tt</DependentUpon>
     </Compile>

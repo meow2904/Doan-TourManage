@@ -9,7 +9,11 @@ using TourManagement.Models.DBContext;
 
 namespace TourManagement.Business.Services
 {
-    public class TourDestinationRepository: GenericRepository<TourDestination>, ITourDestinationRepository
+    public class TourDestinationRepository : GenericRepository<TourDestination>, ITourDestinationRepository
     {
+        public IEnumerable<TourDestination> GetListTourDesination(int tourId)
+        {
+            return Context.TourDestinations.Where(x => x.IdTour == tourId).ToList();
+        }
     }
 }

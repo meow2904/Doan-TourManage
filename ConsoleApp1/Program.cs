@@ -19,7 +19,7 @@ namespace ConsoleApp1
 
             var e = tourRepository.GetById(1);
 
-            Console.WriteLine();
+            Console.WriteLine(e.TimeStart.Value.Date.ToString("MM/dd/yyyy"));
 
             Console.ReadKey();
 

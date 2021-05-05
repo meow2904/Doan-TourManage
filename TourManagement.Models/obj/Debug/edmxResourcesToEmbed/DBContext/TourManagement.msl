@@ -43,15 +43,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="TourManagementModel.Image">
-        <MappingFragment StoreEntitySet="Image">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="NameImage" ColumnName="NameImage" />
-          <ScalarProperty Name="TourId" ColumnName="TourId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderTours">
       <EntityTypeMapping TypeName="TourManagementModel.OrderTour">
         <MappingFragment StoreEntitySet="OrderTour">

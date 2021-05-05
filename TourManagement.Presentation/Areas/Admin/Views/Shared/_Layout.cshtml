@@ -10,44 +10,98 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Css/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Css/style.css">
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5 fixed-top">
-
-        <div class="col-2 text-right">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
-                <img class="border rounded-circle" src="~/Content/images/tours/logo1.jpg" style="width: 50px; height:50px">
-            </a>
-        </div>
-
-        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
-            <ul class="navbar-nav col-10">
-                <li class="nav-item font-weight-bold">
-                    <a href="@Url.Action("Index", "EmployeesManagement", new { area = "Admin", page =1 })" class="nav-link">
-                        <img src="~/Content/images/management.svg" height="20" width="20" />
-                        Employees
-                    </a>
-                </li>
-                <li class="nav-item font-weight-bold">
-                    <a href="@Url.Action("Index", "ToursManagement", new { area = "Admin" })" class="nav-link">
-                        <img src="~/Content/images/travel-bag.svg" height="20" width="20" />
-                        Tours
-                    </a>
-                </li>
-                <li class="nav-item font-weight-bolder">
-                    <a href="@Url.Action("Index", "HotelsManagement", new { area = "Admin" })" class="nav-link">
-                        <img src="~/Content/images/hotel.svg" height="20" width="20" />
-                        Hotels
-                    </a>
-                </li>
-            </ul>
-            <div>
-                @Html.Partial("LoginPatial")
-            </div>
-        </div>
-    </nav>
-    <div class="container ptc-60">
+    <div class="navbar-cus">
+        <!-- nav left -->
+        <ul class="navbar-nav-cus">
+            <li class="nav-item-cus">
+                <a class="nav-link">
+                    <i class="fas fa-bars" onclick="collapseSidebar()"></i>
+                </a>
+            </li>
+            <li class="nav-item-cus">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+                    <img class="border rounded-circle" src="~/Content/images/tours/logo1.jpg" style="width: 50px; height:50px">
+                </a>
+            </li>
+        </ul>
+        <!-- end nav left -->
+        <!-- nav right -->
+        <ul class="navbar-nav-cus nav-right">
+            <li class="nav-item-cus avt-wrapper">
+                <div class="avt dropdown">
+                    <img src="~/Content/images/travel-bag.svg" height="30" width="30" class="dropdown-toggle" data-toggle="user-menu" />
+                    <ul id="user-menu" class="dropdown-menu-cus">
+                        <li class="dropdown-menu-item">
+                            <a class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <a href="#" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </div>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <!-- end nav right -->
+    </div>
+    <!-- end navbar -->
+    <!-- sidebar -->
+    <div class="sidebar">
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-item">
+                <a href="@Url.Action("Index", "HomeManagement", new { area = "Admin", page =1 })" class="sidebar-nav-link" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/disboard.svg" height="35" width="35" />
+                    </div>
+                    <span>
+                        Disboard
+                    </span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="@Url.Action("Index", "ToursManagement", new { area = "Admin", page =1 })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/travel-bag.svg" height="30" width="30" />
+                    </div>
+                    <span>Tours</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="@Url.Action("Index", "EmployeesManagement", new { area = "Admin", page=1 })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/management.svg" height="30" width="30" />
+                    </div>
+                    <span>Employees</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="@Url.Action("Index", "HotelsManagement", new { area = "Admin" })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/hotel.svg" height="30" width="30" />
+                    </div>
+                    <span>Hotels</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="container ptcus-100">
         <div>
             @RenderBody()
         </div>
@@ -62,6 +116,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/Site.js"></script>
+    <script src="~/Areas/Admin/Scripts/index.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

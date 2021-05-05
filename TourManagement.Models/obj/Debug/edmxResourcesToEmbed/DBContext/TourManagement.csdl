@@ -42,14 +42,6 @@
     <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
   </EntityType>
-  <EntityType Name="Image">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NameImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="TourId" Type="Int32" />
-  </EntityType>
   <EntityType Name="OrderTour">
     <Key>
       <PropertyRef Name="OrderId" />
@@ -119,7 +111,7 @@
     <NavigationProperty Name="Employee" Relationship="Self.FK_Tour_Employee" FromRole="Tour" ToRole="Employee" />
     <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="Tour" ToRole="OrderTourDetail" />
     <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Tour" FromRole="Tour" ToRole="TourDestination" />
-    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TourDestination">
     <Key>
@@ -246,7 +238,6 @@
     <EntitySet Name="Destinations" EntityType="Self.Destination" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="Hotels" EntityType="Self.Hotel" />
-    <EntitySet Name="Images" EntityType="Self.Image" />
     <EntitySet Name="OrderTours" EntityType="Self.OrderTour" />
     <EntitySet Name="OrderTourDetails" EntityType="Self.OrderTourDetail" />
     <EntitySet Name="Rooms" EntityType="Self.Room" />
