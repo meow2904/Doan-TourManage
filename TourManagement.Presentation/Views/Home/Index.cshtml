@@ -2,6 +2,7 @@
 @model IEnumerable<Tour>
 @{
     ViewBag.Title = "Tìm tour du lịch - Let's Go";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="py-3">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -31,13 +32,23 @@
         </a>
     </div>
 </div>
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        @Html.Partial("TourOverView", item);
-    }
+<div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center py-3 mt-5 font-weight-bold">
+            <h2>Tour nổi bật</h2>
+        </div>
+    </div>
+    <div class="seemore text-right">
+        <a href="@Url.Action("GetByCategory", "Tours", new { category = "Trong nước", page = 1 })" class="link"><img src="~/Content/images/eye.svg" height="15" width="15" /> Xem tất cả</a>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            @Html.Partial("TourOverView", item);
+        }
+    </div>
 </div>
+
 <div class="py-3">
     <div class="text-center py-3">
         <h3>Điểm đến yêu thích</h3>

@@ -80,13 +80,37 @@
 
 /*css tour over view*/
 .tours {
-    height: 280px;
+    height: 300px;
 }
 
 .tour-image {
-    height: 65%;
+    height: 60%;
 }
 .tour-detail {
-    height: 35%;
+    height: 40%;
 }
 
+/*css title see more*/
+.seemore a{
+    color: black;
+    text-decoration: none;
+}
+.seemore:hover .link{
+    color: crimson;
+    
+}
+
+
+/*css footer*/
+.wrapper_cus ul {
+    list-style: none;
+}
+
+.socail_links ul{
+    display:flex;
+    padding:0;
+}
+
+.socail_links li{
+    margin: 0 10px;
+}

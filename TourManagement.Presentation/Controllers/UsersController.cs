@@ -25,10 +25,7 @@ namespace TourManagement.Presentation.Controllers
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[Bind(Include = "Id,Name,Phone,Email,Address,Password,Role")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User user)
@@ -114,7 +111,7 @@ namespace TourManagement.Presentation.Controllers
             else if (result != null && result.Role == 1)
             {
                 Session["username"] = result;
-                return RedirectToAction("Index", "ToursManagement", new { area = "Admin" });
+                return RedirectToAction("Index", "HomeManagement", new { area = "Admin" });
             }
             else
             {

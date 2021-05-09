@@ -38,6 +38,8 @@ namespace TourManagement.Presentation.Controllers
         {
             var tour = _tourRepository.GetById(id);
             ViewBag.Tour = tour;
+            string[] listImages = tour.Image.Split('-');
+            ViewBag.ListImages = listImages;
 
             var remainingQuantity = _tourRepository.GetRemainingQuantity((int)id);
             ViewBag.Remaining = remainingQuantity;

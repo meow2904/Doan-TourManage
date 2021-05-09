@@ -27,39 +27,16 @@
                 </a>
             </li>
             <li class="nav-item-cus">
-                <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+                <a class="navbar-brand" href="@Url.Action("Index", "HomeManagement", new { area = "Admin" })">
                     <img class="border rounded-circle" src="~/Content/images/tours/logo1.jpg" style="width: 50px; height:50px">
                 </a>
             </li>
         </ul>
         <!-- end nav left -->
         <!-- nav right -->
-        <ul class="navbar-nav-cus nav-right">
-            <li class="nav-item-cus avt-wrapper">
-                <div class="avt dropdown">
-                    <img src="~/Content/images/travel-bag.svg" height="30" width="30" class="dropdown-toggle" data-toggle="user-menu" />
-                    <ul id="user-menu" class="dropdown-menu-cus">
-                        <li class="dropdown-menu-item">
-                            <a class="dropdown-menu-link">
-                                <div>
-                                    <i class="fas fa-user-tie"></i>
-                                </div>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-menu-item">
-                            <a href="#" class="dropdown-menu-link">
-                                <div>
-                                    <i class="fas fa-sign-out-alt"></i>
-                                </div>
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-        <!-- end nav right -->
+        <div class="nav-right navbar-nav-cus">
+            @Html.Partial("LoginPatial")
+        </div>
     </div>
     <!-- end navbar -->
     <!-- sidebar -->
@@ -110,8 +87,6 @@
             <p>Copyright &copy; 2021 - MeowMeow</p>
         </div>
     </div>
-
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -21,6 +21,17 @@
                             <span>Profile</span>
                         </a>
                     </li>
+                    @if (user.Role == 2)
+                    {
+                        <li class="dropdown-menu-item">
+                            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-luggage-cart"></i>
+                                </div>
+                                <span>My orders</span>
+                            </a>
+                        </li>
+                    }
                     <li class="dropdown-menu-item">
                         <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-menu-link">
                             <div>

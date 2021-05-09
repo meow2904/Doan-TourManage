@@ -192,6 +192,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\calendar.svg" />
+    <Content Include="Content\images\chungnhan1.jpg" />
+    <Content Include="Content\images\chungnhan2.jpg" />
     <Content Include="Content\images\content.svg" />
     <Content Include="Content\images\destiantions\dd1.jpg" />
     <Content Include="Content\images\destiantions\dd2.jpg" />
@@ -199,6 +201,8 @@
     <Content Include="Content\images\destiantions\dd4.jpg" />
     <Content Include="Content\images\disboard.svg" />
     <Content Include="Content\images\email.svg" />
+    <Content Include="Content\images\eye.svg" />
+    <Content Include="Content\images\facebook.svg" />
     <Content Include="Content\images\hotel.svg" />
     <Content Include="Content\images\hotels\danang1.jpg" />
     <Content Include="Content\images\hotels\danang2.jpg" />
@@ -230,9 +234,9 @@
     <Content Include="Content\images\hotels\vungtau3.jpg" />
     <Content Include="Content\images\hotels\vungtau4.jpg" />
     <Content Include="Content\images\info.svg" />
+    <Content Include="Content\images\instagram.svg" />
     <Content Include="Content\images\management.svg" />
     <Content Include="Content\images\phone-call.svg" />
-    <Content Include="Content\images\searchbtn.svg" />
     <Content Include="Content\images\star.svg" />
     <Content Include="Content\images\tours\1002\baidinh1.jpg" />
     <Content Include="Content\images\tours\1002\halong1.jpg" />
@@ -311,7 +315,9 @@
     <Content Include="Content\images\tours\yentu1.jpg" />
     <Content Include="Content\images\travel-bag.svg" />
     <Content Include="Content\images\travel.svg" />
+    <Content Include="Content\images\twitter.svg" />
     <Content Include="Content\images\user.svg" />
+    <Content Include="Content\images\youtube.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

@@ -1,21 +1,23 @@
 ﻿@model TourManagement.Models.DBContext.OrderTourDetail
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var tour = (TourManagement.Models.DBContext.Tour)ViewBag.Tour;
     var custommer = (TourManagement.Models.DBContext.User)Session["username"];
+    string[] listImages = @ViewBag.ListImages;
 }
 <div class="row">
     <div class="col-md-6">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="~/Content/images/tours/@tour.Images.FirstOrDefault().NameImage" style="width: 100%;"
-                         class="d-block w-100" height="400" alt="...">
+                    <img src="~/Content/images/tours/image-active.jpg""
+                         class="d-block w-100 img-thumbnail img-fluid" alt="...">
                 </div>
-                @foreach (var item in tour.Images)
+                @foreach (var item in listImages)
                 {
                     <div class="carousel-item">
-                        <img src="~/Content/images/tours/@item.NameImage" style="width: 100%;" class="d-block w-100" height="400" alt="...">
+                        <img src="~/Content/images/tours/@item" class="d-block w-100 img-thumbnail img-fluid" alt="...">
                     </div>
                 }
             </div>

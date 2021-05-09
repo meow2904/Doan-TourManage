@@ -1,6 +1,7 @@
 ﻿@model TourManagement.Models.DBContext.Tour
 @{
     string[] listImages = Model.Image.Split('-');
+
 }
 
 <div class="col-3 py-3 px-1">
@@ -9,7 +10,7 @@
             <img src="~/Content/images/tours/@listImages[0]" class="w-100 h-100" alt="@Model.Name">
         </div>
         <div class="tour-detail">
-            <div class="h-75 p-2 bg-light m-auto">
+            <div class="h-50 p-2 bg-light m-auto">
                 @if (Model.Name.Length > 35)
                 {
                     <a class="card-title font-weight-bold" style="color: black;" href="/Tours/Details?id=@Model.Id">@Model.Name.Substring(0, 32)...</a>
