@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\EmployeesManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\HotelsManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderToursManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ToursManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
@@ -191,9 +192,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\bills.svg" />
     <Content Include="Content\images\calendar.svg" />
     <Content Include="Content\images\chungnhan1.jpg" />
     <Content Include="Content\images\chungnhan2.jpg" />
+    <Content Include="Content\images\clock.svg" />
     <Content Include="Content\images\content.svg" />
     <Content Include="Content\images\destiantions\dd1.jpg" />
     <Content Include="Content\images\destiantions\dd2.jpg" />
@@ -443,6 +446,8 @@
     <Content Include="Areas\Admin\Css\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Areas\Admin\Css\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Areas\Admin\Views\HomeManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ToursManagement\CheckTour.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderToursManagement\GetOrdersTour.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

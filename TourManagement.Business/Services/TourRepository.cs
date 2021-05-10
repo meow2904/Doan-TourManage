@@ -51,8 +51,8 @@ namespace TourManagement.Business.Services
 
         public IEnumerable<Tour> Search(string tour)
         {
-            return Context.Tours.Where(x => x.Name.Contains(tour.ToLower()) ||
-            x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower()))).ToList();
+            return Context.Tours.Where(x => x.Name.Contains(tour.ToLower()) || 
+            x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower())) ).ToList();
         }
 
         public IEnumerable<Tour> GetByPrice(string category, decimal startPrice, decimal endPrice)
@@ -77,5 +77,13 @@ namespace TourManagement.Business.Services
             return Context.Categories.ToList();
         }
 
+        public IEnumerable<Tour> SearchByDate(DateTime dateTime)
+        {
+            var day = dateTime.AddDays(3);
+            return Context.Tours.Where(x => x.TimeStart.Value.Day == day.Day &&
+                    x.TimeStart.Value.Month == day.Month &&
+                    x.TimeStart.Value.Year == day.Year
+            );
+        }
     }
 }

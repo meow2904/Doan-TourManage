@@ -12,5 +12,10 @@ namespace TourManagement.Business.Services
         {
             return Context.OrderTours.Where(x => x.UserId == cusId).ToList();
         }
+
+        public IEnumerable<OrderTour> GetOrderTourByTour(int tourId)
+        {
+            return Context.OrderTours.Where(x => x.OrderTourDetails.Any(y => y.TourId == tourId)).ToList();
+        }
     }
 }

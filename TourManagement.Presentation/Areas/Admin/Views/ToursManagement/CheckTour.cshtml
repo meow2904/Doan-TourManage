@@ -1,28 +1,18 @@
-﻿@model IEnumerable<TourManagement.Models.DBContext.Tour>
-
+﻿@model List<TourManagement.Models.DBContext.Tour>
 @{
-    ViewBag.Title = "Tour management | Let's Go";
+    ViewBag.Title = "CheckTour";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h2>Tours Management</h2>
-    <hr />
-</div>
-<div class="py-2">
-    <a href="@Url.Action("Create", "ToursManagement")" class="btn btn-primary">ADD</a>
-</div>
+<h2>CheckTour</h2>
 
 <table class="table table-bordered">
     <tr>
         <th>
+            <p>Id</p>
+        </th>
+        <th>
             <p>Name</p>
-        </th>
-        <th>
-            <label>Time</label>
-        </th>
-        <th>
-            <label>From to</label>
         </th>
         <th>
             Action
@@ -33,15 +23,11 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @item.Id
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Time)
+                <a href="@Url.Action("GetOrdersTour","OrderToursManagement", new { tourId= item.Id})">@item.Name</a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceOfAdult) đ
-            </td>
-          
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">
                 <form action="@Url.Action("DeleteTour","ToursManagement", new { id=item.Id })" method="post">
                     <a href="@Url.Action("Edit", "ToursManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>

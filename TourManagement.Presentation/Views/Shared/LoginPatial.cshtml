@@ -3,7 +3,7 @@
 }
 @if (Session["username"] != null)
 {
-<form action="@Url.Action("Logout", "Users", new { area = "" })" id="logoutForm" class="navbar-right" method="post">
+<form action="@Url.Action("Logout", "Users", new { area = "" })" id="logoutForm" class="navbar-right col-2" method="post">
     @Html.AntiForgeryToken()
     <ul class="navbar-nav-cus nav-right">
         <li class="nav-item-cus avt-wrapper">

@@ -68,7 +68,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/EmployeesManagement/Details/5
+
         public ActionResult Details(int? id)
         {
 
@@ -88,7 +88,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 
         }
 
-        // GET: Admin/EmployeesManagement/Create
+
         public ActionResult Create()
         {
             if (Session["username"] == null)
@@ -101,9 +101,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/EmployeesManagement/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Employee employee)
@@ -129,7 +127,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/EmployeesManagement/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (Session["username"] == null)
@@ -151,9 +149,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/EmployeesManagement/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Gender,BirthDate,Address,Phone,StatusWorking")] Employee employee)
@@ -174,7 +170,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         }
 
 
-        // POST: Admin/EmployeesManagement/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
         {

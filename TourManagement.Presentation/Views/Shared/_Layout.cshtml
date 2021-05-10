@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light px-5 fixed-top" style="background-color:aliceblue;">
 
         <div class="col-2 text-right">
             <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
@@ -27,7 +27,7 @@
 
         </div>
 
-        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse row">
             <ul class="navbar-nav col-4">
                 <li class="nav-item dropdown" id="group-tour">
                     <a class="nav-link font-weight-bold" href="@Url.Action("Index", "Home", new { area = "" })">TOUR</a>
@@ -52,10 +52,7 @@
                     <input type="date" placeholder="Date" class="form-control" required>
                 </div>
 
-                <div class="pl-2"><button class="btn btn-outline-danger form-control" type="submit">Search</button></div>
-
-
-                @*<button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/searchbtn.svg" width="25" height="25" /></button>*@
+                <div class="pl-2"><button class="btn btn-outline-success form-control" type="submit">Search</button></div>
             }
             @Html.Partial("LoginPatial")
         </div>
@@ -63,19 +60,20 @@
     <div class="clearfix">
 
     </div>
-    <div class="container ptcus-100">
+    <div class="container-fluid ptcus-100">
         <div>
             @RenderBody()
         </div>
         <hr />
+        <!-- start footer -->
         <footer class="footer">
             <div class="container wrapper_cus">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="footer_widget">
-                            <h3 class="footer_title">
+                            <h4 class="footer_title">
                                 Liên hệ với chúng tôi
-                            </h3>
+                            </h4>
                             <ul class="p-0">
                                 <li>Công ty du lịch Huyền Trang</li>
                                 <li>Đăng kí ngày 23/5/2021</li>
@@ -87,9 +85,9 @@
                     </div>
                     <div class="col-lg-4">
                         <div>
-                            <h3 class="footer_title">
+                            <h4 class="footer_title">
                                 Mạng xã hội
-                            </h3>
+                            </h4>
                             <div class="socail_links">
                                 <ul>
                                     <li>
@@ -118,13 +116,13 @@
                     </div>
                     <div class="col-lg-4">
                         <div>
-                            <h3 class="footer_title">
+                            <h4 class="footer_title">
                                 Chứng nhận
-                            </h3>
+                            </h4>
                             <div class="socail_links p-0">
                                 <ul>
-                                    <li><img src="~/Content/images/chungnhan1.jpg" class="w-100" height="50"/> </li>
-                                    <li><img src="~/Content/images/chungnhan2.jpg" class="w-100" height="50"/></li>
+                                    <li><img src="~/Content/images/chungnhan1.jpg" class="w-100" height="50" /> </li>
+                                    <li><img src="~/Content/images/chungnhan2.jpg" class="w-100" height="50" /></li>
                                 </ul>
                             </div>
                         </div>
@@ -135,6 +133,7 @@
                 <p>Copyright &copy; 2021 - MeowMeow</p>
             </div>
         </footer>
+        <!-- end footer -->
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -55,11 +55,11 @@
     <EntitySetMapping Name="OrderTourDetails">
       <EntityTypeMapping TypeName="TourManagementModel.OrderTourDetail">
         <MappingFragment StoreEntitySet="OrderTourDetail">
-          <ScalarProperty Name="NumberRoom" ColumnName="NumberRoom" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="TourId" ColumnName="TourId" />
           <ScalarProperty Name="QuantityChild" ColumnName="QuantityChild" />
           <ScalarProperty Name="QuantityAdult" ColumnName="QuantityAdult" />
+          <ScalarProperty Name="NumberRoom" ColumnName="NumberRoom" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -91,7 +91,6 @@
     <EntitySetMapping Name="Tours">
       <EntityTypeMapping TypeName="TourManagementModel.Tour">
         <MappingFragment StoreEntitySet="Tour">
-          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Time" ColumnName="Time" />
@@ -106,6 +105,7 @@
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
           <ScalarProperty Name="StopPosition" ColumnName="StopPosition" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

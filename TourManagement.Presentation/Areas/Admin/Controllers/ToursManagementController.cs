@@ -37,6 +37,22 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View(tours);
         }
 
+        public ActionResult CheckTour()
+        {
+            var tours = _tourRepository.SearchByDate(DateTime.Now);
+            List<Tour> listTourCancel = new List<Tour>();
+            foreach(var item in tours)
+            {
+                int a = _tourRepository.GetRemainingQuantity(item.Id);
+                if (a > 10)
+                {
+                    listTourCancel.Add(item);
+                }
+            }
+
+            return View(listTourCancel);
+        }
+
         // GET: Admin/ToursManagement/Create
         public ActionResult Create()
         {
@@ -60,14 +76,14 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 {
                     try
                     {
-                        foreach(var item in filesInput)
+                        foreach (var item in filesInput)
                         {
                             string fileName = "";
                             fileName = Path.GetFileName(item.FileName);
                             string path = Path.Combine(Server.MapPath("~/Content/images/tours"), fileName);
                             item.SaveAs(path);
                         }
-                        
+
                     }
                     catch (Exception)
                     {
@@ -77,7 +93,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 _tourRepository.Add(tour);
                 foreach (var item in DestinationIds)
                 {
-                    
+
                     var tourdestination = new TourDestination();
                     tourdestination.IdTour = tour.Id;
                     tourdestination.IdDestination = Int32.Parse(item);
@@ -127,7 +143,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View(tour);
         }
 
-        
+
         // POST: Admin/ToursManagement/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -158,7 +174,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 _tourRepository.Update(tour);
                 //delete old tourdes 
                 var tds = _tourDestinationRepository.GetListTourDesination(tour.Id);
-                foreach(var item in tds)
+                foreach (var item in tds)
                 {
                     _tourDestinationRepository.Delete(item);
                 }

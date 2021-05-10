@@ -43,7 +43,7 @@
     <div class="sidebar">
         <ul class="sidebar-nav">
             <li class="sidebar-nav-item">
-                <a href="@Url.Action("Index", "HomeManagement", new { area = "Admin", page =1 })" class="sidebar-nav-link" class="sidebar-nav-link">
+                <a href="@Url.Action("Index", "HomeManagement", new { area = "Admin", page =1 })" class="sidebar-nav-link">
                     <div class="d-flex align-items-center pl-3">
                         <img src="~/Content/images/disboard.svg" height="35" width="35" />
                     </div>
@@ -76,15 +76,19 @@
                     <span>Hotels</span>
                 </a>
             </li>
+            <li class="sidebar-nav-item">
+                <a href="@Url.Action("CheckTour", "ToursManagement", new { area = "Admin" })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/bills.svg" height="30" width="30" />
+                    </div>
+                    <span>Check tour</span>
+                </a>
+            </li>
         </ul>
     </div>
-    <div class="container ptcus-100">
+    <div class=" container ptcus-100">
         <div>
             @RenderBody()
-        </div>
-        <hr />
-        <div class="card-footer text-muted text-center">
-            <p>Copyright &copy; 2021 - MeowMeow</p>
         </div>
     </div>
 

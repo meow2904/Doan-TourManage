@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.OrderTour>
+@{
+    ViewBag.Title = "Get Orders Tour";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Get Orders Tour</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            <p>Customer Name</p>
+        </th>
+        <th>
+            <label>Phone</label>
+        </th>
+        <th>
+            <label>Email</label>
+        </th>
+        <th>
+            <label>Address</label>
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.User.Name
+            </td>
+            <td>
+                @item.User.Phone
+            </td>
+            <td>
+                @item.User.Email
+            </td>
+            <td>
+                @item.User.Address
+            </td>
+            <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                <form action="@Url.Action("Delete","OrderToursManagement", new { orderTourId = item.OrderId, tourId= item.OrderTourDetails.FirstOrDefault().TourId })" method="post">
+                    <button type="submit" onclick="return confirm('Delete order tours?');" class="btn btn-outline-danger mx-1">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>

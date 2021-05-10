@@ -61,9 +61,9 @@
     <Property Name="TourId" Type="Int32" Nullable="false" />
     <Property Name="QuantityChild" Type="Int32" />
     <Property Name="QuantityAdult" Type="Int32" />
+    <Property Name="NumberRoom" Type="Int32" />
     <NavigationProperty Name="OrderTour" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTourDetail" ToRole="OrderTour" />
     <NavigationProperty Name="Tour" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="OrderTourDetail" ToRole="Tour" />
-    <Property Name="NumberRoom" Type="Int32" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -107,11 +107,11 @@
     <Property Name="EmployeeId" Type="Int32" />
     <Property Name="StopPosition" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Tour_Category" FromRole="Tour" ToRole="Category" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Tour_Employee" FromRole="Tour" ToRole="Employee" />
     <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_Tour" FromRole="Tour" ToRole="OrderTourDetail" />
     <NavigationProperty Name="TourDestinations" Relationship="Self.FK_TourDestination_Tour" FromRole="Tour" ToRole="TourDestination" />
-    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TourDestination">
     <Key>

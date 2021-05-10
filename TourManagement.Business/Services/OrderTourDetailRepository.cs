@@ -11,5 +11,9 @@ namespace TourManagement.Business.Services
 {
     public class OrderTourDetailRepository : GenericRepository<OrderTourDetail>, IOrderTourDetailRepository
     {
+        public OrderTourDetail GetOrderTourDetailByOrderId(int orderId)
+        {
+            return Context.OrderTourDetails.FirstOrDefault(x => x.OrderId == orderId);
+        }
     }
 }
