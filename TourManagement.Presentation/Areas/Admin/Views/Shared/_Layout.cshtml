@@ -53,6 +53,14 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
+                <a href="@Url.Action("CheckTour", "ToursManagement", new { area = "Admin" })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/bills.svg" height="30" width="30" />
+                    </div>
+                    <span>Check tour</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
                 <a href="@Url.Action("Index", "ToursManagement", new { area = "Admin", page =1 })" class="sidebar-nav-link">
                     <div class="d-flex align-items-center pl-3">
                         <img src="~/Content/images/travel-bag.svg" height="30" width="30" />
@@ -77,23 +85,22 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="@Url.Action("CheckTour", "ToursManagement", new { area = "Admin" })" class="sidebar-nav-link">
+                <a href="@Url.Action("Orders", "OrderToursManagement", new { area = "Admin" })" class="sidebar-nav-link">
                     <div class="d-flex align-items-center pl-3">
-                        <img src="~/Content/images/bills.svg" height="30" width="30" />
+                        <img src="~/Content/images/check-list.svg" height="30" width="30" />
                     </div>
-                    <span>Check tour</span>
+                    <span>Orders</span>
                 </a>
             </li>
         </ul>
     </div>
-    <div class=" container ptcus-100">
-        <div>
-            @RenderBody()
-        </div>
+    <div class=" container ptcus-100 px-0">
+        @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     <script src="~/Scripts/Site.js"></script>
     <script src="~/Areas/Admin/Scripts/index.js"></script>
     @RenderSection("scripts", required: false)

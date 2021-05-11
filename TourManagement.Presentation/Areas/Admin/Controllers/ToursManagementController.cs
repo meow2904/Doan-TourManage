@@ -31,10 +31,27 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         }
 
         // GET: Admin/ToursManagement
-        public ActionResult Index()
+        public ActionResult Index(int page)
         {
-            var tours = _tourRepository.GetAll();
-            return View(tours);
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Users", new { area = "" });
+            }
+            else
+            {
+                var totalTours = _tourRepository.GetAll().Count();
+                if (page <= 0)
+                {
+                    page = 1;
+                }
+                var totalPage = (int)Math.Ceiling(totalTours / (double)8);
+                ViewBag.TotalPage = totalPage;
+                ViewBag.CurrentPage = page;
+
+                var tours = _tourRepository.GetToursWithPaging(page, 8);
+                return View(tours);
+            }
+
         }
 
         public ActionResult CheckTour()

@@ -1,7 +1,7 @@
 ﻿@model TourManagement.Models.DBContext.Tour
 
 @{
-    ViewBag.Title = "Add tour | Let's Go";
+    ViewBag.Title = "Add tour";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -40,7 +40,7 @@
                     @id = "DestinationIds",
                     multiple = "multiple",
                     required = "required",
-                    size = 8
+                    size = 15
                 })
             </div>
         </div>
@@ -49,9 +49,9 @@
     <div class="col-6">
         <div class="form-group">
             <label class="control-label">Select images</label>
-            <div>
-                <input type="text" id="Image" name="Image" class="col-5" />
-                <input type="file" id="filesInput" name="filesInput" multiple required onchange="Getname()">
+            <div class="row m-auto">
+                <input type="text" id="Image" name="Image" class="col-6 form-control" />
+                <input type="file" id="filesInput" name="filesInput" class="col-6" multiple required onchange="Getname()">
             </div>
         </div>
         <div class="row">

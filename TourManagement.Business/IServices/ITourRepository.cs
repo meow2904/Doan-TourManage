@@ -20,7 +20,6 @@ namespace TourManagement.Business.IServices
         int CountTourByEmpId(int empId);
         IEnumerable<Category> GetCategory();
         IEnumerable<Tour> SearchByDate(DateTime dateTime);
-
-
+        IEnumerable<Tour> GetToursWithPaging(int page, int size);
     }
 }

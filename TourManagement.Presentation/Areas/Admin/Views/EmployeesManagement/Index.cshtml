@@ -77,11 +77,10 @@
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">
                 <form action="@Url.Action("Delete","EmployeesManagement", new { id=item.Id })" method="post">
                     <a href="@Url.Action("Edit", "EmployeesManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>
-                    <button type="submit" onclick="return confirm('Are you sure to delete this hotel?');" class="btn btn-outline-danger mx-1">Delete</button>
+                    <button type="submit" onclick="return confirm('Are you sure to delete this employee?');" class="btn btn-outline-danger mx-1">Delete</button>
 
                 </form>
             </td>
-
         </tr>
     }
 </table>

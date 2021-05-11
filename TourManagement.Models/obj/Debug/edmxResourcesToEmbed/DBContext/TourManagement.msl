@@ -46,6 +46,7 @@
     <EntitySetMapping Name="OrderTours">
       <EntityTypeMapping TypeName="TourManagementModel.OrderTour">
         <MappingFragment StoreEntitySet="OrderTour">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />

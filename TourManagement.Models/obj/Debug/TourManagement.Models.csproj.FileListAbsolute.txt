@@ -10,3 +10,5 @@ D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Models\obj\Debug\TourMana
 D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Models\obj\Debug\TourManagement.Models.csproj.CopyComplete
 D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Models\obj\Debug\TourManagement.Models.dll
 D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Models\obj\Debug\TourManagement.Models.pdb
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Models\bin\Debug\Newtonsoft.Json.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Models\bin\Debug\Newtonsoft.Json.xml

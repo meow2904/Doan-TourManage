@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="TourManagementModel.OrderTourDetail" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.Room" Width="1.5" PointX="8" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TourManagementModel.Tour" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TourManagementModel.Tour" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.TourDestination" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TourManagementModel.User" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <AssociationConnector Association="TourManagementModel.FK_Tour_Category" ManuallyRouted="false" />

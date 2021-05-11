@@ -1,8 +1,15 @@
 ﻿@model IEnumerable<TourManagement.Models.DBContext.Tour>
 
 @{
-    ViewBag.Title = "Tour management | Let's Go";
+    ViewBag.Title = "Tour management";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    int totalPage = @ViewBag.TotalPage;
+    int pageRange = 3;
+    int currentPage = @ViewBag.CurrentPage;
+
+    var prevDisabled = (currentPage - 1 <= 0 ? "disabled" : "");
+    var nextDisabled = (currentPage >= totalPage ? "disabled" : "");
 }
 
 <div>
@@ -16,13 +23,17 @@
 <table class="table table-bordered">
     <tr>
         <th>
+            <p>Tour Id</p>
+        </th>
+        <th>
             <p>Name</p>
         </th>
+
         <th>
             <label>Time</label>
         </th>
         <th>
-            <label>From to</label>
+            <label>Time start</label>
         </th>
         <th>
             Action
@@ -33,15 +44,18 @@
     {
         <tr>
             <td>
+                @item.Id
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Time)
+                @Html.DisplayFor(modelItem => item.Time) ngày
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PriceOfAdult) đ
+                @item.TimeStart.Value.ToString("MM/dd/yyyy")
             </td>
-          
+
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">
                 <form action="@Url.Action("DeleteTour","ToursManagement", new { id=item.Id })" method="post">
                     <a href="@Url.Action("Edit", "ToursManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>
@@ -52,3 +66,21 @@
     }
 
 </table>
+
+<nav aria-label="Page navigation example" class="row w-100">
+    <ul class="pagination col-12 justify-content-center">
+        <li class="page-item"><a class="btn page-link @prevDisabled" href="@Url.Action("Index", "ToursManagement", new {page=(currentPage - 1 <= 0 ? 1 : currentPage - 1) })">Previous</a></li>
+        @for (int i = 1; i <= totalPage; i++)
+        {
+            if (i >= currentPage - pageRange && i <= currentPage + pageRange)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "ToursManagement", new {page = i })">@i</a>
+                </li>
+            }
+        }
+        <li class="page-item">
+            <a class="btn page-link @nextDisabled" href="@Url.Action("Index", "ToursManagement", new {page=(currentPage + 1 > totalPage ? totalPage : currentPage + 1)})">Next</a>
+        </li>
+    </ul>
+</nav>

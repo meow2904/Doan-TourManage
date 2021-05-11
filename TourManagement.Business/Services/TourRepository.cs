@@ -85,5 +85,10 @@ namespace TourManagement.Business.Services
                     x.TimeStart.Value.Year == day.Year
             );
         }
+
+        public IEnumerable<Tour> GetToursWithPaging(int page, int size)
+        {
+            return Context.Tours.OrderBy(x => x.TimeStart).Skip(size * (page - 1)).Take(size).ToList();
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 ViewBag.TotalPage = totalPage;
                 ViewBag.CurrentPage = page;
 
-                var employees = _employeeRepository.GetEmployeesWithPaging(page, 6);
+                var employees = _employeeRepository.GetEmployeesWithPaging(page, 8);
                 return View(employees);
             }
 
