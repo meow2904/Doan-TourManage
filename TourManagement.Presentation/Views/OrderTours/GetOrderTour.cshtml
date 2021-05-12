@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TourManagement.Models.DBContext.OrderTour>
 @{
-    ViewBag.Title = "Get Ordered Tour";
+    ViewBag.Title = "Lịch sủ đặt";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row pt-5">
+<div class="container m-auto row pt-5">
     @if (!Model.Any())
     {
         <div class="m-auto">
@@ -19,6 +19,7 @@
                 <tr>
                     <th scope="col">Mã đơn</th>
                     <th scope="col">Ngày đặt</th>
+                    <th scope="col">Trạng thái</th>
                     <th scope="col">Xem chi tiết</th>
                 </tr>
             </thead>
@@ -28,6 +29,16 @@
                     <tr>
                         <th>@item.OrderId</th>
                         <td>@item.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (@item.Status == "Pending")
+                            {
+                                <span class="badge badge-primary">@item.Status</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-warning">@item.Status</span>
+                            }
+                        </td>
                         <td><a href="#">Chi tiết</a></td>
                     </tr>
                 }

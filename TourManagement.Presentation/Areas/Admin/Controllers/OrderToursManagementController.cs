@@ -49,9 +49,18 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 
         public ActionResult GetOrders(string status)
         {
-            var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status);
+
+            if(status == "Confirmed")
+            {
+               var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status).OrderByDescending(x => x.OrderDate);
+               return PartialView(listOrderStatus);
+            }
+            else
+            {
+                var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status);
+                return PartialView(listOrderStatus);
+            }
             
-            return PartialView(listOrderStatus);
         }
         
         public ActionResult GetInfor(int orderTourId)
@@ -63,10 +72,12 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         public ActionResult UpdateOrders(int orderTourId, string status)
         {
             var orderTour = _orderTourRepository.GetById(orderTourId);
-            orderTour.Status = status;
-            _orderTourRepository.Update(orderTour);
 
-            return PartialView();
+            orderTour.Status = status;
+
+            //update quantity
+            _orderTourRepository.Update(orderTour);
+            return Content("Thành công");
         }
     }
 }

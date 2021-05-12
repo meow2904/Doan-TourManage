@@ -52,8 +52,17 @@
             var url = '@Url.Action("UpdateOrders", "OrderToursManagement")'
             url += '?orderTourId=' + orderid+'&status='+'Confirmed'
             $('#orderPending').load(url);
+            getData();
         })
-        getData()
+
+        $('#orderPending').on('click', '.btnDelete', function () {
+            const orderid = $(this).data('id')
+            var url = '@Url.Action("UpdateOrders", "OrderToursManagement")'
+            url += '?orderTourId=' + orderid+'&status='+'Cancel'
+            $('#orderPending').load(url);
+            getData();
+        })
+
     </script>
     
 }
