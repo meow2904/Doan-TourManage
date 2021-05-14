@@ -27,7 +27,7 @@ namespace TourManagement.Presentation.Controllers
             _orderTourRepository = orderTourRepository;
         }
 
-        public ActionResult GetOrderTour()
+        public ActionResult GetMyOrders()
         {
             var custommer = (User)Session["username"];
             var orderTour = _orderTourRepository.GetOrderTourByCustommer(custommer.Id);
@@ -66,7 +66,7 @@ namespace TourManagement.Presentation.Controllers
             {
                 var orderTour = new OrderTour();
                 orderTour.UserId = cusInfor.Id;
-
+                orderTour.Status = "Pending";
                 _bookTourRepository.BookTour(orderTour, orderTourDetail);
                 return RedirectToAction("CompleteOrder");
             }
@@ -79,6 +79,12 @@ namespace TourManagement.Presentation.Controllers
             ViewBag.CompleteMessage = "Cảm ơn bạn đã đặt tour, đơn hàng của bạn đang được xử lý";
 
             return View();
+        }
+
+        public ActionResult GetInforOrder(int orderId)
+        {
+            var order = _orderTourRepository.GetById(orderId);
+            return PartialView(order);
         }
     }
 }

@@ -146,10 +146,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DestinationsManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeesManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\HotelsManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderToursManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomsManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ToursManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
@@ -235,9 +237,11 @@
     <Content Include="Content\images\hotels\vungtau4.jpg" />
     <Content Include="Content\images\info.svg" />
     <Content Include="Content\images\instagram.svg" />
+    <Content Include="Content\images\loupe.svg" />
     <Content Include="Content\images\management.svg" />
     <Content Include="Content\images\phone-call.svg" />
     <Content Include="Content\images\star.svg" />
+    <Content Include="Content\images\starnone.svg" />
     <Content Include="Content\images\tours\1002\baidinh1.jpg" />
     <Content Include="Content\images\tours\1002\halong1.jpg" />
     <Content Include="Content\images\tours\1002\halong2.jpg" />
@@ -566,16 +570,19 @@
     <Content Include="Views\Home\SearchTour.cshtml" />
     <Content Include="Views\OrderTours\OrderTour.cshtml" />
     <Content Include="Views\OrderTours\CompleteOrder.cshtml" />
-    <Content Include="Views\OrderTours\GetOrderTour.cshtml" />
+    <Content Include="Views\OrderTours\GetMyOrders.cshtml" />
     <Content Include="Views\Hotels\Details.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />
     <Content Include="Views\Shared\HotelOverView.cshtml" />
     <Content Include="Views\Tours\GetByPrice.cshtml" />
     <Content Include="Views\Hotels\ConfirmContact.cshtml" />
+    <Content Include="Views\OrderTours\GetInforOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\DestinationsManagement\" />
+    <Folder Include="Areas\Admin\Views\RoomsManagement\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

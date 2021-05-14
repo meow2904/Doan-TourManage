@@ -30,7 +30,7 @@ function cal_price() {
     var quan_remain = document.getElementById('quantityRemain').innerHTML;
 
     var sum_quan = quan_adult + quan_child;
-
+    
     
     if (sum_quan > quan_remain) {
         alert("Số lượng chỗ đặt vượt quá số lượng còn !")

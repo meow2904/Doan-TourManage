@@ -1,0 +1,91 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.OrderTour>
+@{
+    ViewBag.Title = "Lịch sử đặt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container m-auto row pt-5">
+    @if (!Model.Any())
+    {
+        <div class="m-auto text-center">
+            <p>Bạn chưa có đơn đặt tour nào</p>
+            <a href="@Url.Action("Index", "Home", new { area =""})">Tìm tour tại đây</a>
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered" id="myorders">
+            <thead>
+                <tr>
+                    <th scope="col">Mã đơn</th>
+                    <th scope="col">Ngày đặt</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Xem chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@item.OrderId</th>
+                        <td>@item.OrderDate.Value</td>
+                        <td>
+                            @if (@item.Status == "Pending")
+                            {
+                                <span class="badge badge-primary">@item.Status</span>
+                            }
+                            else if (@item.Status == "Confirmed")
+                            {
+                                <span class="badge badge-success">@item.Status</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">@item.Status</span>
+                            }
+                        </td>
+                        <td><button class="btn btn-primary btn-modal-order" data-toggle="modal" data-target="#exModal" data-id="@item.OrderId">Chi tiết</button></td>
+
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="exModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="inforOrder">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section scripts{
+    <script>
+        //$(".modal").on("hidden.bs.modal", function () {
+        //    $(".modal-body").empty();
+        //});
+
+        $('#myorders').on('click', '.btn-modal-order', function () {
+            const orderId = $(this).data('id')
+            var url = '@Url.Action("GetInforOrder", "OrderTours")'
+            url += '?orderId=' + orderId
+            $('#inforOrder').load(url);
+        })
+
+    </script>
+    
+}

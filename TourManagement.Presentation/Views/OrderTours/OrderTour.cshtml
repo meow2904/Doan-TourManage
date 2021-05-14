@@ -6,169 +6,176 @@
     var custommer = (TourManagement.Models.DBContext.User)Session["username"];
     string[] listImages = @ViewBag.ListImages;
 }
-<div class="row">
-    <div class="col-md-6">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="~/Content/images/tours/image-active.jpg""
-                         class="d-block w-100 img-thumbnail img-fluid" alt="...">
-                </div>
-                @foreach (var item in listImages)
-                {
-                    <div class="carousel-item">
-                        <img src="~/Content/images/tours/@item" class="d-block w-100 img-thumbnail img-fluid" alt="...">
+
+<div class="container tour-container pt-4">
+
+    <div class="row">
+        <div class="col-md-6 py-0">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" style="height: 400px;">
+                    <div class="carousel-item active">
+                        <img src="~/Content/images/tours/image-active.jpg" class="d-block w-100 img-fluid" alt="...">
                     </div>
-                }
+                    @foreach (var item in listImages)
+                    {
+                        <div class="carousel-item">
+                            <img src="~/Content/images/tours/@item" class="d-block w-100 img-fluid" alt="...">
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+        </div>
+        <div class="col-md-6 border h-75 py-3">
+            <div class="tour-cart font-weight-normal">
+                <div class="text-center ">
+                    @tour.Name
+                </div>
+                <hr />
+                <div>
+                    <div class="row m-auto">
+                        <div class="col-5">Thời gian: </div><div class="col-7">@tour.Time ngày</div>
+                    </div>
+                    <div class="row m-auto">
+                        <div class="col-5">Bắt đầu: </div><div class="col-7">@tour.TimeStart.Value.ToString("dd/MM/yyyy")</div>
+                    </div>
+                    <div class="row m-auto">
+                        <div class="col-5">Điểm xuất phát: </div><div class="col-7">@tour.PositionStart</div>
+                    </div>
+                    <div class="row m-auto">
+                        <div class="col-5">Giá từ:</div>
+                        <div class="col-7">
+                            <span style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(tour.PriceOfAdult.Value).ToString("###,###,###")</span>đ/khách
+                        </div>
+                    </div>
+                    <div class="row m-auto">
+                        <div class="col-5">Số lượng chỗ còn: </div><div class="col-7" id="quantityRemain">@ViewBag.Remaining</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6 border h-75 py-3">
-        <div class="tour-cart font-weight-normal">
-            <div class="text-center">
-                <h5>@tour.Name</h5>
+    <span class="text-danger">
+        Các khoản phí phát sinh (nếu có) như: phụ thu dành cho khách nước ngoài, việt kiều; phụ thu phòng đơn; phụ thu chênh lệch giá tour… Nhân viên sẽ gọi điện thoại
+        tư vấn cho quý khách ngay sau khi có phiếu xác nhận booking. (Trong giờ hành chính)
+        Trường hợp quý khách không đồng ý các khoản phát sinh, phiếu xác nhận booking của quý khách sẽ không có hiệu lực.
+    </span>
+
+    <div class="py-4">
+        <div class="text-center">
+            <h4>Bảng giá chi tiết</h4>
+        </div>
+
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Loại giá</th>
+                    <th scope="col">Giá người lớn</th>
+                    <th scope="col">Giá trẻ em</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Giá</th>
+                    <td><span id="price_adult">@Math.Truncate(tour.PriceOfAdult.Value).ToString("###,###,###")</span> đ</td>
+                    <td id="price_child">@Math.Truncate(tour.PriceOfChild.Value).ToString("###,###,###") đ</td>
+                </tr>
+                <tr>
+                    <th>Phụ thu phòng đơn</th>
+                    <td colspan="2" id="price_room">
+                        @Math.Truncate(tour.SurchargeOfRoom.Value).ToString("###,###,###") đ
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    @using (Html.BeginForm("OrderTour", "OrderTours", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" onload="cal_price();">
+            <h4 class="text-center">Thông tin đơn đặt tour</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label class="control-label">Tên khách hàng</label>
+                    <div>
+                        <input type="text" value="@custommer.Name" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Số diện thoại</label>
+                    <div>
+                        <input type="text" value="@custommer.Phone" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Địa chỉ</label>
+                    <div>
+                        <input type="text" value="@custommer.Address" readonly />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-3">
+                    <label>Mã tour</label>
+                    <div>
+                        <input type="number" value="@tour.Id" id="TourId" name="TourId" readonly />
+                        @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Số người lớn</label>
+                    <div>
+                        <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1" onchange="cal_price();" />
+                        @Html.ValidationMessageFor(model => model.QuantityAdult, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Số trẻ em</label>
+                    <div>
+                        <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0" onchange="cal_price();" />
+                        @Html.ValidationMessageFor(model => model.QuantityChild, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Số phòng đơn</label>
+                    <div>
+                        <input type="number" min="0" id="NumberRoom" name="NumberRoom" value="0" onchange="cal_price();" />
+                        @Html.ValidationMessageFor(model => model.NumberRoom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
             <hr />
-            <div>
-                <div class="row">
-                    <span class="col-6">Thời gian: </span><span>@tour.Time ngày</span>
-                </div>
-                <div class="row">
-                    <span class="col-6">Bắt đầu: </span><span>@tour.TimeStart.Value.ToString("dd/MM/yyyy")</span>
-                </div>
-                <div class="row">
-                    <span class="col-6">Điểm xuất phát: </span><span>@tour.PositionStart</span>
-                </div>
-                <div class="row">
-                    <span class="col-6">Giá từ: </span><span> @Math.Truncate(tour.PriceOfAdult.Value).ToString("###,###,###") đ/khách</span>
-                </div>
-                <div class="row">
-                    <span class="col-6">Số lượng chỗ còn: </span><span id="quantityRemain">@ViewBag.Remaining</span>
+            <div class="text-right w-100">
+                Tổng tiền: <span id="sum_price" class="text-danger font-weight-bold">@Math.Truncate(tour.PriceOfAdult.Value)</span> đ
+            </div>
+            <div class="text-center">
+                <div>
+                    <input type="submit" value="Hoàn thành" class="btn btn-outline-success" />
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<span class="text-danger">
-    Các khoản phí phát sinh (nếu có) như: phụ thu dành cho khách nước ngoài, việt kiều; phụ thu phòng đơn; phụ thu chênh lệch giá tour… Nhân viên sẽ gọi điện thoại
-    tư vấn cho quý khách ngay sau khi có phiếu xác nhận booking. (Trong giờ hành chính)
-    Trường hợp quý khách không đồng ý các khoản phát sinh, phiếu xác nhận booking của quý khách sẽ không có hiệu lực.
-</span>
-
-<div class="py-4">
-    <div class="text-center">
-        <h4>Bảng giá chi tiết</h4>
-    </div>
-
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th scope="col">Loại giá</th>
-                <th scope="col">Giá người lớn</th>
-                <th scope="col">Giá trẻ em</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Giá</th>
-                <td ><span id="price_adult">@Math.Truncate(tour.PriceOfAdult.Value).ToString("###,###,###")</span> đ</td>
-                <td id="price_child">@Math.Truncate(tour.PriceOfChild.Value).ToString("###,###,###") đ</td>
-            </tr>
-            <tr>
-                <th>Phụ thu phòng đơn</th>
-                <td colspan="2" id="price_room">
-                    @Math.Truncate(tour.SurchargeOfRoom.Value).ToString("###,###,###") đ
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    }
 
 </div>
-
-@using (Html.BeginForm("OrderTour", "OrderTours", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal" onload="cal_price();">
-        <h4 class="text-center">Thông tin đơn đặt tour</h4>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="row">
-            <div class="form-group col-4">
-                <label class="control-label">Tên khách hàng</label>
-                <div>
-                    <input type="text" value="@custommer.Name" readonly />
-                </div>
-            </div>
-
-            <div class="form-group col-4">
-                <label class="control-label">Số diện thoại</label>
-                <div>
-                    <input type="text" value="@custommer.Phone" readonly />
-                </div>
-            </div>
-
-            <div class="form-group col-4">
-                <label class="control-label">Địa chỉ</label>
-                <div>
-                    <input type="text" value="@custommer.Address" readonly />
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="form-group col-3">
-                <label>Mã tour</label>
-                <div>
-                    <input type="number" value="@tour.Id" id="TourId" name="TourId" readonly />
-                    @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-3">
-                <label>Số người lớn</label>
-                <div>
-                    <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1" onchange="cal_price();" />
-                    @Html.ValidationMessageFor(model => model.QuantityAdult, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-3">
-                <label>Số trẻ em</label>
-                <div>
-                    <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0" onchange="cal_price();" />
-                    @Html.ValidationMessageFor(model => model.QuantityChild, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-3">
-                <label>Số phòng đơn</label>
-                <div>
-                    <input type="number" min="0" id="NumberRoom" name="NumberRoom" value="0"  onchange="cal_price();" />
-                    @Html.ValidationMessageFor(model => model.NumberRoom, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="text-right w-100">
-            Tổng tiền: <span id="sum_price" class="text-danger font-weight-bold" >@Math.Truncate(tour.PriceOfAdult.Value)</span> đ
-        </div>
-        <div class="text-center">
-            <div>
-                <input type="submit" value="Hoàn thành" class="btn btn-outline-success" />
-            </div>
-        </div>
-    </div>
-}
 
 
 

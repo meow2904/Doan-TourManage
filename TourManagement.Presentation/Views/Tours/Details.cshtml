@@ -9,18 +9,26 @@
 <div class="container tour-container pt-4">
     <div>
         <h4>@Model.Name</h4>
+        <div class="p-2">
+            @for (int i = 0; i < 4; i++)
+            {
+                <img src="~/Content/images/star.svg" height="15" width="15" />
+            }
+            <img src="~/Content/images/starnone.svg" height="15" width="15" />
+            <span class="font-weight-bold">4,67/5</span> trong<span class="font-weight-bold"> 256</span> đánh giá
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 py-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" style="height: 400px;">
                     <div class="carousel-item active">
-                        <img src="~/Content/images/tours/image-active.jpg" class="d-block w-100 img-thumbnail img-fluid" alt="...">
+                        <img src="~/Content/images/tours/image-active.jpg" class="d-block w-100 img-fluid" alt="...">
                     </div>
                     @foreach (var item in listImages)
                     {
                         <div class="carousel-item">
-                            <img src="~/Content/images/tours/@item" class="d-block w-100 img-thumbnail img-fluid" alt="...">
+                            <img src="~/Content/images/tours/@item" class="d-block w-100 img-fluid" alt="...">
                         </div>
                     }
                 </div>
@@ -37,73 +45,87 @@
 
         <div class="col-md-4 border h-75 py-3">
             <div class="tour-cart font-weight-normal">
-                <div class="text-center">
-                    <h5>@Model.Name</h5>
+                <div class="text-center ">
+                    @Model.Name
                 </div>
                 <hr />
                 <div>
-                    <div class="row">
-                        <p class="col-6">Thời gian: </p><span>@Model.Time ngày</span>
+                    <div class="row m-auto">
+                        <div class="col-5">Thời gian: </div><div class="col-7">@Model.Time ngày</div>
                     </div>
-                    <div class="row">
-                        <p class="col-6">Bắt đầu: </p><span>@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                    <div class="row m-auto">
+                        <div class="col-5">Bắt đầu: </div><div class="col-7">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</div>
                     </div>
-                    <div class="row">
-                        <p class="col-6">Điểm xuất phát: </p><span>@Model.PositionStart</span>
+                    <div class="row m-auto">
+                        <div class="col-5">Điểm xuất phát: </div><div class="col-7">@Model.PositionStart</div>
                     </div>
-                    <div class="row">
-                        <p class="col-6">Giá từ:</p><p style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###")</p><p>đ/khách</p>
+                    <div class="row m-auto">
+                        <div class="col-5">Giá từ:</div>
+                        <div class="col-7">
+                            <span style="color:red; padding-right:5px; font-weight:bold">@Math.Truncate(Model.PriceOfAdult.Value).ToString("###,###,###")</span>đ/khách
+                        </div>
                     </div>
-                    <div class="row">
-                        <p class="col-6">Số lượng chỗ còn: </p><span id="remaining">@remaining</span>
+                    <div class="row m-auto">
+                        <div class="col-5">Số lượng chỗ còn: </div><div class="col-7" id="remaining">@remaining</div>
                     </div>
-                    <hr />
                 </div>
             </div>
             <div class="input-group py-3 justify-content-center">
-                <a href="@Url.Action("OrderTour","OrderTours", new { id= Model.Id})" id="btnBook" class="btn btn-outline-primary mr-3">Book Now</a>
+                <a href="@Url.Action("OrderTour","OrderTours", new { id= Model.Id})" id="btnBook" class="btn btn-primary mr-3">Đặt ngay</a>
             </div>
 
         </div>
 
         <div class="row mt-5 pt-4 border-top">
             <h5><img src="~/Content/images/info.svg" height="20" width="20"> Tổng quan về tour</h5>
-            <div class="col-lg-12 py-4">
+            <div class="col-lg-12 pl-5">
                 <div class="row">
-                    <h6 class="col-3">Địa diểm đến:</h6> <span class="font-weight-light col-9">@ViewBag.Destination</span>
-                    <h6 class="col-3">Thời gian: </h6><span class="font-weight-light col-9">@Model.Time ngày</span>
-                    <h6 class="col-3">Ngày khởi hành: </h6><span class="font-weight-light col-9">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
-                    <h6 class="col-3">Hướng dẫn viên: </h6><span class="font-weight-light col-9">@Model.Employee.Name</span>
-                    <h6 class="col-3">Nơi nghỉ đêm: </h6><span class="font-weight-light col-9">@Model.StopPosition</span>
-                    <h6 class="col-3">Vận chuyển: </h6><span class="font-weight-light col-9">@Model.Transport</span>
-                    <h6 class="col-3">Xuất phát: </h6><span class="font-weight-light col-9">@Model.PositionStart</span>
+                    <p class="col-2 p-0 m-0">Địa diểm đến:</p> <span class="font-weight-light col-9 p-0 m-0">@ViewBag.Destination</span>
+                    <p class="col-2 p-0 m-0">Thời gian: </p><span class="font-weight-light col-9 p-0 m-0">@Model.Time ngày</span>
+                    <p class="col-2 p-0 m-0">Ngày khởi hành: </p><span class="font-weight-light col-9 p-0 m-0">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
+                    <p class="col-2 p-0 m-0">Hướng dẫn viên: </p><span class="font-weight-light col-9 p-0 m-0">@Model.Employee.Name</span>
+                    <p class="col-2 p-0 m-0">Nơi nghỉ đêm: </p><span class="font-weight-light col-9 p-0 m-0">@Model.StopPosition</span>
+                    <p class="col-2 p-0 m-0">Vận chuyển: </p><span class="font-weight-light col-9 p-0 m-0">@Model.Transport</span>
+                    <p class="col-2 p-0 m-0">Xuất phát: </p><span class="font-weight-light col-9 p-0 m-0">@Model.PositionStart</span>
                 </div>
             </div>
             <div class="py-4 border-top">
-                <h5><img src="~/Content/images/content.svg" height="20" width="20"> Giới thiệu chung</h5>
-                <div id="content" class="w-100">
-                    
+                <h5><img src="~/Content/images/content.svg" height="20" width="20"> Chi tiết</h5>
+                <div id="content" class="w-100 pl-4">
+
                 </div>
             </div>
             <div class="row py-4 border-top">
-                <div class="col-6">
+                <div class="col-4 p-0">
                     <h5>Bao gồm</h5>
-                    <ul>
+                    <ul class="pl-3">
                         <li>Vận chuyển: du lịch đời mới, đưa đón theo chương trình. Lái xe thân thiện và cẩn thận suốt hành trình.</li>
                         <li>Hướng dẫn viên kinh nghiệm suốt tuyến.</li>
                         <li>Vé thắng cảnh theo chương trình.</li>
                         <li>Nước uống trên xe: 1 chai 0,5 lit/ người/ ngày</li>
                         <li>Thuế VAT theo quy định của nhà nước</li>
                         <li>Bảo hiểm với mức bồi thường tối đa 100.000.000 đồng/trường hợp. Không áp dụng cho khách từ 80 tuổi trở lên.</li>
-                    </ul>
+                    </ul>   
                 </div>
-                <div class="col-6">
+                <div class="col-4 p-0">
                     <h5>Không bao gồm</h5>
-                    <ul>
+                    <ul class="pl-3">
                         <li>Đồ uống trong bữa ăn và chi phí cá nhân</li>
                         <li>Ăn sáng</li>
                         <li>Tiền tip hướng dẫn viên và lái xe</li>
                         <li>Các chi phí khác không đề cập trong mục bao gồm</li>
+                    </ul>
+                </div>
+                <div class="col-4 p-0">
+                    <h5 class="font-italic font-weight-bold">Lưu ý</h5>
+                    <ul class="pl-3">
+                        <li>Hủy từ 5 ngày  trước ngày khởi hành: chịu phí 100% giá tour + 100% tiền vé máy bay.</li>
+                        <li>Trường hợp quý khách đến trễ giờ khởi hành được tính là hủy 5 ngày trước ngày khởi hành</li>
+                        <li>Việc huỷ bỏ chuyến đi phải được thông báo trực tiếp với Công ty hoặc qua fax, email, tin nhắn và phải được Công ty xác nhận.
+                        Việc huỷ bỏ bằng điện thoại không được chấp nhận.</li>
+                        <li>Do tính chất là đoàn ghép khách lẻ, Du Lịch Việt sẽ có trách nhiệm nhận khách đăng ký cho đủ đoàn (10 khách người lớn trở lên)
+                        thì đoàn sẽ khởi hành đúng lịch trình. Nếu số lượng đoàn dưới 10 khách, công ty có trách nhiệm thông báo cho khách trước ngày khởi
+                        hành 3 ngày và sẽ thỏa thuận lại ngày khởi hành mới hoặc hoàn trả toàn bộ số tiền đã đặt cọc tour</li>
                     </ul>
                 </div>
             </div>

@@ -7,6 +7,9 @@
     var male = Model.Gender== true ? "selected" : "";
     var female = Model.Gender== false ? "selected" : "";
 
+    var working = Model.StatusWorking == 0 ? "selected" : "";
+    var stopping = Model.StatusWorking == 1 ? "selected" : "";
+
 }
 
 <h2>Edit</h2>
@@ -70,8 +73,8 @@
                 <label>Status working</label>
                 <div>
                     <select class="form-control" id="StatusWorking" name="StatusWorking">
-                        <option value="0" selected>Nghỉ làm</option>
-                        <option value="1">Đang làm</option>
+                        <option value="0" @working>Nghỉ làm</option>
+                        <option value="1" @stopping>Đang làm</option>
                     </select>
                 </div>
             </div>
@@ -79,7 +82,7 @@
             <div class="form-group">
                 <div>
                     <input type="submit" value="Save" class="btn btn-success" />
-                    <a class="btn btn-secondary" href="@Url.Action("Index","HotelsManagement")">Cancel</a>
+                    <a class="btn btn-secondary" href="@Url.Action("Index","EmployeesManagement", new { area="Admin", page=1})">Cancel</a>
                 </div>
             </div>
         </div>

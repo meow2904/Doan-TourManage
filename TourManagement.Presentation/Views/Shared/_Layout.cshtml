@@ -18,10 +18,12 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light px-5 fixed-top" style="background-color:aliceblue;">
-
-        <div class="col-2 text-right">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+    <nav class="navbar navbar-expand-lg navbar-light pr-5s pl-2 fixed-top" style="background-color:aliceblue;">
+        <div class="col-2">
+            HotLine: <span style="color: red; font: bold">1900 8198</span>
+        </div>
+        <div class="col-1 text-center p-0">
+            <a href="@Url.Action("Index", "Home", new { area = "" })">
                 <img class="border rounded-circle" src="~/Content/images/tours/logo1.jpg" style="width: 50px; height:50px">
             </a>
 
@@ -60,7 +62,7 @@
     <div class="clearfix">
 
     </div>
-    <div class="container-fluid ptcus-100">
+    <div class="container-fluid ptcus-110">
         @RenderBody()
         <hr />
         <!-- start footer -->

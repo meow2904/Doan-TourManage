@@ -1,11 +1,11 @@
 ﻿@model TourManagement.Models.DBContext.Employee
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create employee";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Create employee</h2>
 <hr />
 
 <form action="@Url.Action("Create", "EmployeesManagement")" method="post" class=" row form-horizontal" enctype="multipart/form-data">
@@ -65,7 +65,7 @@
             <div class="form-group">
                 <div>
                     <input type="submit" value="Save" class="btn btn-success" />
-                    <a class="btn btn-secondary" href="@Url.Action("Index","EmployeesManagement")">Cancel</a>
+                    <a class="btn btn-secondary" href="@Url.Action("Index","EmployeesManagement", new { area="Admin", page =1})">Cancel</a>
                 </div>
             </div>
         </div>

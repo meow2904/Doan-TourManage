@@ -5,9 +5,12 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+/*scroll ckeditor*/
+.ck-editor__editable {
+    max-height: 400px;
+}
+
+
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -20,8 +23,8 @@
     display: block;
 }
 
-.ptcus-100 {
-    padding-top: 100px;
+.ptcus-110 {
+    padding-top: 110px;
 }
 
 .btn-none:focus {
@@ -89,6 +92,13 @@
 .tour-detail {
     height: 40%;
 }
+.box-positon {
+    position: absolute;
+    top: 81%;
+    background-color: rgba(0,0,0, 0.4);
+    color:white;
+    padding: 5px;
+}
 
 /*css title see more*/
 .seemore a{
@@ -113,4 +123,14 @@
 
 .socail_links li{
     margin: 0 10px;
+}
+
+/*css custom form add destination*/
+.gr-parent{
+    position:relative;
+}
+
+.sub-gr-destiantion{
+    position:absolute;
+    top:70%;
 }

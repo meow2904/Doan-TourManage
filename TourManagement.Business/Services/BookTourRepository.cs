@@ -20,7 +20,7 @@ namespace TourManagement.Business.Services
         }
         public void BookTour(OrderTour orderTour, OrderTourDetail orderTourDetail)
         {
-            orderTour.OrderDate = DateTime.Now.Date;
+            orderTour.OrderDate = DateTime.Now;
 
             //update quantity of tour
             var tour = _tourRepository.GetById(orderTourDetail.TourId);

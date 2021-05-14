@@ -13,5 +13,3 @@ D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourMa
 D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.csproj.CopyComplete
 D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.dll
 D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\obj\Debug\TourManagement.Business.pdb
-D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\Newtonsoft.Json.dll
-D:\DoAn\DoAnCuaTui\TourManagementSystem\TourManagement.Business\bin\Debug\Newtonsoft.Json.xml

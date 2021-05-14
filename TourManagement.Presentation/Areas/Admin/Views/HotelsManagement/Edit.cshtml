@@ -1,15 +1,50 @@
 ﻿@model TourManagement.Models.DBContext.Hotel
 
 @{
-    ViewBag.Title = "Edit hotel | Let's Go";
+    ViewBag.Title = "Edit hotel";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit hotel</h2>
+<div class="row">
+    <h2 class="col-8">Edit tour</h2>
+    <div class="col-2">
+        <a href="#" class="btn btn-outline-secondary">Manage room</a>
+    </div>
+    <div class="col-2">
+        <a href="#" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Add room</a>
+    </div>
+
+    @*div Modal*@
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="@Url.Action("Create","RoomsManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div>
+                            Tên địa điểm
+                            <input type="text" name="Name" id="đestiantion" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <hr />
 <form action="@Url.Action("Edit", "HotelsManagement")" method="post" class=" row form-horizontal" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
     <div class="col">
@@ -24,18 +59,16 @@
         <div class="form-group">
             <label class="control-label">Content</label>
             <div>
-                <textarea class="form-control" name="Content" id="ckeditor" rows="5">@Model.Content</textarea>
+                <textarea class="form-control" name="Content" id="editor" rows="5">@Model.Content</textarea>
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="ImgUrl">Image Thumbnail:</label>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="validatedCustomFile" name="Image" onchange="readURL(this)" value="@Model.Image">
-                <label class="custom-file-label" for="validatedCustomFile">Choose an image</label>
-                <div><img id="FileImage" src="~/Content/images/hotels/@Model.Image" name="Image" alt="your image" class="img-thumbnail" width="100" /></div>
-                @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+            <label class="control-label">Select images</label>
+            <div class="row m-auto">
+                <input type="text" id="Image" name="Image" class="w-100 form-control" value="@Model.Image" />
+                <input type="file" id="filesInput" name="filesInput" class="col-6" multiple onchange="Getname()">
             </div>
         </div>
 
@@ -45,7 +78,7 @@
         <div class="form-group">
             <label class="control-label">Phone</label>
             <div>
-                <input type="number" name="Phone" id="Phone" class="form-control" min="1" value="@Model.Phone"/>
+                <input type="number" name="Phone" id="Phone" class="form-control" min="1" value="@Model.Phone" />
                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,7 +86,7 @@
         <div class="form-group">
             <label class="control-label">Address</label>
             <div>
-                <input type="text" name="Address" id="Address" class="form-control" value="@Model.Address"/>
+                <input type="text" name="Address" id="Address" class="form-control" value="@Model.Address" />
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,5 +109,6 @@
 </form>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ckeditor5-build-classic/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor5-build-classic/ClassicEditor.js"></script>
 }

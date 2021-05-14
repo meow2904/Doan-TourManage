@@ -4,7 +4,7 @@
 }
 
 <div class="row">
-    <div id="orderPending" class="col-6">
+    <div id="orderPending" class="col-7">
 
     </div>
     <div id="orderConfirmed" class="col-5">
@@ -32,6 +32,7 @@
 
 @section scripts{
     <script type="text/javascript">
+        //load all data
         function getData() {
 
             const url = '@Url.Action("GetOrders", "OrderToursManagement")'
@@ -40,6 +41,8 @@
         }
         getData()
 
+
+        //see detail orderPending
         $('#orderPending').on('click', '.btnInforModal', function () {
             const orderid = $(this).data('id')
             var url = '@Url.Action("GetInfor", "OrderToursManagement")'
@@ -47,6 +50,15 @@
             $('#infor').load(url);
         })
 
+        $('#orderConfirmed').on('click', '.btnInforModal', function () {
+            const orderid = $(this).data('id')
+            var url = '@Url.Action("GetInfor", "OrderToursManagement")'
+            url += '?orderTourId=' + orderid
+            $('#infor').load(url);
+        })
+
+
+        //confirm order
         $('#orderPending').on('click', '.btnConfirm', function () {
             const orderid = $(this).data('id')
             var url = '@Url.Action("UpdateOrders", "OrderToursManagement")'
@@ -55,6 +67,7 @@
             getData();
         })
 
+        //cancel order
         $('#orderPending').on('click', '.btnDelete', function () {
             const orderid = $(this).data('id')
             var url = '@Url.Action("UpdateOrders", "OrderToursManagement")'

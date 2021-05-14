@@ -74,7 +74,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(_tourRepository.GetCategory(), "Id", "Name");
-            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll().OrderBy(x => x.Name), "Id", "Name");
             ViewBag.EmployeeId = new SelectList(_employeeRepository.GetAll(), "Id", "Name");
             return View();
         }
@@ -121,7 +121,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
-            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll().OrderBy(x => x.Name), "Id", "Name");
             ViewBag.EmployeeId = new SelectList(_employeeRepository.GetAll(), "Id", "Name");
             return View(tour);
         }
@@ -155,7 +155,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "Name", tour.EmployeeId);
-            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll().OrderBy(x => x.Name), "Id", "Name");
 
             return View(tour);
         }
@@ -208,7 +208,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
-            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll(), "Id", "Name");
+            ViewBag.DestiantionId = new SelectList(_destinatioRepository.GetAll().OrderBy(x => x.Name), "Id", "Name");
             ViewBag.EmployeeId = new SelectList(_employeeRepository.GetAll(), "Id", "Name");
             return View(tour);
         }

@@ -49,7 +49,7 @@
           </Key>
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
-          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderDate" Type="datetime" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderTourDetail">
@@ -320,7 +320,7 @@
           </Key>
           <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="Self.FK_OrderTour_Customer" FromRole="OrderTour" ToRole="User" />
           <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTour" ToRole="OrderTourDetail" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

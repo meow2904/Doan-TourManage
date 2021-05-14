@@ -5,158 +5,203 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<div class="row">
+    <h2 class="col-6">
+        Add new tour
+    </h2>
+    <div class="col-6 text-right pb-0">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add destiantion
+            </button>
 
-<h2>Add new tour</h2>
-<hr />
-
-<form action="@Url.Action("Create","ToursManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    <div class="col-6">
-        <div class="form-group">
-            <label class="control-label">Name</label>
-            <div>
-                <input type="text" class="form-control" name="Name" id="Name" required />
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="@Url.Action("Create","DestinationsManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div>
+                                    Tên địa điểm
+                                    <input type="text" name="Name" id="đestiantion" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label">Position Start</label>
-            <div>
-                <input type="text" name="PositionStart" id="PositionStart" class="form-control" required/>
-                @Html.ValidationMessageFor(model => model.PositionStart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label">Select more destinations</label>
-            <div>
-                @Html.DropDownList("DestinationIds", new SelectList(ViewBag.DestiantionId, "Value", "Text"), new
-                {
-                    @class = "form-control",
-                    @id = "DestinationIds",
-                    multiple = "multiple",
-                    required = "required",
-                    size = 15
-                })
-            </div>
-        </div>
     </div>
+</div>
 
-    <div class="col-6">
-        <div class="form-group">
-            <label class="control-label">Select images</label>
-            <div class="row m-auto">
-                <input type="text" id="Image" name="Image" class="col-6 form-control" />
-                <input type="file" id="filesInput" name="filesInput" class="col-6" multiple required onchange="Getname()">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-6">
-                <label class="control-label">Quantity Prople</label>
+
+<div class="gr-parent">
+    <form action="@Url.Action("Create","ToursManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-6">
+            <div class="form-group">
+                <label class="control-label">Name</label>
                 <div>
-                    <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" required />
-                    @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group col-6">
-                <label class="control-label">Category</label>
-                <div>
-                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-6">
-                <label class="control-label">Time</label>
-                <div>
-                    <input type="number" name="Time" id="Time" class="form-control" min="1" required/>
-                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                    <input type="text" class="form-control" name="Name" id="Name" required />
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group col-6">
-                <label class="control-label">Time Start</label>
+            <div class="form-group">
+                <label class="control-label">Position Start</label>
                 <div>
-                    <input type="date" name="TimeStart" id="TimeStart" class="form-control" required/>
-                    @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+                    <input type="text" name="PositionStart" id="PositionStart" class="form-control" required />
+                    @Html.ValidationMessageFor(model => model.PositionStart, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Select images</label>
+                <div class="row m-auto">
+                    <input type="text" id="Image" name="Image" class="w-100 form-control" />
+                    <input type="file" id="filesInput" name="filesInput" class="col-6" multiple required onchange="Getname()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label class="control-label">Quantity Prople</label>
+                    <div>
+                        <input type="number" name="QuantityPeople" id="QuantityPeople" class="form-control" min="1" required />
+                        @Html.ValidationMessageFor(model => model.QuantityPeople, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label class="control-label">Category</label>
+                    <div>
+                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label class="control-label">Time</label>
+                    <div>
+                        <input type="number" name="Time" id="Time" class="form-control" min="1" required />
+                        @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="control-label">Time Start</label>
+                    <div>
+                        <input type="date" name="TimeStart" id="TimeStart" class="form-control" required />
+                        @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Tour guide</label>
+                <div>
+                    @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+
+            <div class="form-group">
+                <label class="control-label">Select more destinations</label>
+                <div class="row">
+                    <div class="col-12">
+                        @Html.DropDownList("DestinationIds", new SelectList(ViewBag.DestiantionId, "Value", "Text"), new
+                        {
+                            @class = "form-control",
+                            @id = "DestinationIds",
+                            multiple = "multiple",
+                            required = "required",
+                            size = 15
+                        })
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-6">
+                    <label class="control-label">Stop position</label>
+                    <div>
+                        <input type="text" id="StopPosition" name="StopPosition" class="form-control" required />
+                        @Html.ValidationMessageFor(model => model.StopPosition, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="control-label">Transport</label>
+                    <div>
+                        <input type="text" id="Transport" name="Transport" class="form-control" required />
+                        @Html.ValidationMessageFor(model => model.Transport, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-4">
+                    <label class="control-label">Price Of Adult</label>
+                    <div>
+                        <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" required />
+                        @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label class="control-label">Price Of Child</label>
+                    <div>
+                        <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" required />
+                        @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Surcharge Of Room</label>
+                    <div>
+                        <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" required />
+                        @Html.ValidationMessageFor(model => model.SurchargeOfRoom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="w-100">
+            <div class="form-group">
+                <label class="control-label">Content</label>
+                <div>
+                    <textarea class="form-control" name="Content" id="editor"></textarea>
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label">Tour guide</label>
             <div>
-                @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a class="btn btn-secondary" href="/Admin/ToursManagement/Index?page=1">Cancel</a>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-6">
-                <label class="control-label">Stop position</label>
-                <div>
-                    <input type="text" id="StopPosition" name="StopPosition" class="form-control" required/>
-                    @Html.ValidationMessageFor(model => model.StopPosition, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    </form>
 
-            <div class="form-group col-6">
-                <label class="control-label">Transport</label>
-                <div>
-                    <input type="text" id="Transport" name="Transport" class="form-control" required />
-                    @Html.ValidationMessageFor(model => model.Transport, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-4">
-                <label class="control-label">Price Of Adult</label>
-                <div>
-                    <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" required />
-                    @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group col-4">
-                <label class="control-label">Price Of Child</label>
-                <div>
-                    <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" required />
-                    @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-4">
-                <label class="control-label">Surcharge Of Room</label>
-                <div>
-                    <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" required />
-                    @Html.ValidationMessageFor(model => model.SurchargeOfRoom, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-        </div>
-
-
-
-    </div>
-    <div class="w-100">
-        <div class="form-group">
-            <label class="control-label">Content</label>
-            <div>
-                <textarea class="form-control" name="Content" id="editor" ></textarea>
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div>
-            <input type="submit" value="Add" class="btn btn-success" />
-            <a class="btn btn-secondary" href="/Admin/ToursManagement/Index">Cancel</a>
-        </div>
-    </div>
-</form>
+    
+</div>
 
 
 @section scripts {

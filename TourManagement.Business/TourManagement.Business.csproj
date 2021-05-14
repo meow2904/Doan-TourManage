@@ -59,6 +59,7 @@
     <Compile Include="IServices\IHotelRepository.cs" />
     <Compile Include="IServices\IOrderTourDetailRepository.cs" />
     <Compile Include="IServices\IOrderTourRepository.cs" />
+    <Compile Include="IServices\IRoomRepository.cs" />
     <Compile Include="IServices\ITourDestinationRepository.cs" />
     <Compile Include="IServices\ITourRepository.cs" />
     <Compile Include="IServices\IUserRepository.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Services\HotelRepository.cs" />
     <Compile Include="Services\OrderTourDetailRepository.cs" />
     <Compile Include="Services\OrderTourRepository.cs" />
+    <Compile Include="Services\RoomRepository.cs" />
     <Compile Include="Services\TourDestinationRepository.cs" />
     <Compile Include="Services\TourRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />

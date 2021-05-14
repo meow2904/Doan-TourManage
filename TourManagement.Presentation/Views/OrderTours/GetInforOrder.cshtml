@@ -1,0 +1,39 @@
+﻿@model TourManagement.Models.DBContext.OrderTour
+
+<div>
+    <div class="row">
+        <div class="col-3">Mã đơn: @Model.OrderId </div>
+        <div class="col-9">Ngày đăt: @Model.OrderDate </div>
+    </div>
+    <div class="row">
+        <div class="col-12">Khách hàng: @Model.User.Name </div>
+    </div>
+    <div class="row">
+        <div class="col-12">Mã tour: @Model.OrderTourDetails.First().TourId</div>
+        <div class="col-12">Tên tour: @Model.OrderTourDetails.First().Tour.Name</div>
+        <div class="col-12">thời gian đi: @Model.OrderTourDetails.First().Tour.TimeStart </div>
+        <div class="col-12">Phương tiện: @Model.OrderTourDetails.First().Tour.Transport </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Trẻ em: @Model.OrderTourDetails.First().QuantityChild </div>
+        <div class="col-4">Người lớn: @Model.OrderTourDetails.First().QuantityAdult </div>
+        <div class="col-4">Phòng đơn: @Model.OrderTourDetails.First().NumberRoom</div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Trạng thái đơn:
+            @if (Model.Status == "Pending")
+            {
+                <span class="badge badge-primary txtstatus">@Model.Status</span>
+            }
+            else if (Model.Status == "Confirmed")
+            {
+                <span class="badge badge-success txtstatus">@Model.Status</span>
+            }
+            else
+            {
+                <span class="badge badge-danger txtstatus">@Model.Status</span>
+            }
+        </div>
+    </div>
+</div>

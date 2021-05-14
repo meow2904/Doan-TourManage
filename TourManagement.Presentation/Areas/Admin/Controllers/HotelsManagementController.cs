@@ -14,7 +14,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 {
     public class HotelsManagementController : Controller
     {
-        private TourManagementContext db = new TourManagementContext();
+        //private TourManagementContext db = new TourManagementContext();
         private readonly IHotelRepository _hotelRepository;
         private const string _ImagesPath = "~/Content/images/hotels";
 
@@ -23,25 +23,20 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             _hotelRepository = hotelRepository;
         }
 
-        // GET: Admin/HotelsManagement
         public ActionResult Index()
         {
             var hotels = _hotelRepository.GetAll();
             return View(hotels);
         }
 
-
-        // GET: Admin/HotelsManagement/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/HotelsManagement/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(Hotel hotel, HttpPostedFileBase ImgUrl)
         {
             if (ModelState.IsValid)
@@ -87,11 +82,9 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View(hotel);
         }
 
-        // POST: Admin/HotelsManagement/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Hotel hotel)
         {
             if (ModelState.IsValid)
@@ -102,7 +95,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View(hotel);
         }
 
-
         // POST: Admin/HotelsManagement/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
@@ -111,13 +103,13 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

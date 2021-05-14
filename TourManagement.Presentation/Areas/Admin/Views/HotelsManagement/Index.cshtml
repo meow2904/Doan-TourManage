@@ -2,7 +2,7 @@
 @model IEnumerable<Hotel>
 
 @{
-    ViewBag.Title = "Hotels management | Let's Go";
+    ViewBag.Title = "Hotels management";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,9 +17,11 @@
 <table class="table table-bordered ">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
@@ -31,24 +33,28 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <a>@Html.DisplayFor(modelItem => item.Name)</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            <img style="max-width:150px;" src="~/Content/images/hotels/@item.Image" alt="@item.Name" />
-        </td>
-        <td class="d-flex border-bottom-0 border-left-0 border-right-0">
-            <form action="@Url.Action("Delete","HotelsManagement", new { id=item.Id })" method="post">
-                <a href="@Url.Action("Edit", "HotelsManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>
-                <button type="submit" onclick="return confirm('Are you sure to delete this hotel?');" class="btn btn-outline-danger mx-1">Delete</button>
-            </form>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a>@Html.DisplayFor(modelItem => item.Id)</a>
+            </td>
+            <td>
+                <a>@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <img style="max-width:150px; height: 100px;" src="~/Content/images/hotels/@item.Image" alt="@item.Name" />
+            </td>
+            <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                <form action="@Url.Action("Delete","HotelsManagement", new { id=item.Id })" method="post">
+                    <a href="@Url.Action("Edit", "HotelsManagement", new { id=item.Id })" class="btn btn-outline-primary mx-1">Edit</a>
+                    <button type="submit" onclick="return confirm('Are you sure to delete this hotel?');" class="btn btn-outline-danger mx-1">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
 
 </table>

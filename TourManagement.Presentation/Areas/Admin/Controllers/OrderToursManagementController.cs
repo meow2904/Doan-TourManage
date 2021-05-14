@@ -16,12 +16,16 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
     {
         private readonly IOrderTourRepository _orderTourRepository;
         private readonly IOrderTourDetailRepository _orderTourDetailRepository;
+        private readonly ITourRepository _tourRepository;
 
         public OrderToursManagementController(IOrderTourRepository orderTourRepository,
-            IOrderTourDetailRepository orderTourDetailRepository)
+            IOrderTourDetailRepository orderTourDetailRepository,
+            ITourRepository tourRepository
+            )
         {
             _orderTourRepository = orderTourRepository;
             _orderTourDetailRepository = orderTourDetailRepository;
+            _tourRepository = tourRepository;
         }
 
         //take ordertour with user of tour is unconditional
@@ -72,9 +76,20 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         public ActionResult UpdateOrders(int orderTourId, string status)
         {
             var orderTour = _orderTourRepository.GetById(orderTourId);
+            var orderTourDetail = orderTour.OrderTourDetails;
+            var tour = orderTourDetail.First().Tour;
+            if (status == "Confirmed")
+            {
+                orderTour.Status = status;
+            }
+            else
+            {
+                orderTour.Status = status;
 
-            orderTour.Status = status;
-
+                var quanOrder = orderTourDetail.First().QuantityChild + orderTourDetail.First().QuantityAdult;
+                tour.QuantityPeople += quanOrder;
+                _tourRepository.Update(tour);
+            }
             //update quantity
             _orderTourRepository.Update(orderTour);
             return Content("Thành công");
