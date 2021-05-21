@@ -1,30 +1,38 @@
 ﻿@{
-    ViewBag.Title = "Contact - Let's go";
+    ViewBag.Title = "Liên hệ - Let's go";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container pt-3">
-    <div>
-        <p>THÔNG TIN CƠ BẢN</p>
+    <div class="text-xl-center bg-light p-2">
+        <h3>THÔNG TIN CƠ BẢN</h3>
     </div>
-
-    <div>
-        <address>
-            <p>Tên công ty: Công ty du lịch Huyền Trang</p>
-            <p>Đại diện: Nguyễn Đình Huy</p>
-            <p>
-                <abbr title="Phone">Phone:</abbr>
-                425.555.0100
-            </p>
-            <p>Địa chỉ: Số 298 đường Cầu Diễn, quận Bắc Từ Liêm, Hà Nội</p>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <address>
+                <p>Tên công ty: Công ty du lịch Huyền Trang</p>
+                <p>Đại diện: Nguyễn Đình Huy</p>
+                <p>
+                    <abbr title="Phone">Phone:</abbr>
+                    09 868 686
+                </p>
+                <p>Địa chỉ: Số 298 đường Cầu Diễn, quận Bắc Từ Liêm, Hà Nội</p>
+            </address>
+            <address>
+                <span>Support:</span><a href="mailto:meowmeow@gmail.com"> meowmeow@travel.com</a><br />
+                <span>Marketing:</span> <a href="mailto:huyentrangtour@gmail.com"> dulichhuyentrang@tour.com</a>
+            </address>
+        </div>
+        <div class="col-md-6">
+            <strong>Bản đồ chỉ dẫn</strong>
             <div class="irs-footer-contact">
                 <a href="//shorturl.at/jFGIN">
-                    <img src="https://www.haui.edu.vn/dnn/web/haui/assets/images/map.webp" alt="Bản đồ Công ty" width="250" height="150">
+                    <img src="https://www.haui.edu.vn/dnn/web/haui/assets/images/map.webp" alt="Bản đồ Công ty" width="300" height="200">
                 </a>
             </div>
-        </address>
-        <address>
-            <strong>Support:</strong>   <a href="mailto:meowmeow@gmail.com">meowmeow@travel.com</a><br />
-            <strong>Marketing:</strong> <a href="mailto:huyentrangtour@gmail.com">dulichhuyentrang@tour.com</a>
-        </address>
+        </div>
+
     </div>
+
+    
 </div>

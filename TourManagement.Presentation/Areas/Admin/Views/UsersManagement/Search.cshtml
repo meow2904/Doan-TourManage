@@ -1,0 +1,51 @@
+﻿@model TourManagement.Models.DBContext.User
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="py-2 row">
+        <div class="col-12">
+            <form action="@Url.Action("Search","UsersManagement")" method="get" class="form-inline">
+                <input class="form-control mr-sm-2 btn-none" id="employeeSearch" name="employeeSearch" type="search" placeholder="Tìm kiếm tài khoản">
+                <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/loupe.svg" width="25" height="25" /></button>
+            </form>
+
+        </div>
+    </div>
+    <table class="table table-bordered" id="tblUser">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th class="w-50">
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+
+        @if (Model != null)
+        {
+            <tr>
+                <td>
+                    @Model.Id
+                </td>
+                <td>
+                    @Model.Name
+                </td>
+                <td>
+                    @Model.Email
+                </td>
+                <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                    <button data-id="@Model.Id" class="btn btn-outline-primary btnReSet">Reset password</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -49,10 +49,12 @@ namespace TourManagement.Business.Services
                 OrderBy(x => x.PriceOfAdult).Skip(size * (page - 1)).Take(size).ToList();
         }
 
-        public IEnumerable<Tour> Search(string tour)
+        public IEnumerable<Tour> Search(string tour, DateTime dateTime)
         {
-            return Context.Tours.Where(x => x.Name.Contains(tour.ToLower()) || 
-            x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower())) ).ToList();
+            return Context.Tours.Where(x => (x.Name.Contains(tour.ToLower()) ||  
+                                    x.TourDestinations.Any(y => y.Destination.Name.Contains(tour.ToLower()))) 
+                                    && x.TimeStart >= dateTime
+                                    ).ToList();
         }
 
         public IEnumerable<Tour> GetByPrice(string category, decimal startPrice, decimal endPrice)

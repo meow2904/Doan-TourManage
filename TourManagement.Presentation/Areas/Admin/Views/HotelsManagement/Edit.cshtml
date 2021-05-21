@@ -8,7 +8,7 @@
 <div class="row">
     <h2 class="col-8">Edit tour</h2>
     <div class="col-2">
-        <a href="#" class="btn btn-outline-secondary">Manage room</a>
+        <a href="@Url.Action("Index","RoomsManagement", new { area ="Admin", hotelId = Model.Id }) " class="btn btn-outline-secondary">Manage room</a>
     </div>
     <div class="col-2">
         <a href="#" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Add room</a>
@@ -19,16 +19,42 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add room</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="@Url.Action("Create","RoomsManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
+                <form action="@Url.Action("Create","RoomsManagement", new { area= "Admin"})" method="post" class=" form-horizontal" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="modal-body">
                         <div>
-                            Tên địa điểm
-                            <input type="text" name="Name" id="đestiantion" class="form-control" />
+                            Tên
+                            <input type="text" name="Name" id="Name" class="form-control" />
+                        </div>
+                        <div>
+                            Giá
+                            <input type="number" name="Price" id="Price" min="1" class="form-control" value="1" />
+                        </div>
+                        <div>
+                            Diện tích
+                            <input type="text" name="Acreage" id="Acreage" class="form-control" />
+                        </div>
+                        <div>
+                            Số giường
+                            <input type="number" name="NumberBed" id="NumberBed" min="1" class="form-control" value="1" />
+                        </div>
+                        <div>
+                            Ảnh
+                            <input type="text" id="Image" name="Image" class="w-100 form-control" />
+                            <input type="file" id="filesInput" name="filesInput" class="col-6" required onchange="Getname()">
+                        </div>
+                        <div>
+                            Ghi chú
+                            <input name="NoteRoom" id="NoteRoom" class="form-control" />
+                        </div>
+                        <div>
+                            <input type="text" name="HotelId" id="HotelId" value="@Model.Id" hidden />
                         </div>
                     </div>
                     <div class="modal-footer">

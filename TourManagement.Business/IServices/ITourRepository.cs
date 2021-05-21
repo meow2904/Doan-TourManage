@@ -12,7 +12,7 @@ namespace TourManagement.Business.IServices
     {
         IEnumerable<Tour> GetByCategory(string category);
         int GetRemainingQuantity(int tourId);
-        IEnumerable<Tour> Search(string tour);
+        IEnumerable<Tour> Search(string tour, DateTime dateTime);
         IEnumerable<Tour> GetToursByCategoryWithPaging(string category, int page, int size);
         IEnumerable<Tour> GetToursByDateWithPaging(DateTime date, int page, int size);
         IEnumerable<Tour> GetByPrice(string category, decimal startPrice, decimal endPrice);

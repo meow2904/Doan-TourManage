@@ -58,13 +58,14 @@ namespace TourManagement.Presentation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult OrderTour(OrderTourDetail orderTourDetail)
+        public ActionResult OrderTour(OrderTourDetail orderTourDetail, decimal SumPrice)
         {
             //get custommer from session
             var cusInfor = (User)Session["username"];
             if (ModelState.IsValid)
             {
                 var orderTour = new OrderTour();
+                orderTour.SumPrice = SumPrice;
                 orderTour.UserId = cusInfor.Id;
                 orderTour.Status = "Pending";
                 _bookTourRepository.BookTour(orderTour, orderTourDetail);

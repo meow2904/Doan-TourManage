@@ -17,29 +17,35 @@ $(document).ready(() => {
 })
 
 //caculate price order
-function cal_price() {
-    var quan_child = parseInt(document.getElementById('QuantityChild').value);
-    var price_child = parseInt(document.getElementById('price_child').innerHTML.replace(/\,/g,""));
+$('#QuantityChild, #QuantityAdult, #NumberRoom').change(function () {
+    var vl = $(this).val()
+    var quan_child = parseInt($('#QuantityChild').val())
+    var quan_adult = parseInt($('#QuantityAdult').val())
+    var quan_room = parseInt($('#NumberRoom').val())
+    var quan_remain = parseInt($('#quantityRemain').text())
 
-    var quan_adult = parseInt(document.getElementById('QuantityAdult').value);
-    var price_adult = parseInt(document.getElementById('price_adult').innerHTML.replace(/\,/g, ""));
+    var price_adult = parseInt($('#price_adult').text().replace(/\,/g, ""))
+    var price_child = parseInt($('#price_child').text().replace(/\,/g, ""))
+    var price_room = parseInt($('#price_room').text().replace(/\,/g, ""))
 
-    var quan_room = parseInt(document.getElementById('NumberRoom').value);
-    var price_room = parseInt(document.getElementById('price_room').innerHTML.replace(/\,/g, ""));
+    console.log(price_room)
+    var sum_quan = quan_child + quan_adult
 
-    var quan_remain = document.getElementById('quantityRemain').innerHTML;
-
-    var sum_quan = quan_adult + quan_child;
-    
-    
     if (sum_quan > quan_remain) {
+        $(this).val(vl - 1)
         alert("Số lượng chỗ đặt vượt quá số lượng còn !")
     }
-    
-    var sum_price = (quan_adult * price_adult) + (quan_child * price_child) + (quan_room * price_room);
-    document.getElementById('sum_price').innerHTML = sum_price;
+    else {
 
-}
+        var sum_price = (quan_adult * price_adult) + (quan_child * price_child) + (quan_room * price_room)
+
+        $("#sum_price").text(sum_price)
+        $('#total').val(sum_price)
+    }
+})
+
+
+
 
 //display name image
 function Getname() {
@@ -59,17 +65,11 @@ function TakeEmployees(url) {
         $("#TimeStart").change(function () {
             var Time = $("#Time").val()
 
-            var date = new Date($('#TimeStart').val());
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-
-            var TimeStart = [year, month, day].join('-')
-
+            var date = $('#TimeStart').val();
             $.ajax({
                 type: "GET",
                 url: url,
-                data: { datePick: TimeStart, time: Time },
+                data: { datePick: date, time: Time },
                 contentType: 'application/json;charset=utf-8',
                 success: function (response) {
                     let rs = response.split("-")

@@ -23,7 +23,7 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" style="height: 400px;">
                     <div class="carousel-item active">
-                        <img src="~/Content/images/tours/image-active.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <img src="~/Content/images/tours/imgtemplate.jpg" class="d-block w-100 img-fluid" alt="...">
                     </div>
                     @foreach (var item in listImages)
                     {
@@ -83,7 +83,16 @@
                     <p class="col-2 p-0 m-0">Địa diểm đến:</p> <span class="font-weight-light col-9 p-0 m-0">@ViewBag.Destination</span>
                     <p class="col-2 p-0 m-0">Thời gian: </p><span class="font-weight-light col-9 p-0 m-0">@Model.Time ngày</span>
                     <p class="col-2 p-0 m-0">Ngày khởi hành: </p><span class="font-weight-light col-9 p-0 m-0">@Model.TimeStart.Value.ToString("dd/MM/yyyy")</span>
-                    <p class="col-2 p-0 m-0">Hướng dẫn viên: </p><span class="font-weight-light col-9 p-0 m-0">@Model.Employee.Name</span>
+                    <p class="col-2 p-0 m-0">Hướng dẫn viên: </p><span class="font-weight-light col-9 p-0 m-0">
+                        @if (Model.EmployeeId == null)
+                        {
+                            <span>Chưa cập nhật</span>
+                        }
+                        else
+                        {
+                            @Model.Employee.Name
+                        }
+                    </span>
                     <p class="col-2 p-0 m-0">Nơi nghỉ đêm: </p><span class="font-weight-light col-9 p-0 m-0">@Model.StopPosition</span>
                     <p class="col-2 p-0 m-0">Vận chuyển: </p><span class="font-weight-light col-9 p-0 m-0">@Model.Transport</span>
                     <p class="col-2 p-0 m-0">Xuất phát: </p><span class="font-weight-light col-9 p-0 m-0">@Model.PositionStart</span>
@@ -105,7 +114,7 @@
                         <li>Nước uống trên xe: 1 chai 0,5 lit/ người/ ngày</li>
                         <li>Thuế VAT theo quy định của nhà nước</li>
                         <li>Bảo hiểm với mức bồi thường tối đa 100.000.000 đồng/trường hợp. Không áp dụng cho khách từ 80 tuổi trở lên.</li>
-                    </ul>   
+                    </ul>
                 </div>
                 <div class="col-4 p-0">
                     <h5>Không bao gồm</h5>
@@ -121,11 +130,15 @@
                     <ul class="pl-3">
                         <li>Hủy từ 5 ngày  trước ngày khởi hành: chịu phí 100% giá tour + 100% tiền vé máy bay.</li>
                         <li>Trường hợp quý khách đến trễ giờ khởi hành được tính là hủy 5 ngày trước ngày khởi hành</li>
-                        <li>Việc huỷ bỏ chuyến đi phải được thông báo trực tiếp với Công ty hoặc qua fax, email, tin nhắn và phải được Công ty xác nhận.
-                        Việc huỷ bỏ bằng điện thoại không được chấp nhận.</li>
-                        <li>Do tính chất là đoàn ghép khách lẻ, Du Lịch Việt sẽ có trách nhiệm nhận khách đăng ký cho đủ đoàn (10 khách người lớn trở lên)
-                        thì đoàn sẽ khởi hành đúng lịch trình. Nếu số lượng đoàn dưới 10 khách, công ty có trách nhiệm thông báo cho khách trước ngày khởi
-                        hành 3 ngày và sẽ thỏa thuận lại ngày khởi hành mới hoặc hoàn trả toàn bộ số tiền đã đặt cọc tour</li>
+                        <li>
+                            Việc huỷ bỏ chuyến đi phải được thông báo trực tiếp với Công ty hoặc qua fax, email, tin nhắn và phải được Công ty xác nhận.
+                            Việc huỷ bỏ bằng điện thoại không được chấp nhận.
+                        </li>
+                        <li>
+                            Do tính chất là đoàn ghép khách lẻ, Du Lịch Việt sẽ có trách nhiệm nhận khách đăng ký cho đủ đoàn (10 khách người lớn trở lên)
+                            thì đoàn sẽ khởi hành đúng lịch trình. Nếu số lượng đoàn dưới 10 khách, công ty có trách nhiệm thông báo cho khách trước ngày khởi
+                            hành 3 ngày và sẽ thỏa thuận lại ngày khởi hành mới hoặc hoàn trả toàn bộ số tiền đã đặt cọc tour
+                        </li>
                     </ul>
                 </div>
             </div>

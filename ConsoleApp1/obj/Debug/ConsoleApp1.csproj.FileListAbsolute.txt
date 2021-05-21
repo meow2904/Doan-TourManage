@@ -16,3 +16,5 @@ D:\DoAn\DoAnCuaTui\TourManagementSystem\ConsoleApp1\obj\Debug\ConsoleApp1.csproj
 D:\DoAn\DoAnCuaTui\TourManagementSystem\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
 D:\DoAn\DoAnCuaTui\TourManagementSystem\ConsoleApp1\obj\Debug\ConsoleApp1.exe
 D:\DoAn\DoAnCuaTui\TourManagementSystem\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+D:\DoAn\DoAnCuaTui\TourManagementSystem\ConsoleApp1\bin\Debug\Newtonsoft.Json.dll
+D:\DoAn\DoAnCuaTui\TourManagementSystem\ConsoleApp1\bin\Debug\Newtonsoft.Json.xml

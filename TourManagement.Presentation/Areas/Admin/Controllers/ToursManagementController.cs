@@ -56,6 +56,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 
         public ActionResult CheckTour()
         {
+            //finf tours on 3 next day
             var tours = _tourRepository.SearchByDate(DateTime.Now);
             List<Tour> listTourCancel = new List<Tour>();
             foreach(var item in tours)
@@ -100,7 +101,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                             string path = Path.Combine(Server.MapPath("~/Content/images/tours"), fileName);
                             item.SaveAs(path);
                         }
-
                     }
                     catch (Exception)
                     {
@@ -117,7 +117,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 
                     _tourDestinationRepository.Add(tourdestination);
                 }
-                return RedirectToAction("Index");
+                return Content($"<script language='javascript' type='text/javascript'> alert('Thêm thành công'); window.location.href='https://localhost:44316/Admin/ToursManagement?page=1' </script>");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);
@@ -169,7 +169,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (filesInput != null)
+                if (filesInput[0] != null && filesInput != null)
                 {
                     try
                     {
@@ -190,21 +190,26 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
 
                 _tourRepository.Update(tour);
                 //delete old tourdes 
-                var tds = _tourDestinationRepository.GetListTourDesination(tour.Id);
-                foreach (var item in tds)
+                if(DestinationIds != null)
                 {
-                    _tourDestinationRepository.Delete(item);
-                }
+                    var tds = _tourDestinationRepository.GetListTourDesination(tour.Id);
+                    foreach (var item in tds)
+                    {
+                        _tourDestinationRepository.Delete(item);
+                    }
 
-                foreach (var item in DestinationIds)
-                {
-                    var tourdestination = new TourDestination();
-                    tourdestination.IdTour = tour.Id;
-                    tourdestination.IdDestination = Int32.Parse(item);
+                    foreach (var item in DestinationIds)
+                    {
+                        var tourdestination = new TourDestination();
+                        tourdestination.IdTour = tour.Id;
+                        tourdestination.IdDestination = Int32.Parse(item);
 
-                    _tourDestinationRepository.Add(tourdestination);
+                        _tourDestinationRepository.Add(tourdestination);
+                    }
                 }
-                return RedirectToAction("Index");
+                
+
+                return Content($"<script language='javascript' type='text/javascript'> alert('Cập nhật thành công'); window.location.href='https://localhost:44316/Admin/ToursManagement?page=1' </script>");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", tour.CategoryId);

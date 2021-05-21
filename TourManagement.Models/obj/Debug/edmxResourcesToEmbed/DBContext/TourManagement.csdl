@@ -49,9 +49,10 @@
     <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" />
     <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="Self.FK_OrderTour_Customer" FromRole="OrderTour" ToRole="User" />
     <NavigationProperty Name="OrderTourDetails" Relationship="Self.FK_OrderTourDetail_OrderTour" FromRole="OrderTour" ToRole="OrderTourDetail" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SumPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="OrderTourDetail">
     <Key>
@@ -75,10 +76,10 @@
     <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Acreage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="NumberBed" Type="Int32" />
-    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoteRoom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="HotelId" Type="Int32" />
     <NavigationProperty Name="Hotel" Relationship="Self.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>

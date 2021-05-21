@@ -9,6 +9,7 @@
 
 namespace TourManagement.Models.DBContext
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,7 +20,7 @@ namespace TourManagement.Models.DBContext
         public Nullable<int> QuantityChild { get; set; }
         public Nullable<int> QuantityAdult { get; set; }
         public Nullable<int> NumberRoom { get; set; }
-    
+        [JsonIgnore]
         public virtual OrderTour OrderTour { get; set; }
         public virtual Tour Tour { get; set; }
     }

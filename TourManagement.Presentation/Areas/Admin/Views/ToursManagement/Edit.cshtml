@@ -35,7 +35,7 @@
             <label class="control-label">Select images</label>
             <div>
                 <input type="text" id="Image" name="Image" class="w-100 form-control" value="@Model.Image" />
-                <input type="file" id="filesInput" name="filesInput" class="col-6" multiple required onchange="Getname()">
+                <input type="file" id="filesInput" name="filesInput" class="col-6" multiple onchange="Getname()">
             </div>
         </div>
         <div class="row">
@@ -93,7 +93,7 @@
                     @class = "form-control",
                     @id = "DestinationIds",
                     multiple = "multiple",
-                    required = "required",
+
                     size = 15
                 })
             </div>
@@ -101,7 +101,7 @@
 
         <div class="row">
             <div class="form-group col-6">
-                <label class="control-label">Stop position</label>
+                <label class="control-label">Resting position</label>
                 <div>
                     <input type="text" id="StopPosition" name="StopPosition" class="form-control" value="@Model.StopPosition" />
                     @Html.ValidationMessageFor(model => model.StopPosition, "", new { @class = "text-danger" })
@@ -151,9 +151,9 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group w-100 text-right">
         <div>
-            <input type="submit" value="Add" class="btn btn-success" />
+            <input type="submit" value="Save Change" class="btn btn-success" />
             <a class="btn btn-secondary" href="/Admin/ToursManagement/Index?page=1">Cancel</a>
         </div>
     </div>

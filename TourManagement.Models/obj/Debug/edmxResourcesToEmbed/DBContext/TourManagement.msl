@@ -46,10 +46,11 @@
     <EntitySetMapping Name="OrderTours">
       <EntityTypeMapping TypeName="TourManagementModel.OrderTour">
         <MappingFragment StoreEntitySet="OrderTour">
-          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -67,13 +68,13 @@
     <EntitySetMapping Name="Rooms">
       <EntityTypeMapping TypeName="TourManagementModel.Room">
         <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Acreage" ColumnName="Acreage" />
           <ScalarProperty Name="NumberBed" ColumnName="NumberBed" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="NoteRoom" ColumnName="NoteRoom" />
           <ScalarProperty Name="HotelId" ColumnName="HotelId" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.User>
+
+@{
+    ViewBag.Title = "Employee Mamagement";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    int totalPage = @ViewBag.TotalPage;
+    int pageRange = 3;
+    int currentPage = @ViewBag.CurrentPage;
+
+    var prevDisabled = (currentPage - 1 <= 0 ? "disabled" : "");
+    var nextDisabled = (currentPage >= totalPage ? "disabled" : "");
+
+}
+<div>
+    <h2>User Management</h2>
+    <hr />
+</div>
+<div class="py-2 row">
+    <div class="col-12">
+        <form action="@Url.Action("Search","UsersManagement")" method="get" class="form-inline">
+            <input class="form-control mr-sm-2 btn-none" id="employeeSearch" name="employeeSearch" type="search" placeholder="Tìm kiếm tài khoản">
+            <button class="btn my-2 my-sm-0 btn-none" type="submit"><img src="~/Content/images/loupe.svg" width="25" height="25" /></button>
+        </form>
+
+    </div>
+</div>
+
+<table class="table table-bordered" id="tblUser">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th class="w-50">
+            Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                <button data-id="@item.Id" class="btn btn-outline-primary btnReSet">Reset password</button>
+            </td>
+        </tr>
+    }
+</table>
+
+
+<nav aria-label="Page navigation example" class="row w-100">
+    <ul class="pagination col-12 justify-content-center">
+        <li class="page-item"><a class="btn page-link @prevDisabled" href="@Url.Action("Index", "UsersManagement", new {page=(currentPage - 1 <= 0 ? 1 : currentPage - 1) })">Previous</a></li>
+        @for (int i = 1; i <= totalPage; i++)
+        {
+            if (i >= currentPage - pageRange && i <= currentPage + pageRange)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "UsersManagement", new {page = i })">@i</a>
+                </li>
+            }
+        }
+
+        <li class="page-item">
+            <a class="btn page-link @nextDisabled" href="@Url.Action("Index", "UsersManagement", new {page=(currentPage + 1 > totalPage ? totalPage : currentPage + 1)})">Next</a>
+        </li>
+    </ul>
+</nav>
+
+@section scripts{
+    <script>
+        $('#tblUser').on('click', '.btnReSet', function () {
+            const userId = $(this).data('id')
+            var url = '@Url.Action("ResetPassword", "UsersManagement")'
+            url += '?userId=' + userId
+            $.post(url, { userId: userId })
+                .done(function () {
+                    alert('Reset thành công!')
+                    
+                })
+
+        })
+    </script>
+}

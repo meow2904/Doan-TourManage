@@ -31,17 +31,25 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         //take ordertour with user of tour is unconditional
         public ActionResult GetOrdersTour(int tourId)
         {
-            var ordersTour = _orderTourRepository.GetOrderTourByTour(tourId);
-            return View(ordersTour);
+            var ordersByTourId = _orderTourRepository.GetOrderTourByTour(tourId);
+            var order = ordersByTourId.Where(x => x.Status != "Cancel").ToList();
+
+            return View(order);
         }
 
         // delete ordertour with user of tour is unconditional
         [HttpPost]
-        public ActionResult Delete(int orderTourId, int tourId)
+        public ActionResult CancelOrder(int orderTourId, int tourId)
         {
-            var orderTourDetail = _orderTourDetailRepository.GetOrderTourDetailByOrderId(orderTourId);
-            _orderTourDetailRepository.Delete(orderTourDetail);
-            _orderTourRepository.DeleteByID(orderTourId);
+            var order = _orderTourRepository.GetById(orderTourId);
+            var orderDetail = order.OrderTourDetails;
+            var tour = orderDetail.First().Tour;
+
+            order.Status = "Cancel";
+            var quanOrder = orderDetail.First().QuantityChild + orderDetail.First().QuantityAdult;
+            tour.QuantityPeople += quanOrder;
+
+            _orderTourRepository.Update(order);
             return RedirectToAction("GetOrdersTour", new { tourId = tourId });
         }
 
@@ -51,23 +59,30 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult GetOrders(string status)
+        public JsonResult GetOrders()
         {
+            var listPending = _orderTourRepository.GetOrderTourByStatus("Pending");
+            var listConfirmed = _orderTourRepository.GetOrderTourByStatus("Confirmed").OrderByDescending(x => x.OrderDate);
+            return Json(new
+            {
+                ListPending = JsonConvert.SerializeObject(listPending),
+                ListConfirmed = JsonConvert.SerializeObject(listConfirmed),
+            }, JsonRequestBehavior.AllowGet);
 
-            if(status == "Confirmed")
-            {
-               var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status).OrderByDescending(x => x.OrderDate);
-               return PartialView(listOrderStatus);
-            }
-            else
-            {
-                var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status);
-                return PartialView(listOrderStatus);
-            }
-            
+            //if (status == "Confirmed")
+            //{
+            //   var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status).OrderByDescending(x => x.OrderDate);
+            //   return PartialView(listOrderStatus);
+            //}
+            //else
+            //{
+            //    var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status);
+            //    return PartialView(listOrderStatus);
+            //}
+
         }
         
-        public ActionResult GetInfor(int orderTourId)
+        public ActionResult GetInformationOrder(int orderTourId)
         {
             var infor = _orderTourRepository.GetById(orderTourId);
             return PartialView(infor);

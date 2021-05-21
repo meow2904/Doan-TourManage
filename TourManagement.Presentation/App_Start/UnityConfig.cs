@@ -49,6 +49,7 @@ namespace TourManagement.Presentation
             container.RegisterType<IHotelRepository, HotelRepository>();
             container.RegisterType<IEmployeeRepository, EmployeeRepository>();
             container.RegisterType<IDestinatioRepository, DestinationRepository>();
+            container.RegisterType<IRoomRepository, RoomRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
 
 

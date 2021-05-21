@@ -14,5 +14,6 @@ namespace TourManagement.Business.IServices
         IEnumerable<OrderTour> GetOrderTourByTour(int tourId);
         IEnumerable<OrderTour> GetOrderTourByStatus(string status);
 
+        IEnumerable<OrderTour> GetOrderDone();
     }
 }

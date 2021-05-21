@@ -32,6 +32,9 @@
 
 <table class="table table-bordered ">
     <tr>
+        <th>
+            Id
+        </th>
         <th class="w-50">
             Name
         </th>
@@ -53,6 +56,9 @@
     {
         <tr>
             <td>
+                @item.Id
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
@@ -71,7 +77,14 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.StatusWorking)
+                @if(item.StatusWorking == 1)
+                {
+                    <p>Working</p>
+                }
+                else
+                {
+                    <p>Out</p>
+                }
             </td>
 
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">

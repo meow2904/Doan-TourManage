@@ -1,0 +1,57 @@
+﻿@model TourManagement.Models.DBContext.Room
+
+@Html.HiddenFor(model => model.Id)
+<div class="form-group">
+    <label>Name</label>
+    <div>
+        <input type="text" id="Name" name="Name" value="@Model.Name" class="w-100" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Price</label>
+    <div>
+        <input type="number" id="Price" name="Price" value="@Model.Price" class="w-100"/>
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Acreage</label>
+    <div>
+        <input type="text" id="Acreage" name="Acreage" value="@Model.Acreage" class="w-100"/>
+        @Html.ValidationMessageFor(model => model.Acreage, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Number Bed</label>
+    <div>
+        <input type="number" id="NumberBed" name="NumberBed" value="@Model.NumberBed" class="w-100"/>
+        @Html.ValidationMessageFor(model => model.NumberBed, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Note</label>
+    <div >
+        <textarea id="NoteRoom" name="NoteRoom" class="w-100" rows="5">@Model.NoteRoom</textarea>
+        @Html.ValidationMessageFor(model => model.NoteRoom, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Hotel Id</label>
+    <div >
+        <input type="text" id="HotelId" name="HotelId" value="@Model.HotelId" class="w-100"/>
+        @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Image</label>
+    <div >
+        <input type="text" id="Image" name="Image" value="@Model.Image" class="w-100 form-control" />
+        <input type="file" id="filesInput" name="filesInput" class="col-6" onchange="Getname()">
+    </div>
+</div>

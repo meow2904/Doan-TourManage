@@ -9,6 +9,7 @@
 
 namespace TourManagement.Models.DBContext
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -29,6 +30,7 @@ namespace TourManagement.Models.DBContext
         public Nullable<int> Role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<OrderTour> OrderTours { get; set; }
     }
 }

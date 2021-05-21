@@ -46,6 +46,7 @@
     <Property Name="UserId" Type="int" />
     <Property Name="OrderDate" Type="datetime" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="SumPrice" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="OrderTourDetail">
     <Key>
@@ -68,7 +69,7 @@
     <Property Name="Acreage" Type="nvarchar" MaxLength="50" />
     <Property Name="NumberBed" Type="int" />
     <Property Name="Image" Type="nvarchar" MaxLength="50" />
-    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="NoteRoom" Type="nvarchar(max)" />
     <Property Name="HotelId" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">

@@ -16,5 +16,6 @@ namespace TourManagement.Business.Services
 
             return Context.Destinations.Where(x => x.TourDestinations.Any( td => td.IdTour == idTour)).ToList();
         }
+
     }
 }

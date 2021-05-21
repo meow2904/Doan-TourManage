@@ -25,9 +25,9 @@ namespace TourManagement.Presentation.Controllers
         }
 
 
-        public ActionResult SearchTour(string search)
+        public ActionResult SearchTour(string search, DateTime datepick)
         {
-            var toursSearch = _tourRepository.Search(search);
+            var toursSearch = _tourRepository.Search(search, datepick);
             ViewBag.MessageSearch = search;
             return View(toursSearch);
 

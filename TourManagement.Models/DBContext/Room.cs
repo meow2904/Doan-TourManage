@@ -19,9 +19,9 @@ namespace TourManagement.Models.DBContext
         public Nullable<decimal> Price { get; set; }
         public string Acreage { get; set; }
         public Nullable<int> NumberBed { get; set; }
-        public string Image { get; set; }
-        public string Note { get; set; }
+        public string NoteRoom { get; set; }
         public Nullable<int> HotelId { get; set; }
+        public string Image { get; set; }
     
         public virtual Hotel Hotel { get; set; }
     }

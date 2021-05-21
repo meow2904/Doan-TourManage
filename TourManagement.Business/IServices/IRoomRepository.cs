@@ -10,5 +10,6 @@ namespace TourManagement.Business.IServices
 {
     public interface IRoomRepository : IGenericRepository<Room>
     {
+        IEnumerable<Room> GetRoomByHotelId(int hotelId);
     }
 }

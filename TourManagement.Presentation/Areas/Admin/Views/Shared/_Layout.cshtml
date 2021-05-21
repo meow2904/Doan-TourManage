@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Css/fontawesome-free/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Css/style.css">
@@ -61,19 +61,19 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
+                <a href="@Url.Action("Orders", "OrderToursManagement", new { area = "Admin" })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/check-list.svg" height="30" width="30" />
+                    </div>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
                 <a href="@Url.Action("Index", "ToursManagement", new { area = "Admin", page =1 })" class="sidebar-nav-link">
                     <div class="d-flex align-items-center pl-3">
                         <img src="~/Content/images/travel-bag.svg" height="30" width="30" />
                     </div>
                     <span>Tours</span>
-                </a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a href="@Url.Action("Index", "EmployeesManagement", new { area = "Admin", page=1 })" class="sidebar-nav-link">
-                    <div class="d-flex align-items-center pl-3">
-                        <img src="~/Content/images/management.svg" height="30" width="30" />
-                    </div>
-                    <span>Employees</span>
                 </a>
             </li>
             <li class="sidebar-nav-item">
@@ -85,11 +85,19 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="@Url.Action("Orders", "OrderToursManagement", new { area = "Admin" })" class="sidebar-nav-link">
+                <a href="@Url.Action("Index", "EmployeesManagement", new { area = "Admin", page=1 })" class="sidebar-nav-link">
                     <div class="d-flex align-items-center pl-3">
-                        <img src="~/Content/images/check-list.svg" height="30" width="30" />
+                        <img src="~/Content/images/management.svg" height="30" width="30" />
                     </div>
-                    <span>Orders</span>
+                    <span>Employees</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="@Url.Action("Index", "UsersManagement", new { area = "Admin", page=1 })" class="sidebar-nav-link">
+                    <div class="d-flex align-items-center pl-3">
+                        <img src="~/Content/images/user.svg" height="30" width="30" />
+                    </div>
+                    <span>Users</span>
                 </a>
             </li>
         </ul>

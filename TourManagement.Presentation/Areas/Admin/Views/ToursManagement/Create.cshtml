@@ -25,14 +25,14 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="@Url.Action("Create","DestinationsManagement", new { area= "Admin"})" method="post" class=" row form-horizontal" enctype="multipart/form-data">
-                            <div class="modal-body">
+                        <form action="@Url.Action("Create","DestinationsManagement", new { area= "Admin"})" method="post" class=" form-horizontal" enctype="multipart/form-data">
+                            <div class="modal-body w-100">
                                 <div>
-                                    Tên địa điểm
+                                    <p class="text-left">Tên điểm đến</p>
                                     <input type="text" name="Name" id="đestiantion" class="form-control" />
                                 </div>
                             </div>
-                            <div class="modal-footer">
+                            <div class="modal-footer w-100">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>
@@ -135,10 +135,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="form-group col-6">
-                    <label class="control-label">Stop position</label>
+                    <label class="control-label">Resting positon</label>
                     <div>
                         <input type="text" id="StopPosition" name="StopPosition" class="form-control" required />
                         @Html.ValidationMessageFor(model => model.StopPosition, "", new { @class = "text-danger" })
@@ -158,14 +158,14 @@
                 <div class="form-group col-4">
                     <label class="control-label">Price Of Adult</label>
                     <div>
-                        <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" required />
+                        <input type="number" id="PriceOfAdult" name="PriceOfAdult" class="form-control" min="0" value="0" required />
                         @Html.ValidationMessageFor(model => model.PriceOfAdult, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group col-4">
                     <label class="control-label">Price Of Child</label>
                     <div>
-                        <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" required />
+                        <input type="number" id="PriceOfChild" name="PriceOfChild" class="form-control" min="0" value="0" required />
                         @Html.ValidationMessageFor(model => model.PriceOfChild, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                 <div class="form-group col-4">
                     <label class="control-label">Surcharge Of Room</label>
                     <div>
-                        <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" required />
+                        <input type="number" id="SurchargeOfRoom" name="SurchargeOfRoom" class="form-control" min="0" value="0" required />
                         @Html.ValidationMessageFor(model => model.SurchargeOfRoom, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group w-100 text-right">
             <div>
                 <input type="submit" value="Add" class="btn btn-success" />
                 <a class="btn btn-secondary" href="/Admin/ToursManagement/Index?page=1">Cancel</a>

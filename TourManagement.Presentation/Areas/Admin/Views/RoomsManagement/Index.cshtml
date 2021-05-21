@@ -1,0 +1,84 @@
+﻿@model IEnumerable<TourManagement.Models.DBContext.Room>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage room</h2>
+<hr />
+@if (Model.Any())
+{
+    <table class="table table-bordered " id="RoomManage">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a>@Html.DisplayFor(modelItem => item.Id)</a>
+                </td>
+                <td>
+                    <a>@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    <img style="max-width:150px; height: 100px;" src="~/Content/images/hotels/room/@item.Image" alt="@item.Name" />
+                </td>
+                <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                    <button class="btn btn-outline-primary mx-1 btn-modal-room" data-toggle="modal" data-target="#ModalRoom" data-id="@item.Id">Edit</button>
+                    <form action="@Url.Action("Delete","RoomsManagement", new { area="Admin", id=item.Id, hoId =item.HotelId })" method="post">
+                        <button type="submit" onclick="return confirm('Are you sure to delete this room?');" class="btn btn-outline-danger mx-1">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="modal fade" id="ModalRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="@Url.Action("Edit","RoomsManagement", new { area= "Admin"})" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body" id="formRoom">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-success">Update</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $('#RoomManage').on('click', '.btn-modal-room', function () {
+            const roomId = $(this).data('id')
+            var url = '@Url.Action("GetRoom", "RoomsManagement")'
+            url += '?roomId=' + roomId
+            $('#formRoom').load(url);
+        })
+    </script>
+    }

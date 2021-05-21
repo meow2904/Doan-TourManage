@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Get order tour with user</h2>
+<h2>Get order tour of user</h2>
 <table class="table table-bordered">
     <tr>
         <th>
@@ -40,8 +40,8 @@
                 @item.User.Address
             </td>
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">
-                <form action="@Url.Action("Delete","OrderToursManagement", new { orderTourId = item.OrderId, tourId= item.OrderTourDetails.FirstOrDefault().TourId })" method="post">
-                    <button type="submit" onclick="return confirm('Delete order tours?');" class="btn btn-outline-danger mx-1">Delete</button>
+                <form action="@Url.Action("CancelOrder","OrderToursManagement", new { orderTourId = item.OrderId, tourId= item.OrderTourDetails.FirstOrDefault().TourId })" method="post">
+                    <button type="submit" onclick="return confirm('Cancel order tours?');" class="btn btn-outline-danger mx-1">Cancel</button>
                 </form>
             </td>
         </tr>

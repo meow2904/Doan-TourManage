@@ -69,26 +69,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Details(int? id)
-        {
-
-            if (Session["username"] == null)
-            {
-                return RedirectToAction("Login", "Users", new { area = "" });
-            }
-            else
-            {
-                var employee = _employeeRepository.GetById((int)id);
-                if (employee == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(employee);
-            }
-
-        }
-
-
         public ActionResult Create()
         {
             if (Session["username"] == null)
@@ -118,9 +98,9 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                     var result = _employeeRepository.Add(employee);
                     if (result)
                     {
-                        return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/'</script>");
+                        return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/Admin/EmployeesManagement?page=1'</script>");
                     }
-                    return RedirectToAction("Index", "EmployeesManagement", new { area = "Admin" });
+                    return RedirectToAction("Index", "EmployeesManagement", new { area = "Admin" , page =1});
                 }
 
                 return View(employee);
@@ -163,7 +143,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     _employeeRepository.Update(employee);
-                    return RedirectToAction("Index", new { page = 1 });
+                    return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/Admin/EmployeesManagement?page=1'</script>");
                 }
                 return View(employee);
             }

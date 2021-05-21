@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -15,6 +16,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
     {
         private TourManagementContext db = new TourManagementContext();
         private readonly IRoomRepository _roomRepository;
+        private const string _ImagesPath = "~/Content/images/hotels/room";
 
         public RoomsManagementController(IRoomRepository roomRepository)
         {
@@ -22,99 +24,91 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         }
 
         // GET: Admin/RoomsManagement
-        public ActionResult Index()
+        public ActionResult Index(int hotelId)
         {
-            var rooms = db.Rooms.Include(r => r.Hotel);
-            return View(rooms.ToList());
+            var rooms = _roomRepository.GetRoomByHotelId(hotelId);
+            return View(rooms);
         }
 
-        // GET: Admin/RoomsManagement/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Room room = db.Rooms.Find(id);
-            if (room == null)
-            {
-                return HttpNotFound();
-            }
-            return View(room);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Room room)
+        [ValidateInput(false)]
+        public ActionResult Create(Room room, HttpPostedFileBase filesInput)
         {
             if (ModelState.IsValid)
             {
-                _roomRepository.Add(room);
-                return Content("<script language='javascript' type='text/javascript'>alert('Thêm thành công!'); window.location.href='https://localhost:44316/Admin/ToursManagement/Create'</script>");
+                string fileName = "";
+                if (filesInput != null && filesInput.ContentLength > 0)
+                {
+                    try
+                    {
+                        fileName = Path.GetFileName(filesInput.FileName);
+                        string path = Path.Combine(Server.MapPath(_ImagesPath), fileName);
+                        filesInput.SaveAs(path);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+
+                }
+
+                var resultAdd = _roomRepository.Add(room);
+
+                if (resultAdd)
+                {
+                    return Content($"<script language='javascript' type='text/javascript'> alert('Thêm thành công'); window.location.href='https://localhost:44316/Admin/HotelsManagement/Edit/'+{room.HotelId} </script>");
+                }
             }
-            else
-            {
-                return Content("<script language='javascript' type='text/javascript'>alert('Thêm thất bại '); window.location.href='https://localhost:44316/Admin/ToursManagement/Create'</script>");
-            }
+            return Content("<script language='javascript' type='text/javascript'> alert('Thêm thất bại '); window.location.href='https://localhost:44316/Admin/HotelsManagement' </script>");
         }
 
         // GET: Admin/RoomsManagement/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult GetRoom(int roomId)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Room room = db.Rooms.Find(id);
-            if (room == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "Name", room.HotelId);
-            return View(room);
+            var room = _roomRepository.GetById(roomId);
+            return PartialView(room);
         }
 
-        // POST: Admin/RoomsManagement/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Acreage,NumberBed,Image,Note,HotelId")] Room room)
+        [ValidateInput(false)]
+        public ActionResult Edit(Room room, HttpPostedFileBase filesInput)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(room).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "Name", room.HotelId);
-            return View(room);
-        }
+                string fileName = "";
+                if (filesInput != null && filesInput.ContentLength > 0)
+                {
+                    try
+                    {
+                        fileName = Path.GetFileName(filesInput.FileName);
+                        string path = Path.Combine(Server.MapPath(_ImagesPath), fileName);
+                        filesInput.SaveAs(path);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
 
-        // GET: Admin/RoomsManagement/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                _roomRepository.Update(room);
+
+                return Content($"<script language='javascript' type='text/javascript'> alert('Cập nhật thành công'); window.location.href='https://localhost:44316/Admin/RoomsManagement/?hotelId='+{room.HotelId} </script>");
             }
-            Room room = db.Rooms.Find(id);
-            if (room == null)
-            {
-                return HttpNotFound();
-            }
-            return View(room);
+
+            return Content($"<script language='javascript' type='text/javascript'> alert('Cập nhật thất bại '); window.location.href='https://localhost:44316/Admin/RoomsManagement/?hotelId='+{room.HotelId} </script>");
         }
 
         // POST: Admin/RoomsManagement/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id, int hoId)
         {
-            Room room = db.Rooms.Find(id);
-            db.Rooms.Remove(room);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            _roomRepository.DeleteByID(id);
+            return RedirectToAction("Index", "RoomsManagement", new { area = "Admin", hotelId = hoId });
         }
 
         protected override void Dispose(bool disposing)

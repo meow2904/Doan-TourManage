@@ -12,5 +12,6 @@ namespace TourManagement.Business.IServices
     {
         User GetUserLogin(string email, string password);
         IEnumerable<User> GetUsersWithPaging(int page, int size);
+        User Search(string email);
     }
 }

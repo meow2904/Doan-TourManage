@@ -4,11 +4,14 @@
 }
 
 <div class="row">
-    <div id="orderPending" class="col-7">
-
+    <div class="col-7">
+        <table id="orderPending" class="table table-bordered">
+        </table>
     </div>
-    <div id="orderConfirmed" class="col-5">
     
+    <div class="col-5">
+        <table id="orderConfirmed" class="table table-bordered">
+        </table>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -20,7 +23,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="infor">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -34,12 +37,89 @@
     <script type="text/javascript">
         //load all data
         function getData() {
+            $.ajax({
+                url: '@Url.Action("GetOrders", "OrderToursManagement")',
+                type: 'GET',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    const ListPending = JSON.parse(data.ListPending)
+                    const ListConfirmed = JSON.parse(data.ListConfirmed)
 
-            const url = '@Url.Action("GetOrders", "OrderToursManagement")'
-            $('#orderPending').load(url+'?status=Pending')
-            $('#orderConfirmed').load(url+'?status=Confirmed')
+                    getPendingData(ListPending)
+                    getConfirmedData(ListConfirmed)
+                }
+            })
+
         }
-        getData()
+        getData();
+
+        //take data
+        function getPendingData(rs) {
+            let tblOrder = $('#orderPending')
+            tblOrder.empty()
+            tblOrder.append(
+                '<tr>' +
+                '<th>Order Id</th>' +
+                '<th>Order date</th>' +
+                '<th>Status</th>' +
+                '<th>Detail</th>' +
+                '<th>Action</th>' +
+                '</tr>'
+            )
+
+            for (let item of rs) {
+                tblOrder.append(
+                    '<tr>'+
+                    '<td>'+item.OrderId+'</td>'+
+                    '<td>'+
+                    item.OrderDate.split() +
+                    '</td>'+
+                    '<td>'+
+                        '<span class="badge badge-primary">'+item.Status+'</span>'+
+                    '</td>'+
+                    '<td>'+
+                        '<button data-id="'+item.OrderId+'" class="btn btn-outline-info btnInforModal" data-toggle="modal" data-target="#exampleModal">Detail</button>'+
+                    '</td>'+
+                    '<td>'+
+                        '<button data-id="'+item.OrderId+'"class="btn btn-outline-success btnConfirm">Confirm</button>'+
+                        '<button data-id="'+item.OrderId+'"class="btn btn-outline-danger btnDelete">Delete</button>'+
+                    '</td>'+
+                    '</tr>'
+                )
+            }
+        }   
+
+        function getConfirmedData(rs) {
+            let tblOrder = $('#orderConfirmed')
+            tblOrder.empty()
+            tblOrder.append(
+                '<tr>' +
+                '<th>Order Id</th>' +
+                '<th>Order date</th>' +
+                '<th>Status</th>' +
+                '<th>Detail</th>' +
+                '</tr>'
+            )
+
+            for (let item of rs) {
+                tblOrder.append(
+                    '<tr>' +
+                    '<td>' + item.OrderId + '</td>' +
+                    '<td>' +
+                        item.OrderDate +
+                    '</td>' +
+                    '<td>' +
+                    '<span class="badge badge-warning">' + item.Status + '</span>' +
+                    '</td>' +
+                    '<td>' +
+                    '<button data-id="' + item.OrderId + '" class="btn btn-outline-info btnInforModal" data-toggle="modal" data-target="#exampleModal">Detail</button>' +
+                    '</td>' +
+                    '</tr>'
+                )
+            }
+        }
+
+
 
 
         //see detail orderPending
@@ -62,20 +142,28 @@
         $('#orderPending').on('click', '.btnConfirm', function () {
             const orderid = $(this).data('id')
             var url = '@Url.Action("UpdateOrders", "OrderToursManagement")'
-            url += '?orderTourId=' + orderid+'&status='+'Confirmed'
-            $('#orderPending').load(url);
-            getData();
+            url += '?orderTourId=' + orderid + '&status=Confirmed'
+
+            $.post(url, { orderTourId: orderid, status: "Confirmed" })
+                .done(function (data) {
+                    getData();
+                });
         })
 
         //cancel order
         $('#orderPending').on('click', '.btnDelete', function () {
             const orderid = $(this).data('id')
             var url = '@Url.Action("UpdateOrders", "OrderToursManagement")'
-            url += '?orderTourId=' + orderid+'&status='+'Cancel'
-            $('#orderPending').load(url);
+            url += '?orderTourId='+orderid+'&status=Cancel'
+
+            $.post(url, { orderTourId: orderid, status: "Cancel" })
+                .done(function (data) {
+                    getData();
+                });
+
             getData();
         })
 
     </script>
-    
+
 }

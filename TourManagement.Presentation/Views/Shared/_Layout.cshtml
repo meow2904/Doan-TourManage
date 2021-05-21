@@ -48,10 +48,10 @@
 
             @using (Html.BeginForm("SearchTour", "Home", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0 col-6" }))
             {
-                <div><input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Tìm kiếm tour, điểm đến " aria-label="Search"></div>
+                <div><input class="form-control mr-sm-2 btn-none" id="seach" name="search" type="search" placeholder="Tìm tour, điểm đến ... " aria-label="Search"></div>
 
                 <div>
-                    <input type="date" placeholder="Date" class="form-control" required>
+                    <input type="date" placeholder="Date" name="datepick" id="datepick" class="form-control" required>
                 </div>
 
                 <div class="pl-2"><button class="btn btn-outline-success form-control" type="submit">Search</button></div>

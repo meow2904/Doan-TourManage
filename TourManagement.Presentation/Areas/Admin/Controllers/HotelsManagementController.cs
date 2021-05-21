@@ -37,18 +37,18 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(Hotel hotel, HttpPostedFileBase ImgUrl)
+        public ActionResult Create(Hotel hotel, HttpPostedFileBase filesInput)
         {
             if (ModelState.IsValid)
             {
                 string fileName = "";
-                if (ImgUrl != null && ImgUrl.ContentLength > 0)
+                if(filesInput != null)
                 {
                     try
                     {
-                        fileName = Path.GetFileName(ImgUrl.FileName);
-                        string path = Path.Combine(Server.MapPath(_ImagesPath), Path.GetFileName(ImgUrl.FileName));
-                        ImgUrl.SaveAs(path);
+                        fileName = Path.GetFileName(filesInput.FileName);
+                        string path = Path.Combine(Server.MapPath(_ImagesPath), fileName);
+                        filesInput.SaveAs(path);
                     }
                     catch (Exception)
                     {
@@ -59,7 +59,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 var resultAdd= _hotelRepository.Add(hotel);
                 if (resultAdd)
                 {
-                    return RedirectToAction("Index");
+                    return Content($"<script language='javascript' type='text/javascript'> alert('Thêm thành công'); window.location.href='https://localhost:44316/Admin/HotelsManagement' </script>");
                 }
 
             }
@@ -90,7 +90,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _hotelRepository.Update(hotel);
-                return RedirectToAction("Index");
+                return Content($"<script language='javascript' type='text/javascript'> alert('Cập nhật thành công'); window.location.href='https://localhost:44316/Admin/HotelsManagement' </script>");
             }
             return View(hotel);
         }

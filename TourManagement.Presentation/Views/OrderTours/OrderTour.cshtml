@@ -77,15 +77,15 @@
             <thead>
                 <tr>
                     <th scope="col">Loại giá</th>
-                    <th scope="col">Giá người lớn</th>
-                    <th scope="col">Giá trẻ em</th>
+                    <th scope="col">Giá người lớn( > 11 tuổi)</th>
+                    <th scope="col">Giá trẻ em ( < 11 tuổi )</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th>Giá</th>
                     <td><span id="price_adult">@Math.Truncate(tour.PriceOfAdult.Value).ToString("###,###,###")</span> đ</td>
-                    <td id="price_child">@Math.Truncate(tour.PriceOfChild.Value).ToString("###,###,###") đ</td>
+                    <td><span id="price_child">@Math.Truncate(tour.PriceOfChild.Value).ToString("###,###,###")</span> đ</td>
                 </tr>
                 <tr>
                     <th>Phụ thu phòng đơn</th>
@@ -142,7 +142,7 @@
                 <div class="form-group col-3">
                     <label>Số người lớn</label>
                     <div>
-                        <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1" onchange="cal_price();" />
+                        <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1"  />
                         @Html.ValidationMessageFor(model => model.QuantityAdult, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                 <div class="form-group col-3">
                     <label>Số trẻ em</label>
                     <div>
-                        <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0" onchange="cal_price();" />
+                        <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0"  />
                         @Html.ValidationMessageFor(model => model.QuantityChild, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                 <div class="form-group col-3">
                     <label>Số phòng đơn</label>
                     <div>
-                        <input type="number" min="0" id="NumberRoom" name="NumberRoom" value="0" onchange="cal_price();" />
+                        <input type="number" min="0" id="NumberRoom" name="NumberRoom" value="0" />
                         @Html.ValidationMessageFor(model => model.NumberRoom, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -166,6 +166,7 @@
             <hr />
             <div class="text-right w-100">
                 Tổng tiền: <span id="sum_price" class="text-danger font-weight-bold">@Math.Truncate(tour.PriceOfAdult.Value)</span> đ
+                <input type="text" name="SumPrice" hidden id="total" value="@Math.Truncate(tour.PriceOfAdult.Value)"/>
             </div>
             <div class="text-center">
                 <div>

@@ -36,7 +36,7 @@ namespace TourManagement.Presentation.Controllers
                 var result = _userRepository.Add(user);
                 if (result)
                 {
-                    return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/'</script>");
+                    return Content("<script language='javascript' type='text/javascript'>alert('Bạn đã đăng ký thành công!'); window.location.href='https://localhost:44316/Admin/RoomsManagement/Edit/' </script>");
                 }
             }
 

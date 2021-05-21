@@ -9,7 +9,7 @@
         <h4>@Model.Name</h4>
     </div>
     <div class="row">
-        <div class="col-8 py-0" s>
+        <div class="col-8 py-0">
             <div class="carousel-inner" style="height: 400px;">
                 <img src="~/Content/images/hotels/@Model.Image" class="d-block w-100 img-fluid" alt="...">
             </div>
@@ -26,7 +26,7 @@
                         <div class="col-4">Đia chỉ: </div><div class="col-8">@Model.Address</div>
                     </div>
                     <div class="row m-auto">
-                        <div class="col-4">Điện thoại: </div><div class="col-8">@Model.Phone</div>
+                        <div class="col-4">Hotline: </div><div class="col-8" style="color: red;">@Model.Phone</div>
                     </div>
                     <div class="row m-auto">
                         <div class="col-4">Email:</div><div class="col-8">@Model.Email.ToLower()</div>
@@ -34,13 +34,14 @@
                     <hr />
                 </div>
             </div>
+
             <div class="input-group py-3 justify-content-center">
                 <a href="@Url.Action("ConfirmContact", "Hotels")" class="btn btn-outline-primary mr-3">Liên hệ</a>
             </div>
         </div>
-
     </div>
-    <div class="pt-4 border-top">
+
+    <div class="pt-4">
         <div class="py-4 border-top">
             <h4><img src="~/Content/images/content.svg" height="20" width="20"> Giới thiệu chung</h4>
             <div id="content" class="w-100 pl-4">
@@ -54,23 +55,24 @@
                 {
                     <div class="row p-3">
                         <div class="col-4">
-                            <img src="~/Content/images/hotels/room/@item.Image" height="200" width="100%" />
+                            <img src="~/Content/images/hotels/room/@item.Image" class="w-100" />
                         </div>
                         <div class="col-5">
                             <span class="font-weight-bold">@item.Name</span>
                             <div>
-                                @item.Note
+                                <span>@item.NoteRoom</span>
                             </div>
                             <div>
                                 <ul>
-                                    <li>Tối đa 02 người lớn và 02 trẻ em dưới 12 tuổi ở (có phụ thu).</li>
+                                    <li>Diện tích trung bình: @item.Acreage</li>
+                                    <li>Số giường: @item.NumberBed</li>
                                     <li>Đặt ngay, thanh toán sau.</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-3 text-center">
                             <p>Giá: @Math.Truncate(item.Price.Value).ToString("###,###,###") đ</p>
-                            <a class="nav-link btn btn-outline-secondary" href="@Url.Action("ConfirmContact", "Hotels")">Liên hệ</a>
+                            <a class="btn btn-outline-warning" href="@Url.Action("ConfirmContact", "Hotels")">Liên hệ</a>
                         </div>
                     </div>
                 }
