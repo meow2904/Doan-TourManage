@@ -5,26 +5,79 @@
     padding-right: 15px;
 }
 
+/*nav link*/
+.nav_header {
+    height: 65px;
+}
+
+.nav_menu ul > li {
+    display: inline-flex;
+    list-style: none;
+    padding: 0 10px;
+    position: relative;
+    height:100%;
+    align-items: center;
+}
+
+    .nav_menu ul li a {
+        display: block;
+        text-decoration: none;
+        color: black;
+        font-size: large;
+        font-weight: 500;
+    }
+
+.nav_menu ul li:hover {
+    background: rgba(29, 42, 59, 0.1);
+}
+
+.nav_menu ul li:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 10px;
+    width: 100%;
+    background: #4657F0;
+}
+
+.dropmenu {
+    top: 65px;
+    left: 0;
+    background-color: whitesmoke;
+    position: absolute;
+    display: none;
+}
+
+.dropmenu > li{
+    width: 150px;
+    text-align: center;
+    justify-content: center;
+}
+
+.nav_menu li:hover .dropmenu{
+    display: block;
+}
+
 /*scroll ckeditor*/
 .ck-editor__editable {
     max-height: 400px;
 }
 
 
+
+/**/
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
-#group-tour:hover .dropdown-menu {
-    display: block;
-}
 
 #group-price:hover .dropdown-menu {
     display: block;
 }
 
 .ptcus-110 {
-    padding-top: 110px;
+    padding-top: 70px;
 }
 
 .btn-none:focus {
@@ -74,7 +127,7 @@
     font-weight: 500;
     text-align: center;
     width: 100%;
-    z-index:99;
+    z-index: 99;
 }
 
     .hotels-name > p {
@@ -89,25 +142,27 @@
 .tour-image {
     height: 60%;
 }
+
 .tour-detail {
     height: 40%;
 }
+
 .box-positon {
     position: absolute;
     top: 81%;
     background-color: rgba(0,0,0, 0.4);
-    color:white;
+    color: white;
     padding: 5px;
 }
 
 /*css title see more*/
-.seemore a{
+.seemore a {
     color: black;
     text-decoration: none;
 }
-.seemore:hover .link{
+
+.seemore:hover .link {
     color: crimson;
-    
 }
 
 
@@ -116,21 +171,21 @@
     list-style: none;
 }
 
-.socail_links ul{
-    display:flex;
-    padding:0;
+.socail_links ul {
+    display: flex;
+    padding: 0;
 }
 
-.socail_links li{
+.socail_links li {
     margin: 0 10px;
 }
 
 /*css custom form add destination*/
-.gr-parent{
-    position:relative;
+.gr-parent {
+    position: relative;
 }
 
-.sub-gr-destiantion{
-    position:absolute;
-    top:70%;
+.sub-gr-destiantion {
+    position: absolute;
+    top: 70%;
 }

@@ -3,7 +3,7 @@
 }
 @if (Session["username"] != null)
 {
-<form action="@Url.Action("Logout", "Users", new { area = "" })" id="logoutForm" class="navbar-right col-2" method="post">
+<form action="@Url.Action("Logout", "Users", new { area = "" })" id="logoutForm" class="" method="post">
     @Html.AntiForgeryToken()
     <ul class="navbar-nav-cus nav-right">
         <li class="nav-item-cus avt-wrapper">
@@ -48,12 +48,9 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">@Html.ActionLink("Đăng kí", "Register", "Users", null, new { id = "registerLink", @class = "nav-link" })</li>
-        <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Users", null, new { @class = "nav-link" })</li>
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="@Url.Action("Register","Users", new { area = ""})">Đăng kí</a>
+            <a href="@Url.Action("Login","Users", new { area = ""})">Đăng nhập</a>
     </ul>
 }
-
-<script>
-    var getUrl = window.location.href;
-</script>
