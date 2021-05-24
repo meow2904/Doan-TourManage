@@ -58,6 +58,22 @@
     display: block;
 }
 
+/*nav search*/
+.search_form {
+    height: 95px;
+    left: 15%;
+    top: -35px;
+    z-index: 15;
+    background-color: white;
+    box-shadow: 5px 10px 18px #888888;
+}
+.search_form input{
+    height: 40px;   
+}
+
+
+
+
 /*scroll ckeditor*/
 .ck-editor__editable {
     max-height: 400px;
