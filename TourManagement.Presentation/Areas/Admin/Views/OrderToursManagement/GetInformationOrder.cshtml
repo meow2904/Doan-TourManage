@@ -34,4 +34,8 @@
             <p>Phòng đơn: @Model.OrderTourDetails.First().NumberRoom</p>
         </div>
     </div>
+    <div class="row">
+        <h5 class="col-4">Tổng tiền: </h5>
+        <p class="col-6 badge badge-danger">@Math.Truncate(Model.SumPrice.Value).ToString("###,###,###")  đ</p>
+    </div>
 </div>

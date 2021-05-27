@@ -20,33 +20,14 @@ namespace ConsoleApp1
             //var e = tourRepository.GetById(1);
 
             //Console.WriteLine(e.TimeStart.Value.Date.ToString("MM/dd/yyyy"));
-            //Console.WriteLine();
-            try
-            {
-                int a = 0;
-                if(a == 0)
-                {
-                    throw new Exception("hihih");
-                }
-            }
-            catch (Exception e1)
-            {
+            ////Console.WriteLine();
+            //int x = 1;
 
-                 new Exception(e1.Message);
-            }
-
-            Console.ReadKey();
+            Console.ReadLine();
 
         }
     }
 
-    public class Test
-    {
 
-        public void ABC(Exception e1)
-        {
-            throw new Exception(e1.Message);
-        }
-    }
 
 }

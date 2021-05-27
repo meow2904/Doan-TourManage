@@ -68,11 +68,12 @@
             )
 
             for (let item of rs) {
+                //console.log(new Date(JSON.parse(item.OrderDate)))
                 tblOrder.append(
                     '<tr>'+
                     '<td>'+item.OrderId+'</td>'+
-                    '<td>'+
-                    item.OrderDate.split() +
+                    '<td>' +
+                    new Date(item.OrderDate).toLocaleString() +
                     '</td>'+
                     '<td>'+
                         '<span class="badge badge-primary">'+item.Status+'</span>'+
@@ -106,7 +107,7 @@
                     '<tr>' +
                     '<td>' + item.OrderId + '</td>' +
                     '<td>' +
-                        item.OrderDate +
+                    new Date(item.OrderDate).toLocaleString() +
                     '</td>' +
                     '<td>' +
                     '<span class="badge badge-warning">' + item.Status + '</span>' +
@@ -120,19 +121,17 @@
         }
 
 
-
-
-        //see detail orderPending
+        //see information order tour
         $('#orderPending').on('click', '.btnInforModal', function () {
             const orderid = $(this).data('id')
-            var url = '@Url.Action("GetInfor", "OrderToursManagement")'
+            var url = '@Url.Action("GetInformationOrder", "OrderToursManagement")'
             url += '?orderTourId=' + orderid
             $('#infor').load(url);
         })
 
         $('#orderConfirmed').on('click', '.btnInforModal', function () {
             const orderid = $(this).data('id')
-            var url = '@Url.Action("GetInfor", "OrderToursManagement")'
+            var url = '@Url.Action("GetInformationOrder", "OrderToursManagement")'
             url += '?orderTourId=' + orderid
             $('#infor').load(url);
         })

@@ -20,9 +20,10 @@
 <body>
     <nav class="nav_header fixed-top row align-items-center" style="background-color:aliceblue;">
         <div class="col-2 pl-5">
-            HotLine: <span style="color: red; font: bold">1900 8198</span>
+            <img src="~/Content/images/telephone.svg" height="15" width="15" /> <span style="color: red;">1900 8198</span>
         </div>
-        <div class="col-1 justify-content-center p-0 d-flex align-items-center">
+        <div class="col-1 justify-content-between p-0 d-flex align-items-center">
+            <img  src="~/Content/images/beach.svg" width="30" height="30"/>
             <a href="@Url.Action("Index", "Home", new { area = "" })">
                 <img class="border rounded-circle" src="~/Content/images/tours/logo1.jpg" style="width: 50px; height:50px">
             </a>
@@ -38,7 +39,7 @@
                     </ul>
                 </li>
                 <li >
-                    <a href="@Url.Action("Index", "Hotels", new { area = "" })">KHÁCH SẠN</a>
+                    <a href="@Url.Action("Index", "Hotels", new { area = "", page =1 })">KHÁCH SẠN</a>
                 </li>
                 <li>
                     <a href="@Url.Action("Contact", "Home", new { area = "" })">GIỚI THIỆU</a>
