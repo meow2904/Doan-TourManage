@@ -1,6 +1,6 @@
 ﻿@model TourManagement.Models.DBContext.OrderTourDetail
-
 @{
+    ViewBag.Title = "Thông tin chi tiết";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var tour = (TourManagement.Models.DBContext.Tour)ViewBag.Tour;
     var custommer = (TourManagement.Models.DBContext.User)Session["username"];
@@ -89,11 +89,19 @@
                 </tr>
                 <tr>
                     <th>Phụ thu phòng đơn</th>
-                    <td colspan="2" id="price_room">
-                        @Math.Truncate(tour.SurchargeOfRoom.Value).ToString("###,###,###") đ
-                    </td>
-                </tr>
-            </tbody>
+                    @if (tour.SurchargeOfRoom.Value == 0)
+                    {
+                        <td colspan="2" id="price_room">
+                            0 đ
+                        </td>
+                    }
+                    else
+                    {
+                        <td colspan="2" id="price_room">
+                            @Math.Truncate(tour.SurchargeOfRoom.Value).ToString("###,###,###") đ
+                        </td>
+                    }
+</tbody>
         </table>
 
     </div>
@@ -142,7 +150,7 @@
                 <div class="form-group col-3">
                     <label>Số người lớn</label>
                     <div>
-                        <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1"  />
+                        <input type="number" min="1" id="QuantityAdult" name="QuantityAdult" value="1" />
                         @Html.ValidationMessageFor(model => model.QuantityAdult, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -150,15 +158,15 @@
                 <div class="form-group col-3">
                     <label>Số trẻ em</label>
                     <div>
-                        <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0"  />
+                        <input type="number" min="0" id="QuantityChild" name="QuantityChild" value="0" />
                         @Html.ValidationMessageFor(model => model.QuantityChild, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group col-3">
+                <div class="form-group col-3" id="div_numberroom">
                     <label>Số phòng đơn</label>
                     <div>
-                        <input type="number" min="0" id="NumberRoom" name="NumberRoom" value="0" />
+                        <input type="number" min="0" id="NumberRoom" name="NumberRoom" value="0"  />
                         @Html.ValidationMessageFor(model => model.NumberRoom, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -166,7 +174,7 @@
             <hr />
             <div class="text-right w-100">
                 Tổng tiền: <span id="sum_price" class="text-danger font-weight-bold">@Math.Truncate(tour.PriceOfAdult.Value)</span> đ
-                <input type="text" name="SumPrice" hidden id="total" value="@Math.Truncate(tour.PriceOfAdult.Value)"/>
+                <input type="text" name="SumPrice" hidden id="total" value="@Math.Truncate(tour.PriceOfAdult.Value)" />
             </div>
             <div class="text-center">
                 <div>

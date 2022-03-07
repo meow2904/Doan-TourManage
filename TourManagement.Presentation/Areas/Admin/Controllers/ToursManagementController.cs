@@ -223,7 +223,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         public ActionResult Delete(int? id)
         {
             _tourRepository.DeleteByID((int)id);
-            return RedirectToAction("Index");
+            return Content($"<script language='javascript' type='text/javascript'> alert('Delete success'); window.location.href='https://localhost:44316/Admin/ToursManagement?page=1' </script>");
         }
 
         protected override void Dispose(bool disposing)

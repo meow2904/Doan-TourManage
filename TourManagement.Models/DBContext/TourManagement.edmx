@@ -165,7 +165,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Room_Hotel">
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
@@ -213,7 +215,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TourDestination_Tour">
-          <End Role="Tour" Type="Self.Tour" Multiplicity="1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TourDestination" Type="Self.TourDestination" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tour">

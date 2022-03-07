@@ -37,7 +37,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             return View(order);
         }
 
-        // delete ordertour with user of tour is unconditional
+        // delete ordertour with user of tour is unconditional (in check tour)
         [HttpPost]
         public ActionResult CancelOrder(int orderTourId, int tourId)
         {
@@ -69,17 +69,6 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                 ListConfirmed = JsonConvert.SerializeObject(listConfirmed),
             }, JsonRequestBehavior.AllowGet);
 
-            //if (status == "Confirmed")
-            //{
-            //   var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status).OrderByDescending(x => x.OrderDate);
-            //   return PartialView(listOrderStatus);
-            //}
-            //else
-            //{
-            //    var listOrderStatus = _orderTourRepository.GetOrderTourByStatus(status);
-            //    return PartialView(listOrderStatus);
-            //}
-
         }
         
         public ActionResult GetInformationOrder(int orderTourId)
@@ -93,6 +82,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             var orderTour = _orderTourRepository.GetById(orderTourId);
             var orderTourDetail = orderTour.OrderTourDetails;
             var tour = orderTourDetail.First().Tour;
+            int quanTour = (int)tour.QuantityPeople;
             if (status == "Confirmed")
             {
                 orderTour.Status = status;
@@ -101,8 +91,9 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             {
                 orderTour.Status = status;
 
-                var quanOrder = orderTourDetail.First().QuantityChild + orderTourDetail.First().QuantityAdult;
-                tour.QuantityPeople += quanOrder;
+                //int quanOrder = (int)(orderTourDetail.First().QuantityChild + orderTourDetail.First().QuantityAdult);
+                //quanTour += quanOrder;
+                tour.QuantityPeople = quanTour;
                 _tourRepository.Update(tour);
             }
             //update quantity

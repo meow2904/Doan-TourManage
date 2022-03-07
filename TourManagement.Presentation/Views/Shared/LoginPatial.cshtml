@@ -13,16 +13,17 @@
                     @user.Name
                 </a>
                 <ul id="user-menu" class="dropdown-menu-cus">
-                    <li class="dropdown-menu-item">
-                        <a href="@Url.Action("Edit", "Users", new { area = "", id = user.Id })" class="dropdown-menu-link">
-                            <div>
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <span>Profile</span>
-                        </a>
-                    </li>
+
                     @if (user.Role == 2)
                     {
+                        <li class="dropdown-menu-item">
+                            <a href="@Url.Action("Edit", "Users", new { area = "", id = user.Id })" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <span>Profile</span>
+                            </a>
+                        </li>
                         <li class="dropdown-menu-item">
                             <a href="@Url.Action("GetMyOrders","OrderTours", new { area=""})" class="dropdown-menu-link">
                                 <div>

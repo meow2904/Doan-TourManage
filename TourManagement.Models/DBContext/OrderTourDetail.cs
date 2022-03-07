@@ -22,6 +22,7 @@ namespace TourManagement.Models.DBContext
         public Nullable<int> NumberRoom { get; set; }
         [JsonIgnore]
         public virtual OrderTour OrderTour { get; set; }
+        [JsonIgnore]
         public virtual Tour Tour { get; set; }
     }
 }

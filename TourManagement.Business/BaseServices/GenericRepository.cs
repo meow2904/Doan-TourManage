@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TourManagement.Models.DBContext;
 
 namespace TourManagement.Business.BaseServices
@@ -19,10 +16,11 @@ namespace TourManagement.Business.BaseServices
             Context = new TourManagementContext();
             _dbSet = Context.Set<TEntity>();
         }
+
         public bool Add(TEntity entity)
         {
-                _dbSet.Add(entity);
-                return Context.SaveChanges() > 0;
+            _dbSet.Add(entity);
+            return Context.SaveChanges() > 0;
         }
 
         public void Delete(TEntity entity)

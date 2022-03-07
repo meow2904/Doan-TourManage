@@ -42,7 +42,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string fileName = "";
-                if(filesInput != null)
+                if (filesInput != null)
                 {
                     try
                     {
@@ -56,7 +56,7 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
                     }
                 }
                 hotel.Image = fileName;
-                var resultAdd= _hotelRepository.Add(hotel);
+                var resultAdd = _hotelRepository.Add(hotel);
                 if (resultAdd)
                 {
                     return Content($"<script language='javascript' type='text/javascript'> alert('Thêm thành công'); window.location.href='https://localhost:44316/Admin/HotelsManagement' </script>");
@@ -85,10 +85,26 @@ namespace TourManagement.Presentation.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(Hotel hotel)
+        public ActionResult Edit(Hotel hotel, HttpPostedFileBase filesInput)
         {
             if (ModelState.IsValid)
             {
+                if (filesInput != null)
+                {
+                    try
+                    {
+
+                        string fileName = "";
+                        fileName = Path.GetFileName(filesInput.FileName);
+                        string path = Path.Combine(Server.MapPath(_ImagesPath), fileName);
+                        filesInput.SaveAs(path);
+
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
                 _hotelRepository.Update(hotel);
                 return Content($"<script language='javascript' type='text/javascript'> alert('Cập nhật thành công'); window.location.href='https://localhost:44316/Admin/HotelsManagement' </script>");
             }

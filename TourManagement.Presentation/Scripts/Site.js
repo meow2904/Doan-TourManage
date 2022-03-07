@@ -16,6 +16,13 @@ $(document).ready(() => {
     })
 })
 
+$(document).ready(() => {
+    var price_room = parseInt($('#price_room').text().replace(/\,/g, ""))
+    if (price_room === 0) {
+        console.log('hihih')
+        $('#div_numberroom').attr('hidden', 'hidden')
+    }
+})
 //caculate price order
 $('#QuantityChild, #QuantityAdult, #NumberRoom').change(function () {
     var vl = $(this).val()
@@ -28,7 +35,10 @@ $('#QuantityChild, #QuantityAdult, #NumberRoom').change(function () {
     var price_child = parseInt($('#price_child').text().replace(/\,/g, ""))
     var price_room = parseInt($('#price_room').text().replace(/\,/g, ""))
 
+
+    
     console.log(price_room)
+
     var sum_quan = quan_child + quan_adult
 
     if (sum_quan > quan_remain) {

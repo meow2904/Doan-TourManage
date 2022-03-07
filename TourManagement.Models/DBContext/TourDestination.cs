@@ -9,6 +9,7 @@
 
 namespace TourManagement.Models.DBContext
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -17,8 +18,10 @@ namespace TourManagement.Models.DBContext
         public int IdTour { get; set; }
         public int IdDestination { get; set; }
         public string Note { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Destination Destination { get; set; }
+        [JsonIgnore]
         public virtual Tour Tour { get; set; }
     }
 }

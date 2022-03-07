@@ -19,19 +19,27 @@ namespace TourManagement.Business.Services
 
         public int GetRemainingQuantity(int tourId)
         {
-            var tourOrderDetail = Context.OrderTourDetails.FirstOrDefault(x => x.TourId == tourId);
-            var tour = Context.Tours.FirstOrDefault(x => x.Id == tourId);
+            //take ordertours with tourid
+            var tourOrderDetails = Context.OrderTourDetails.Where(x => x.OrderTour.Status == "Confirmed" && x.TourId == tourId);
 
+            //get quantity people
+            var tour = Context.Tours.FirstOrDefault(x => x.Id == tourId);
             int remainQuantity = tour.QuantityPeople.Value;
-            if (tourOrderDetail == null)
+
+            if (tourOrderDetails == null)
             {
                 return remainQuantity;
             }
             else
             {
-                var quantity1 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityAdult);
-                var quantity2 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityChild);
-                remainQuantity = (int)(Context.Tours.Where(x => x.Id == tourId).Sum(x => x.QuantityPeople) - (quantity1 + quantity2));
+                int quantity1 = 0;
+                foreach(var item in tourOrderDetails)
+                {
+                    quantity1 += (item.QuantityAdult.Value+ item.QuantityChild.Value);
+                }
+                //var quantity1 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityAdult);
+                //var quantity2 = Context.OrderTourDetails.Where(o => o.TourId == tourId).Sum(o => o.QuantityChild);
+                remainQuantity = remainQuantity - quantity1;
                 return remainQuantity;
             }
         }
